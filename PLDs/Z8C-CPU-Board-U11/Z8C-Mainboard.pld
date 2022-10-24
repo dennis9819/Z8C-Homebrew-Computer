@@ -1,0 +1,32 @@
+Name       XXXXX;
+Partno     XXXXX;
+Date       XX/XX/XX;
+Revision   XX;
+Designer   XXXXX;
+Company    XXXXX;
+Assembly   XXXXX;
+Location   XXXXX;
+DEVICE g16v8a;
+
+Pin 1 = A0;
+Pin 2 = A1;
+Pin 3 = A2;
+Pin 4 = A3;
+Pin 5 = A4;
+Pin 6 = A5;
+Pin 7 = A6;
+Pin 8 = A7;
+Pin 9 = IOREQ;
+Pin 11 = RD;
+Pin 12 = WR;
+
+Pin 15 = CS_BANK;
+Pin 16 = CS_SIO;
+Pin 17 = CS_CTC;
+Pin 19 = CS_DIP;
+
+
+CS_BANK = !(!IOREQ & !A7 & !A6 & !A5 & !A4 & !A3 & !A2 & !A1 & !A0 & !WR);
+CS_DIP = !(!IOREQ & !A7 & !A6 & !A5 & !A4 & !A3 & !A2 & !A1 & A0 & !RD);
+CS_CTC = !(!IOREQ & !A7 & !A6 & !A5 & !A4 & !A3 & A2);
+CS_SIO = !(!IOREQ & !A7 & !A6 & !A5 & !A4 & A3 & !A2);

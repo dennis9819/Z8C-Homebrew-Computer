@@ -1,0 +1,175 @@
+{COMPONENT C:\USERS\DG\DOCUMENTS\Z80\Z8C-MAINBOARD.SYM
+
+ {ENVIRONMENT
+  {PDIFvrev 3.00}
+  {Program "CUPL(WM) Version 5.0a"}
+  {DBtype "Schematic"}
+  {DBvrev 1.01}
+  {DBtime "Thu Oct 20 08:10:08 2022 "}
+  {DBunit "MIL"}
+  {DBgrid 10}
+  {Lyrstr "WIRES" 1 "BUS" 1 "GATE" 2 "IEEE" 2 "PINFUN" 3 "PINNUM" 1 
+          "PINNAM" 6 "PINCON" 4 "REFDES" 2 "ATTR" 6 "SDOT" 1 
+          "DEVICE" 5 "OUTLIN" 5 "ATTR2" 6 "NOTES" 6 "NETNAM" 4 
+          "CMPNAM" 5 "BORDER" 5}
+ }
+
+ {USER
+  {VIEW
+   {Mode SYMB}
+   {Nlst OPEN}
+   {Vw 0 0 2}
+   {Lv 12 2 2 2 0 0 2 2 2 2 0 0 2 1 2 0 0 0 0}
+   {Gs 10 10}
+  }
+ }
+
+ {DISPLAY
+  [Ly "PINNUM"]
+  [Ls "SOLID"][Wd 0]
+  [Ts 15][Tj "LC"][Tr 0][Tm "N"]
+ }
+
+ {SYMBOL
+  {PIN_DEF
+   [Ly "PINCON"]
+   {P A0 {Pt "INPUT"}{Lq 0}{Ploc 100 220}}
+   {P A1 {Pt "INPUT"}{Lq 0}{Ploc 100 200}}
+   {P A2 {Pt "INPUT"}{Lq 0}{Ploc 100 180}}
+   {P A3 {Pt "INPUT"}{Lq 0}{Ploc 100 160}}
+   {P A4 {Pt "INPUT"}{Lq 0}{Ploc 100 140}}
+   {P A5 {Pt "INPUT"}{Lq 0}{Ploc 100 120}}
+   {P A6 {Pt "INPUT"}{Lq 0}{Ploc 100 100}}
+   {P A7 {Pt "INPUT"}{Lq 0}{Ploc 100 80}}
+   {P IOREQ {Pt "INPUT"}{Lq 0}{Ploc 100 60}}
+   {P RD {Pt "INPUT"}{Lq 0}{Ploc 100 40}}
+   {P WR {Pt "INPUT"}{Lq 0}{Ploc 100 20}}
+   {P CS_BANK {Pt "I/O"}{Lq 0}{Ploc 320 20}}
+   {P CS_SIO {Pt "I/O"}{Lq 0}{Ploc 320 40}}
+   {P CS_CTC {Pt "I/O"}{Lq 0}{Ploc 320 60}}
+   {P CS_DIP {Pt "I/O"}{Lq 0}{Ploc 320 80}}
+  }
+
+  {PKG
+   [Ly "REFDES"]
+   [Ts 25][Tj "CB"][Tr 0][Tm "N"]
+   {Rdl 210 250}
+
+   [Ly "PINNUM"]
+   [Ts 15][Tj "RC"]
+   {Pnl 120 230}
+   {Pnl 120 210}
+   {Pnl 120 190}
+   {Pnl 120 170}
+   {Pnl 120 150}
+   {Pnl 120 130}
+   {Pnl 120 110}
+   {Pnl 120 90}
+   {Pnl 120 70}
+   {Pnl 120 50}
+   {Pnl 120 30}
+   [Ts 15][Tj "LC"]
+   {Pnl 300 30}
+   {Pnl 300 50}
+   {Pnl 300 70}
+   {Pnl 300 90}
+
+   {Sd A 1 2 3 4 5 6 7 8 9 11 12 15 16 17 19}
+  }
+
+  {PIC
+   [Ly "GATE"]
+   [Ts 15][Tj "LC"][Tr 0][Tm "N"]
+   {R 130 240 290 0}
+   {L 130 220 100 220}
+   {L 130 200 100 200}
+   {L 130 180 100 180}
+   {L 130 160 100 160}
+   {L 130 140 100 140}
+   {L 130 120 100 120}
+   {L 130 100 100 100}
+   {L 130 80 100 80}
+   {L 130 60 100 60}
+   {L 130 40 100 40}
+   {L 130 20 100 20}
+   {L 290 20 320 20}
+   {L 290 40 320 40}
+   {L 290 60 320 60}
+   {L 290 80 320 80}
+   [Ly "PINNAM"]
+   [Tj "LC"]
+   {T "A0" 140 220}
+   {T "A1" 140 200}
+   {T "A2" 140 180}
+   {T "A3" 140 160}
+   {T "A4" 140 140}
+   {T "A5" 140 120}
+   {T "A6" 140 100}
+   {T "A7" 140 80}
+   {T "IOREQ" 140 60}
+   {T "RD" 140 40}
+   {T "WR" 140 20}
+   [Tj "RC"]
+   {T "CS_BANK" 280 20}
+   {T "CS_SIO" 280 40}
+   {T "CS_CTC" 280 60}
+   {T "CS_DIP" 280 80}
+   [Ly "DEVICE"]
+   [Tj "CT"]
+   {T "G16V8AS" 210 -10}
+  }
+
+  {ATR
+   {IN
+    {Org 100 20}
+    {Ty 255}
+   }
+   {EX
+    [Ly "ATTR2"]
+    [Ts 12][Tj "CT"][Tr 0][Tm "N"]
+    {At PLD C:\USERS\DG\DOCUMENTS\Z80\Z8C-MAINBOARD 210 240}
+   }
+  }
+ }
+
+ {DETAIL
+  {ANNOTATE
+  }
+
+  {NET_DEF
+   {N A0
+   }
+   {N A1
+   }
+   {N A2
+   }
+   {N A3
+   }
+   {N A4
+   }
+   {N A5
+   }
+   {N A6
+   }
+   {N A7
+   }
+   {N IOREQ
+   }
+   {N RD
+   }
+   {N WR
+   }
+   {N CS_BANK
+   }
+   {N CS_SIO
+   }
+   {N CS_CTC
+   }
+   {N CS_DIP
+   }
+  }
+
+  {SUBCOMP
+  }
+ }
+}

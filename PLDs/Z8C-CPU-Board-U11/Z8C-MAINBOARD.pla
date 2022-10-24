@@ -1,0 +1,27 @@
+# Berkeley PLA format generated using
+#
+# CUPL(WM)        5.0a Serial# 60008009
+# Device          g16v8as  Library DLIB-h-40-2
+# Created         Thu Oct 20 08:10:08 2022
+# Name            XXXXX
+# Partno          XXXXX
+# Revision        XX
+# Date            XX/XX/XX
+# Designer        XXXXX
+# Company         XXXXX
+# Assembly        XXXXX
+# Location        XXXXX
+#
+# Inputs  A0 A1 A2 A3 
+#         A4 A5 A6 A7 
+#         CS_BANK CS_CTC CS_DIP CS_SIO 
+#         IOREQ RD WR 
+# Outputs !CS_BANK !CS_CTC !CS_DIP !CS_SIO 
+.i 15
+.o 4
+.p 4
+00000000----0-0 1~~~
+--100000----0-- ~1~~
+10000000----00- ~~1~
+--010000----0-- ~~~1
+.end
