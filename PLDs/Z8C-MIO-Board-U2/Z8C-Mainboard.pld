@@ -1,0 +1,33 @@
+Name       XXXXX;
+Partno     XXXXX;
+Date       XX/XX/XX;
+Revision   XX;
+Designer   XXXXX;
+Company    XXXXX;
+Assembly   XXXXX;
+Location   XXXXX;
+DEVICE g16v8a;
+
+Pin 1 = IOREQ;
+Pin 2 = RD;
+Pin 3 = WR;
+Pin 4 = A0;
+Pin 5 = A1;
+Pin 6 = A2;
+Pin 7 = A3;
+Pin 8 = CS;
+
+
+Pin 18 = CS_PS2;
+Pin 17 = CS_IIC;
+Pin 16 = CS_PIO;
+Pin 15 = CS_FPU;
+Pin 12 = BUSDIR;
+
+
+
+CS_PS2 = !(!IOREQ & !CS & !A3 & !A2 & !A1 );
+CS_IIC = !(!IOREQ & !CS & !A3 & !A2 & A1 );
+CS_PIO = !(!IOREQ & !CS & !A3 & A2  );
+CS_FPU = !(!IOREQ & !CS & A3 & !A2 & !A1  );
+BUSDIR = !CS & !RD;

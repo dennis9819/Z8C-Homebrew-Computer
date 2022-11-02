@@ -1,0 +1,36 @@
+%SIGNAL
+PIN   4 =  A0 
+PIN   5 =  A1 
+PIN   6 =  A2 
+PIN   7 =  A3 
+PIN  12 =  BUSDIR 
+PIN   8 =  CS 
+PIN  15 =  CS_FPU 
+PIN  17 =  CS_IIC 
+PIN  16 =  CS_PIO 
+PIN  18 =  CS_PS2 
+PIN   1 =  IOREQ 
+PIN   2 =  RD 
+PIN   3 =  WR 
+%END
+
+%FIELD
+%END
+
+%EQUATION
+BUSDIR =>
+    !CS & !RD
+
+CS_FPU =>
+    !A1 & !A2 & A3 & !CS & !IOREQ
+
+CS_IIC =>
+    A1 & !A2 & !A3 & !CS & !IOREQ
+
+CS_PIO =>
+    A2 & !A3 & !CS & !IOREQ
+
+CS_PS2 =>
+    !A1 & !A2 & !A3 & !CS & !IOREQ
+
+%END

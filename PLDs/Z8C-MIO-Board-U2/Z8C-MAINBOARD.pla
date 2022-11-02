@@ -1,0 +1,29 @@
+# Berkeley PLA format generated using
+#
+# CUPL(WM)        5.0a Serial# 60008009
+# Device          g16v8as  Library DLIB-h-40-2
+# Created         Sat Oct 29 22:13:29 2022
+# Name            XXXXX
+# Partno          XXXXX
+# Revision        XX
+# Date            XX/XX/XX
+# Designer        XXXXX
+# Company         XXXXX
+# Assembly        XXXXX
+# Location        XXXXX
+#
+# Inputs  A0 A1 A2 A3 
+#         BUSDIR CS CS_FPU CS_IIC 
+#         CS_PIO CS_PS2 IOREQ RD 
+#         WR 
+# Outputs BUSDIR !CS_FPU !CS_IIC !CS_PIO 
+#         !CS_PS2 
+.i 13
+.o 5
+.p 5
+-----0-----0- 1~~~~
+-001-0----0-- ~1~~~
+-100-0----0-- ~~1~~
+--10-0----0-- ~~~1~
+-000-0----0-- ~~~~1
+.end
