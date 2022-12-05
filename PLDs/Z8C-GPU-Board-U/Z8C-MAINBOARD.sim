@@ -1,0 +1,28 @@
+%SIGNAL
+PIN   4 =  A0 
+PIN   5 =  A1 
+PIN   6 =  A2 
+PIN   7 =  A3 
+PIN   8 =  A7 
+PIN  19 =  CRTC_CS 
+PIN  17 =  CRTC_E 
+PIN  18 =  CRTC_RW 
+PIN   1 =  IOREQ 
+PIN   2 =  RD 
+PIN   3 =  WR 
+%END
+
+%FIELD
+%END
+
+%EQUATION
+CRTC_CS =>
+    A7 & !IOREQ
+
+CRTC_E =>
+    !IOREQ
+
+CRTC_RW =>
+    WR
+
+%END

@@ -1,0 +1,28 @@
+Name       XXXXX;
+Partno     XXXXX;
+Date       XX/XX/XX;
+Revision   XX;
+Designer   XXXXX;
+Company    XXXXX;
+Assembly   XXXXX;
+Location   XXXXX;
+DEVICE g16v8a;
+
+Pin 1 = IOREQ;
+Pin 2 = RD;
+Pin 3 = WR;
+
+Pin 4 = A0;
+Pin 5 = A1;
+Pin 6 = A2;
+Pin 7 = A3;
+Pin 8 = A7;
+
+Pin 19 = CRTC_CS;
+Pin 18 = CRTC_RW;
+Pin 17 = CRTC_E;
+
+CRTC_CS = !(A7 & !IOREQ );
+CRTC_RW = WR;
+CRTC_E = !IOREQ;
+
