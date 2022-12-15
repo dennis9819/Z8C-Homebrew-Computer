@@ -7,7 +7,7 @@
   (title_block
     (title "Z8C CPU Board")
     (date "2022-09-29")
-    (rev "0")
+    (rev "1")
     (comment 1 "Z80 Homebrew Computer Main Processing Board")
     (comment 2 "CPU, CLK-GEN, Power-On-Reset, CTC, SIO, 64k RAM, 16k ROM")
     (comment 3 "https://github.com/dennis9819/Z8C-Homebrew-Computer")
