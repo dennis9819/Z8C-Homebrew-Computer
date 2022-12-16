@@ -1,6 +1,6 @@
 # Z8C-Homebrew-Computer
 
-## Using the build tools
+# Using the build tools
 The Z8C uses the zmac macro assembler (http://48k.ca/zmac.html)
 
 To easily develop for my Z80 homebrew system, I designed a simple
@@ -11,13 +11,13 @@ assempler development environment. This packs the following tasks into one scrip
 * symbol table include file generation
 * eeprom programming for the minipro
 
-### Prequisites
+## Prequisites
 * zmac - self-compiled version included in ./Utility.
 * minipro (https://gitlab.com/DavidGriffith/minipro)
 * binutils (apt-get install binutils-multiarch, 
     pacman -S aarch64-linux-gnu-binutils )
 
-### Building a project
+## Building a project
 `./build.sh <dir> <asm filename>`
 * `dir`: Path to the location of the asm file
 * `asm filename`: name of the assembly file without suffix
@@ -28,7 +28,7 @@ assempler development environment. This packs the following tasks into one scrip
     ./build.sh ../OperatingSystem/monitor_v2  
     ./build.sh ../OperatingSystem/software  
 ```
-### Building a project with a properties file
+## Building a project with a properties file
 
 `./build.sh <dir>`
 * `dir`: Path to the location of the asm file
@@ -45,7 +45,7 @@ export OPT_WRITEROM=1
 export FILENAME=main
 ```
 
-#### Options
+### Options
 * `OPT_GEN_SYMBOLTABLE` if set to 1: Generates the symbols.s file
 * `OPT_GEN_MONFILE` if set to 1: Generates the monitor file
 * `OPT_GEN_OBJFILE` if set to 1: Generates the object file
@@ -55,11 +55,11 @@ export FILENAME=main
 * `EEPROM_PART` sets EEPROM part for minipro. Default: `AT28C256`
 
 
-## System design
+# System design
 The Z80 Hombrew computer is modular computer system, designed arround a custom backplane.
 
-### Available modules
-#### Z8C CPU/COM Board
+## Available modules
+### Z8C CPU/COM Board
 * Z80 ZPU @ 4MHz (6MHz planned)
 * 64 KiB SRAM
 * 32 KiB EEPROM (R/W switchable)
@@ -81,9 +81,29 @@ $4000 +--------------------+--------------------+                    |
       |                    |                    |                    |
 $FFFF +--------------------+--------------------+--------------------+
 
+Note: In default mode and mode 1, the MEMAQ pin (pin a5 on backplane) 
+      can be used to inject an external memory device in the $0000-$3FFF 
+      window.
+
 IO Addresses:
 $00 Memory register
 $01 DIP Switches
 $04 CTC (First address)
 $08 SIO (First address)
 ```
+
+### Z8C MIO Board
+* Z80 PIO (Used for GPIO and non Z80 compliant interrupt handling)
+* VT82C42 PS/2 controller
+* AM5911A (only usable with CPU-Clock under 3 MHz)
+* PFC8584 I2C Controller
+* DS1307 RTC
+* 8-Bit GPIO Port
+
+//TODO: Add more Info
+
+### Z8C Disk Interface Board
+* Intel 82C55 based IDE Interface
+* FDC9266 Floppy Disk Controller
+
+//TODO: Add more Info
