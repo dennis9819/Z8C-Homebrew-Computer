@@ -82,7 +82,7 @@ mon_start_init_sound:
     ;call AY0_WRITE_REG
 
 mon_start_init_ctc:
-    ld sp, 0xffff
+    ld sp, STACK_RAM_TOP
     ; Set CTC Ch2 Interrupt Vector
     ;LD A,40h    ; it vector defined in bit 7­3,bit 2­1 don't care, bit 0 = 0
     ;OUT (IO_CTC0_C0),A
@@ -92,6 +92,13 @@ mon_start_init_ctc:
     ;LD A,0x34 ; 55Hz ISR
     ;LD A,0xFF ; 55Hz ISR
     ;OUT (IO_CTC0_C2),A
+
+    ;INIT PIO
+    LD A,0xCF
+    OUT (CS_PIO_AC), A
+    LD A,11110101b
+    OUT (CS_PIO_AC), A
+
 
     xor a
     ;ld i, a
@@ -143,6 +150,9 @@ mon_start_complete:
     call print_str
     
     ;halt
+
+    LD DE,0x40
+    CALL beep
 
     ;call vdp_cursor_on
     call PROMPT_BEGIN
@@ -475,6 +485,7 @@ Includes:
 .include "disassembler.s"
 .include "disassembler_table.s"
 .include "rst.s"
+.include "beep.s" 
 ; Strings
 STR_Banner_Start:
     db "Z8C Monitor V2 by Dennis Gunia (2022)",0

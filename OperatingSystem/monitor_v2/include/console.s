@@ -125,7 +125,7 @@ MSG_CLEAR:
 A_RTS_OFF:
     ld a,005h ;write into WR0: select WR5
     out (CS_SIO_A_C),A
-    ld a,068h ;DTR inactiveh, TX 8bit, BREAK off, TX on, RTS inactive
+    ld a,068h ;DTR inactive, TX 8bit, BREAK off, TX on, RTS inactive
     out (CS_SIO_A_C),A
     ret
 A_RTS_ON:
