@@ -19,6 +19,8 @@ VAR_CONSOLE_BAUD    equ 24  ;BAUD timer constant
 
     org 0x0000
 RST_00: ;Hardware Restart
+    ld sp, STACK_RAM_TOP
+    di
     jp mon_start_init_sound    
 
     org 0x0008
@@ -65,8 +67,9 @@ var_ps2mem:
 var_buffer:
     defb 0  ;var lentgh 
 
-mon_var_template_end:
     dephase
+mon_var_template_end:
+    nop
 ;end memory var template
     org 0x0050
 mon_start_init_sound:
@@ -82,7 +85,7 @@ mon_start_init_sound:
     ;call AY0_WRITE_REG
 
 mon_start_init_ctc:
-    ld sp, STACK_RAM_TOP
+    
     ; Set CTC Ch2 Interrupt Vector
     ;LD A,40h    ; it vector defined in bit 7­3,bit 2­1 don't care, bit 0 = 0
     ;OUT (IO_CTC0_C0),A
@@ -110,11 +113,15 @@ mon_start_init_ctc:
     ld (var_curserchar),a
 
 
+
+
     ;ei      ; Enable Interrupts
 
     ;jr mon_start_ram    ;skip serial, cause not used atm
 mon_start_init_serial:
     call CONSOLE_INIT
+    ;jp mon_start_complete
+
 mon_start_ram:
     ld hl,mon_var_template
     ld de,mon_var_template_end
@@ -328,7 +335,7 @@ CMD_VIEW_ROW:
     call print_a_hex
     ld a, ' '
     call print_char
-    ld c, 8                 ;column counter
+    ld c, 16                 ;column counter
 CMD_VIEW_ROW_LOOP:
     ld a,(hl)
     call print_a_hex
@@ -494,7 +501,7 @@ STR_SyntaxError:
 STR_Unknown:
     db "cmd?",0
 STR_HEXDUMP_HEADER:
-    db 'BASE 0  1  2  3  4  5  6  7',0
+    db 'BASE 0  1  2  3  4  5  6  7  8  A  B  C  D  E  F',0
 
 .include "xmodem.s"
 ;.include "debug.s"

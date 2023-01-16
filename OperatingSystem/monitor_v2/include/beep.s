@@ -8,6 +8,7 @@ beep:
     push    AF
     push    BC
     push    DE
+beep_loop:
 	LD      A,0x08
     OUT     (CS_PIO_AD), A
     LD      BC, 0x28
@@ -19,7 +20,7 @@ beep:
     DEC     DE
     ld      A,D
     or      E
-    jr      NZ, beep
+    jr      NZ, beep_loop
     pop     de
     pop     bc
     pop     af

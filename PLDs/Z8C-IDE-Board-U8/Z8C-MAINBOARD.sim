@@ -1,0 +1,32 @@
+%SIGNAL
+PIN   2 =  A1 
+PIN   3 =  A2 
+PIN   4 =  A3 
+PIN   5 =  A4 
+PIN  12 =  BUSDIR 
+PIN  17 =  BUS_WAIT 
+PIN  18 =  CLK2 
+PIN  19 =  CLK4 
+PIN   1 =  CS 
+PIN  14 =  CS_FDC 
+PIN  15 =  CS_IDE 
+PIN  13 =  CS_LATCH 
+PIN   9 =  IOREQ 
+PIN   8 =  RD 
+PIN  11 =  WR 
+%END
+
+%FIELD
+%END
+
+%EQUATION
+BUSDIR =>
+    !CS & !RD
+
+BUS_WAIT =>
+    0 
+
+CS_IDE =>
+    !A2 & !CS & !IOREQ
+
+%END
