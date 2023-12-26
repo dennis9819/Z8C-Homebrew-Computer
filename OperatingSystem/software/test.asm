@@ -1,9 +1,26 @@
 .include "extern_symbols.s" ;include monitor symbols.
     org 0xB000  
 ;Testing code
-    call ideif_init_drive
 
-    ;testread sector
+    ;LD HL,MEM_IDE_BUFFER 
+    ;LD B,32
+    ;call dump_pretty
+    call find_partition
+    call fat_get_root_table
+    call fat_print_directory
+
+    JP PROMPT_BEGIN
+
+
+delay_small:
+    PUSH AF
+    POP AF
+    PUSH AF
+    POP AF
+    RET
+
+find_partition:
+    ;read bootsector
     LD A,1                  ;read 1 sector
     LD B,IDE_REG_SECTOR
     CALL ide_regwrite_8
@@ -28,23 +45,82 @@
     CALL ide_regwrite_8
 
     LD HL,MEM_IDE_BUFFER    ;set read/write buffer start address
-    call ide_readsector_256_inv ;read 256 words from device
+    call ide_readsector_512_inv ;read 256 words from device
 
-    LD HL,MEM_IDE_BUFFER 
-    LD B,32
-    call dump_pretty
+    LD B,4                      ;Partition table length
+    LD C,0                      ;Partition ID counter
+    LD IX,MEM_IDE_BUFFER+446    ;Load offest of first partition table entry
+find_partition_loop:
+    LD A,(IX+4) ;load status byte
+    OR A
+    JP NZ, find_partition_process    ;If not zero, jump to print function
+    jp find_partition_next
 
-    JP PROMPT_BEGIN
-
-
-
-.include "kdrv_ide8255.s" ;include ide interface driver.
-.include "kdrv_ideif.s" ;include ide driver.
-.include "prettydump.s" ;include monitor symbols.
-
-delay_small:
-    PUSH AF
-    POP AF
-    PUSH AF
-    POP AF
+find_partition_next:
+    LD A,10                 ;New line
+    CALL print_char
+    LD A,13
+    CALL print_char
+    LD DE,16
+    ADD IX,DE
+    DJNZ find_partition_loop    
     RET
+
+find_partition_process: ; process table entry
+    ld hl, [str_part_seek_1]
+    call print_str  ;print 
+    LD A,(IX+0x04) ;load type
+    call print_a_hex
+    LD A,(IX+0x04) ;load type
+    CP 0x0E
+    JR NZ, find_partition_next
+
+    ld hl, [str_part_seek_2]
+    call print_str  ;print 
+    ld hl, [str_part_seek_3]
+    call print_str  ;print 
+
+    LD A,(IX+0x08) ;load start LBA
+    LD (MEM_IDE_PARTITION+3),A
+    LD A,(IX+0x09) ;load start LBA
+    LD (MEM_IDE_PARTITION+2),A
+    LD A,(IX+0x0A) ;load start LBA
+    LD (MEM_IDE_PARTITION+1),A
+    LD A,(IX+0x0B) ;load start LBA
+    LD (MEM_IDE_PARTITION+0),A
+
+    LD A,(MEM_IDE_PARTITION+3)
+    call print_a_hex
+    LD A,(MEM_IDE_PARTITION+2)
+    call print_a_hex
+    LD A,(MEM_IDE_PARTITION+1)
+    call print_a_hex
+    LD A,(MEM_IDE_PARTITION+0)
+    call print_a_hex
+    ld hl, [str_part_seek_4]
+    call print_str  ;print 
+    LD A,(IX+0x0C) ;load count LBA
+    call print_a_hex
+    LD A,(IX+0x0D) ;load count LBA
+    call print_a_hex
+    LD A,(IX+0x0E) ;load count LBA
+    call print_a_hex
+    LD A,(IX+0x0F) ;load count LBA
+    call print_a_hex
+
+    RET
+
+str_part_seek_1:
+    db "- Type: 0x",0
+str_part_seek_2:
+    db " State: ",0
+str_part_seek_3:
+    db " LBA: 0x",0
+str_part_seek_4:
+    db " Len: 0x",0
+str_sum:
+    db "------------",10,13,0
+str_files:
+    db " Files",10,13,0
+
+.include "include/fat16.s"

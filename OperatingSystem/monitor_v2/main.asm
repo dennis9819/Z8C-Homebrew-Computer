@@ -155,8 +155,8 @@ mon_start_complete:
     call print_clear
     ld hl, [STR_Banner_Start]
     call print_str
-    
-    ;halt
+
+    call ideif_init_drive
 
     LD DE,0x40
     CALL beep
@@ -493,6 +493,10 @@ Includes:
 .include "disassembler_table.s"
 .include "rst.s"
 .include "beep.s" 
+.include "xmodem.s"
+.include "kdrv_ide8255.s" ;include ide interface driver.
+.include "kdrv_ideif.s" ;include ide driver.
+.include "prettydump.s" ;include monitor symbols.
 ; Strings
 STR_Banner_Start:
     db "Z8C Monitor V2 by Dennis Gunia (2022)",0
@@ -501,7 +505,8 @@ STR_SyntaxError:
 STR_Unknown:
     db "cmd?",0
 STR_HEXDUMP_HEADER:
-    db 'BASE 0  1  2  3  4  5  6  7  8  A  B  C  D  E  F',0
+    db 'BASE 0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F',0
 
-.include "xmodem.s"
+
+
 ;.include "debug.s"

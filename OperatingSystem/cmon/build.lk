@@ -1,0 +1,11 @@
+-mjwx
+-i ./build
+-b _CODE = 0x8000
+-b _DATA = 0x5000
+-k ./sdcc/bin/../share/sdcc/lib/z80
+-k /usr/local/share/sdcc/lib/z80
+-l z80
+./sdcc/bin/../share/sdcc/lib/z80/crt0.rel
+./build.rel
+
+-e
