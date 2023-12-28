@@ -6,11 +6,23 @@
     ;LD B,32
     ;call dump_pretty
     call find_partition
-    call fat_get_root_table
-    call fat_print_directory
+    ;call fat_get_root_table
+    ;call fat_print_directory
 
+    call fat_get_root_table
+    LD DE, [str1]
+    CALL fat_lfs
+    
     JP PROMPT_BEGIN
 
+str1:
+    db "ILLUSION.PSG",0
+str2:
+    db "HALLOWLT.TXT",0
+str3:
+    db "TEST",0
+str4:
+    db ".ORG",0
 
 delay_small:
     PUSH AF
@@ -107,7 +119,10 @@ find_partition_process: ; process table entry
     call print_a_hex
     LD A,(IX+0x0F) ;load count LBA
     call print_a_hex
-
+    LD A,10                 ;New line
+    CALL print_char
+    LD A,13
+    CALL print_char
     RET
 
 str_part_seek_1:

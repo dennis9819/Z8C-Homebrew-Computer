@@ -401,139 +401,162 @@
    5:				    ;LD HL,MEM_IDE_BUFFER 
    6:				    ;LD B,32
    7:				    ;call dump_pretty
-   8:    0+17	B000  CD11B0  	    call find_partition
-   9:   17+17	B003  CD11B1  	    call fat_get_root_table
-  10:   34+17	B006  CD6CB1  	    call fat_print_directory
+   8:    0+17	B000  CD38B0  	    call find_partition
+   9:				    ;call fat_get_root_table
+  10:				    ;call fat_print_directory
   11:				
-  12:   51+10	B009  C39900  	    JP PROMPT_BEGIN
-  13:				
-  14:				
-  15:     -	B00C          	delay_small:
-  16:   61+11	B00C  F5      	    PUSH AF
-  17:   72+10	B00D  F1      	    POP AF
-  18:   82+11	B00E  F5      	    PUSH AF
-  19:   93+10	B00F  F1      	    POP AF
-  20:  103+10	B010  C9      	    RET
-  21:				
-  22:     -	B011          	find_partition:
-  23:				    ;read bootsector
-  24:  113+7	B011  3E01    	    LD A,1                  ;read 1 sector
-  25:  120+7	B013  060A    	    LD B,IDE_REG_SECTOR
-  26:  127+17	B015  CDB310  	    CALL ide_regwrite_8
-  27:				
-  28:  144+7	B018  3E01    	    LD A,1                  ;read sector 0
-  29:  151+7	B01A  060B    	    LD B,IDE_REG_SSECTOR
-  30:  158+17	B01C  CDB310  	    CALL ide_regwrite_8
-  31:				
-  32:  175+7	B01F  3E00    	    LD A,0                  ;read cylinder 0
-  33:  182+7	B021  060C    	    LD B,IDE_REG_LCYL
-  34:  189+17	B023  CDB310  	    CALL ide_regwrite_8
-  35:  206+7	B026  3E00    	    LD A,0                  
-  36:  213+7	B028  060D    	    LD B,IDE_REG_HCYL
-  37:  220+17	B02A  CDB310  	    CALL ide_regwrite_8
-  38:				
-  39:  237+7	B02D  3EA0    	    LD A,10100000b          ;read head 0
-  40:  244+7	B02F  060E    	    LD B,IDE_REG_HEAD
-  41:  251+17	B031  CDB310  	    CALL ide_regwrite_8
-  42:				
-  43:  268+7	B034  3E20    	    LD A,IDE_CMD_READSEC    ;send read command
-  44:  275+7	B036  060F    	    LD B,IDE_REG_CMDSTS
-  45:  282+17	B038  CDB310  	    CALL ide_regwrite_8
-  46:				
-  47:  299+10	B03B  214150  	    LD HL,MEM_IDE_BUFFER    ;set read/write buffer start address
-  48:  309+17	B03E  CD1D11  	    call ide_readsector_512_inv ;read 256 words from device
-  49:				
-  50:  326+7	B041  0604    	    LD B,4                      ;Partition table length
-  51:  333+7	B043  0E00    	    LD C,0                      ;Partition ID counter
-  52:  340+14	B045  DD21FF51	    LD IX,MEM_IDE_BUFFER+446    ;Load offest of first partition table entry
-  53:     -	B049          	find_partition_loop:
-  54:  354+19	B049  DD7E04  	    LD A,(IX+4) ;load status byte
-  55:  373+4	B04C  B7      	    OR A
-  56:  377+10	B04D  C265B0  	    JP NZ, find_partition_process    ;If not zero, jump to print function
-  57:  387+10	B050  C353B0  	    jp find_partition_next
+  12:   17+17	B003  CD42B1  	    call fat_get_root_table
+  13:   34+10	B006  110FB0  	    LD DE, [str1]
+  14:   44+17	B009  CD1AB2  	    CALL fat_lfs
+  15:				    
+  16:   61+10	B00C  C39900  	    JP PROMPT_BEGIN
+  17:				
+  18:     -	B00F          	str1:
+  19:     -	B00F  494C4C55	    db "ILLUSION.PSG",0
+	              53494F4E
+	              2E505347
+	              00
+  20:     -	B01C          	str2:
+  21:     -	B01C  48414C4C	    db "HALLOWLT.TXT",0
+	              4F574C54
+	              2E545854
+	              00
+  22:     -	B029          	str3:
+  23:     -	B029  54455354	    db "TEST",0
+	              00
+  24:     -	B02E          	str4:
+  25:     -	B02E  2E4F5247	    db ".ORG",0
+	              00
+  26:				
+  27:     -	B033          	delay_small:
+  28:   71+11	B033  F5      	    PUSH AF
+  29:   82+10	B034  F1      	    POP AF
+  30:   92+11	B035  F5      	    PUSH AF
+  31:  103+10	B036  F1      	    POP AF
+  32:  113+10	B037  C9      	    RET
+  33:				
+  34:     -	B038          	find_partition:
+  35:				    ;read bootsector
+  36:  123+7	B038  3E01    	    LD A,1                  ;read 1 sector
+  37:  130+7	B03A  060A    	    LD B,IDE_REG_SECTOR
+  38:  137+17	B03C  CDB310  	    CALL ide_regwrite_8
+  39:				
+  40:  154+7	B03F  3E01    	    LD A,1                  ;read sector 0
+  41:  161+7	B041  060B    	    LD B,IDE_REG_SSECTOR
+  42:  168+17	B043  CDB310  	    CALL ide_regwrite_8
+  43:				
+  44:  185+7	B046  3E00    	    LD A,0                  ;read cylinder 0
+  45:  192+7	B048  060C    	    LD B,IDE_REG_LCYL
+  46:  199+17	B04A  CDB310  	    CALL ide_regwrite_8
+  47:  216+7	B04D  3E00    	    LD A,0                  
+  48:  223+7	B04F  060D    	    LD B,IDE_REG_HCYL
+  49:  230+17	B051  CDB310  	    CALL ide_regwrite_8
+  50:				
+  51:  247+7	B054  3EA0    	    LD A,10100000b          ;read head 0
+  52:  254+7	B056  060E    	    LD B,IDE_REG_HEAD
+  53:  261+17	B058  CDB310  	    CALL ide_regwrite_8
+  54:				
+  55:  278+7	B05B  3E20    	    LD A,IDE_CMD_READSEC    ;send read command
+  56:  285+7	B05D  060F    	    LD B,IDE_REG_CMDSTS
+  57:  292+17	B05F  CDB310  	    CALL ide_regwrite_8
   58:				
-  59:     -	B053          	find_partition_next:
-  60:  397+7	B053  3E0A    	    LD A,10                 ;New line
-  61:  404+17	B055  CDB702  	    CALL print_char
-  62:  421+7	B058  3E0D    	    LD A,13
-  63:  428+17	B05A  CDB702  	    CALL print_char
-  64:  445+10	B05D  111000  	    LD DE,16
-  65:  455+15	B060  DD19    	    ADD IX,DE
-  66:  470+8+5	B062  10E5    	    DJNZ find_partition_loop    
-  67:  478+10	B064  C9      	    RET
-  68:				
-  69:     -	B065          	find_partition_process: ; process table entry
-  70:  488+10	B065  21D3B0  	    ld hl, [str_part_seek_1]
-  71:  498+17	B068  CDBF02  	    call print_str  ;print 
-  72:  515+19	B06B  DD7E04  	    LD A,(IX+0x04) ;load type
-  73:  534+17	B06E  CDE702  	    call print_a_hex
-  74:  551+19	B071  DD7E04  	    LD A,(IX+0x04) ;load type
-  75:  570+7	B074  FE0E    	    CP 0x0E
-  76:  577+7+5	B076  20DB    	    JR NZ, find_partition_next
-  77:				
-  78:  584+10	B078  21DEB0  	    ld hl, [str_part_seek_2]
-  79:  594+17	B07B  CDBF02  	    call print_str  ;print 
-  80:  611+10	B07E  21E7B0  	    ld hl, [str_part_seek_3]
-  81:  621+17	B081  CDBF02  	    call print_str  ;print 
-  82:				
-  83:  638+19	B084  DD7E08  	    LD A,(IX+0x08) ;load start LBA
-  84:  657+13	B087  320550  	    LD (MEM_IDE_PARTITION+3),A
-  85:  670+19	B08A  DD7E09  	    LD A,(IX+0x09) ;load start LBA
-  86:  689+13	B08D  320450  	    LD (MEM_IDE_PARTITION+2),A
-  87:  702+19	B090  DD7E0A  	    LD A,(IX+0x0A) ;load start LBA
-  88:  721+13	B093  320350  	    LD (MEM_IDE_PARTITION+1),A
-  89:  734+19	B096  DD7E0B  	    LD A,(IX+0x0B) ;load start LBA
-  90:  753+13	B099  320250  	    LD (MEM_IDE_PARTITION+0),A
-  91:				
-  92:  766+13	B09C  3A0550  	    LD A,(MEM_IDE_PARTITION+3)
-  93:  779+17	B09F  CDE702  	    call print_a_hex
-  94:  796+13	B0A2  3A0450  	    LD A,(MEM_IDE_PARTITION+2)
-  95:  809+17	B0A5  CDE702  	    call print_a_hex
-  96:  826+13	B0A8  3A0350  	    LD A,(MEM_IDE_PARTITION+1)
-  97:  839+17	B0AB  CDE702  	    call print_a_hex
-  98:  856+13	B0AE  3A0250  	    LD A,(MEM_IDE_PARTITION+0)
-  99:  869+17	B0B1  CDE702  	    call print_a_hex
- 100:  886+10	B0B4  21F0B0  	    ld hl, [str_part_seek_4]
- 101:  896+17	B0B7  CDBF02  	    call print_str  ;print 
- 102:  913+19	B0BA  DD7E0C  	    LD A,(IX+0x0C) ;load count LBA
- 103:  932+17	B0BD  CDE702  	    call print_a_hex
- 104:  949+19	B0C0  DD7E0D  	    LD A,(IX+0x0D) ;load count LBA
- 105:  968+17	B0C3  CDE702  	    call print_a_hex
- 106:  985+19	B0C6  DD7E0E  	    LD A,(IX+0x0E) ;load count LBA
- 107: 1004+17	B0C9  CDE702  	    call print_a_hex
- 108: 1021+19	B0CC  DD7E0F  	    LD A,(IX+0x0F) ;load count LBA
- 109: 1040+17	B0CF  CDE702  	    call print_a_hex
- 110:				
- 111: 1057+10	B0D2  C9      	    RET
- 112:				
- 113:     -	B0D3          	str_part_seek_1:
- 114:     -	B0D3  2D205479	    db "- Type: 0x",0
+  59:  309+10	B062  214150  	    LD HL,MEM_IDE_BUFFER    ;set read/write buffer start address
+  60:  319+17	B065  CD1D11  	    call ide_readsector_512_inv ;read 256 words from device
+  61:				
+  62:  336+7	B068  0604    	    LD B,4                      ;Partition table length
+  63:  343+7	B06A  0E00    	    LD C,0                      ;Partition ID counter
+  64:  350+14	B06C  DD21FF51	    LD IX,MEM_IDE_BUFFER+446    ;Load offest of first partition table entry
+  65:     -	B070          	find_partition_loop:
+  66:  364+19	B070  DD7E04  	    LD A,(IX+4) ;load status byte
+  67:  383+4	B073  B7      	    OR A
+  68:  387+10	B074  C28CB0  	    JP NZ, find_partition_process    ;If not zero, jump to print function
+  69:  397+10	B077  C37AB0  	    jp find_partition_next
+  70:				
+  71:     -	B07A          	find_partition_next:
+  72:  407+7	B07A  3E0A    	    LD A,10                 ;New line
+  73:  414+17	B07C  CDB702  	    CALL print_char
+  74:  431+7	B07F  3E0D    	    LD A,13
+  75:  438+17	B081  CDB702  	    CALL print_char
+  76:  455+10	B084  111000  	    LD DE,16
+  77:  465+15	B087  DD19    	    ADD IX,DE
+  78:  480+8+5	B089  10E5    	    DJNZ find_partition_loop    
+  79:  488+10	B08B  C9      	    RET
+  80:				
+  81:     -	B08C          	find_partition_process: ; process table entry
+  82:  498+10	B08C  2104B1  	    ld hl, [str_part_seek_1]
+  83:  508+17	B08F  CDBF02  	    call print_str  ;print 
+  84:  525+19	B092  DD7E04  	    LD A,(IX+0x04) ;load type
+  85:  544+17	B095  CDE702  	    call print_a_hex
+  86:  561+19	B098  DD7E04  	    LD A,(IX+0x04) ;load type
+  87:  580+7	B09B  FE0E    	    CP 0x0E
+  88:  587+7+5	B09D  20DB    	    JR NZ, find_partition_next
+  89:				
+  90:  594+10	B09F  210FB1  	    ld hl, [str_part_seek_2]
+  91:  604+17	B0A2  CDBF02  	    call print_str  ;print 
+  92:  621+10	B0A5  2118B1  	    ld hl, [str_part_seek_3]
+  93:  631+17	B0A8  CDBF02  	    call print_str  ;print 
+  94:				
+  95:  648+19	B0AB  DD7E08  	    LD A,(IX+0x08) ;load start LBA
+  96:  667+13	B0AE  320550  	    LD (MEM_IDE_PARTITION+3),A
+  97:  680+19	B0B1  DD7E09  	    LD A,(IX+0x09) ;load start LBA
+  98:  699+13	B0B4  320450  	    LD (MEM_IDE_PARTITION+2),A
+  99:  712+19	B0B7  DD7E0A  	    LD A,(IX+0x0A) ;load start LBA
+ 100:  731+13	B0BA  320350  	    LD (MEM_IDE_PARTITION+1),A
+ 101:  744+19	B0BD  DD7E0B  	    LD A,(IX+0x0B) ;load start LBA
+ 102:  763+13	B0C0  320250  	    LD (MEM_IDE_PARTITION+0),A
+ 103:				
+ 104:  776+13	B0C3  3A0550  	    LD A,(MEM_IDE_PARTITION+3)
+ 105:  789+17	B0C6  CDE702  	    call print_a_hex
+ 106:  806+13	B0C9  3A0450  	    LD A,(MEM_IDE_PARTITION+2)
+ 107:  819+17	B0CC  CDE702  	    call print_a_hex
+ 108:  836+13	B0CF  3A0350  	    LD A,(MEM_IDE_PARTITION+1)
+ 109:  849+17	B0D2  CDE702  	    call print_a_hex
+ 110:  866+13	B0D5  3A0250  	    LD A,(MEM_IDE_PARTITION+0)
+ 111:  879+17	B0D8  CDE702  	    call print_a_hex
+ 112:  896+10	B0DB  2121B1  	    ld hl, [str_part_seek_4]
+ 113:  906+17	B0DE  CDBF02  	    call print_str  ;print 
+ 114:  923+19	B0E1  DD7E0C  	    LD A,(IX+0x0C) ;load count LBA
+ 115:  942+17	B0E4  CDE702  	    call print_a_hex
+ 116:  959+19	B0E7  DD7E0D  	    LD A,(IX+0x0D) ;load count LBA
+ 117:  978+17	B0EA  CDE702  	    call print_a_hex
+ 118:  995+19	B0ED  DD7E0E  	    LD A,(IX+0x0E) ;load count LBA
+ 119: 1014+17	B0F0  CDE702  	    call print_a_hex
+ 120: 1031+19	B0F3  DD7E0F  	    LD A,(IX+0x0F) ;load count LBA
+ 121: 1050+17	B0F6  CDE702  	    call print_a_hex
+ 122: 1067+7	B0F9  3E0A    	    LD A,10                 ;New line
+ 123: 1074+17	B0FB  CDB702  	    CALL print_char
+ 124: 1091+7	B0FE  3E0D    	    LD A,13
+ 125: 1098+17	B100  CDB702  	    CALL print_char
+ 126: 1115+10	B103  C9      	    RET
+ 127:				
+ 128:     -	B104          	str_part_seek_1:
+ 129:     -	B104  2D205479	    db "- Type: 0x",0
 	              70653A20
 	              307800
- 115:     -	B0DE          	str_part_seek_2:
- 116:     -	B0DE  20537461	    db " State: ",0
+ 130:     -	B10F          	str_part_seek_2:
+ 131:     -	B10F  20537461	    db " State: ",0
 	              74653A20
 	              00
- 117:     -	B0E7          	str_part_seek_3:
- 118:     -	B0E7  204C4241	    db " LBA: 0x",0
+ 132:     -	B118          	str_part_seek_3:
+ 133:     -	B118  204C4241	    db " LBA: 0x",0
 	              3A203078
 	              00
- 119:     -	B0F0          	str_part_seek_4:
- 120:     -	B0F0  204C656E	    db " Len: 0x",0
+ 134:     -	B121          	str_part_seek_4:
+ 135:     -	B121  204C656E	    db " Len: 0x",0
 	              3A203078
 	              00
- 121:     -	B0F9          	str_sum:
- 122:     -	B0F9  2D2D2D2D	    db "------------",10,13,0
+ 136:     -	B12A          	str_sum:
+ 137:     -	B12A  2D2D2D2D	    db "------------",10,13,0
 	              2D2D2D2D
 	              2D2D2D2D
 	              0A0D00
- 123:     -	B108          	str_files:
- 124:     -	B108  2046696C	    db " Files",10,13,0
+ 138:     -	B139          	str_files:
+ 139:     -	B139  2046696C	    db " Files",10,13,0
 	              65730A0D
 	              00
- 125:				
+ 140:				
 **** test.asm ****
- 126:				.include "include/fat16.s"
+ 141:				.include "include/fat16.s"
 **** include/fat16.s ****
    1:				; VARS
    2:				
@@ -546,173 +569,326 @@
    9:				;-------------------------------------
   10:				; Get FAT Root-Table position
   11:				;-------------------------------------
-  12:     -	B111          	fat_get_root_table:
-  13: 1067+17	B111  CD5BB1  	    call fat_reset_pointer ;reset fat pointer
+  12:     -	B142          	fat_get_root_table:
+  13: 1125+17	B142  CDA7B2  	    call fat_reset_pointer ;reset fat pointer
   14:				    ; Load first sector on active partition
-  15: 1084+10	B114  210250  	    LD HL, MEM_IDE_PARTITION    ; pointer to LBA address
-  16: 1094+7	B117  3E01    	    LD A,1                  ;read 1 sector
-  17: 1101+17	B119  CD5612  	    call read_lba_sector
+  15: 1142+10	B145  210250  	    LD HL, MEM_IDE_PARTITION    ; pointer to LBA address
+  16: 1152+7	B148  3E01    	    LD A,1                  ;read 1 sector
+  17: 1159+17	B14A  CD5612  	    call read_lba_sector
   18:				
   19:				    ; Read and store FS Properties
-  20: 1118+14	B11C  DD214150	    LD IX,MEM_IDE_BUFFER
-  21: 1132+19	B120  DD7E0E  	    LD A,(IX+0x0E)
-  22: 1151+13	B123  320A50  	    LD (MEM_FAT_RESERVED),A
-  23: 1164+19	B126  DD7E0F  	    LD A,(IX+0x0F)
-  24: 1183+13	B129  320B50  	    LD (MEM_FAT_RESERVED+1),A
-  25: 1196+19	B12C  DD7E10  	    LD A,(IX+0x10)
-  26: 1215+13	B12F  320C50  	    LD (MEM_FAT_AMOUNT),A
-  27: 1228+19	B132  DD7E16  	    LD A,(IX+0x16)
-  28: 1247+13	B135  320D50  	    LD (MEM_FAT_SECTORS),A
-  29: 1260+19	B138  DD7E17  	    LD A,(IX+0x17)
-  30: 1279+13	B13B  320E50  	    LD (MEM_FAT_SECTORS+1),A
+  20: 1176+14	B14D  DD214150	    LD IX,MEM_IDE_BUFFER
+  21: 1190+19	B151  DD7E0E  	    LD A,(IX+0x0E)
+  22: 1209+13	B154  320A50  	    LD (MEM_FAT_RESERVED),A
+  23: 1222+19	B157  DD7E0F  	    LD A,(IX+0x0F)
+  24: 1241+13	B15A  320B50  	    LD (MEM_FAT_RESERVED+1),A
+  25: 1254+19	B15D  DD7E10  	    LD A,(IX+0x10)
+  26: 1273+13	B160  320C50  	    LD (MEM_FAT_AMOUNT),A
+  27: 1286+19	B163  DD7E16  	    LD A,(IX+0x16)
+  28: 1305+13	B166  320D50  	    LD (MEM_FAT_SECTORS),A
+  29: 1318+19	B169  DD7E17  	    LD A,(IX+0x17)
+  30: 1337+13	B16C  320E50  	    LD (MEM_FAT_SECTORS+1),A
   31:				
   32:				    ;Get Root FAT
-  33: 1292+13	B13E  3A0E50  	    LD A, (MEM_FAT_SECTORS+1) ; load FAT Sector size to DE
-  34: 1305+4	B141  57      	    LD D,A
-  35: 1309+13	B142  3A0D50  	    LD A, (MEM_FAT_SECTORS)
-  36: 1322+4	B145  5F      	    LD E,A
-  37: 1326+4	B146  AF      	    XOR A   ; clear HL
-  38: 1330+4	B147  67      	    LD H,A
-  39: 1334+4	B148  6F      	    LD L,A
-  40: 1338+13	B149  3A0C50  	    LD A,(MEM_FAT_AMOUNT)  ; Load counter for multiplication
-  41: 1351+4	B14C  47      	    LD B,A
-  42:     -	B14D          	_fat_get_root_table_loop:  ; multiply
-  43: 1355+11	B14D  19      	    ADD HL,DE
-  44: 1366+8+5	B14E  10FD    	    DJNZ _fat_get_root_table_loop
+  33: 1350+13	B16F  3A0E50  	    LD A, (MEM_FAT_SECTORS+1) ; load FAT Sector size to DE
+  34: 1363+4	B172  57      	    LD D,A
+  35: 1367+13	B173  3A0D50  	    LD A, (MEM_FAT_SECTORS)
+  36: 1380+4	B176  5F      	    LD E,A
+  37: 1384+4	B177  AF      	    XOR A   ; clear HL
+  38: 1388+4	B178  67      	    LD H,A
+  39: 1392+4	B179  6F      	    LD L,A
+  40: 1396+13	B17A  3A0C50  	    LD A,(MEM_FAT_AMOUNT)  ; Load counter for multiplication
+  41: 1409+4	B17D  47      	    LD B,A
+  42:     -	B17E          	_fat_get_root_table_loop:  ; multiply
+  43: 1413+11	B17E  19      	    ADD HL,DE
+  44: 1424+8+5	B17F  10FD    	    DJNZ _fat_get_root_table_loop
   45:				
   46:				    ; add reserved sectors
-  47: 1374+7	B150  1600    	    LD D,0
-  48: 1381+13	B152  3A0A50  	    LD A,(MEM_FAT_RESERVED)
-  49: 1394+4	B155  5F      	    LD E,A
-  50: 1398+11	B156  19      	    ADD HL,DE
+  47: 1432+7	B181  1600    	    LD D,0
+  48: 1439+13	B183  3A0A50  	    LD A,(MEM_FAT_RESERVED)
+  49: 1452+4	B186  5F      	    LD E,A
+  50: 1456+11	B187  19      	    ADD HL,DE
   51:				
   52:				    ; add 
-  53: 1409+17	B157  CDFAB1  	    call _fat_math_sector_add_16
-  54: 1426+10	B15A  C9      	    ret
+  53: 1467+17	B188  CD84B2  	    call _fat_math_sector_add_16
+  54: 1484+10	B18B  C9      	    ret
   55:				
-  56:				; reset LBA pointer to first sector in partition
-  57:     -	B15B          	fat_reset_pointer:
-  58: 1436+10	B15B  210250  	    LD HL,MEM_IDE_PARTITION
-  59: 1446+10	B15E  110650  	    LD DE,MEM_IDE_POINTER
-  60: 1456+12	B161  1800    	    jr fat_copy_lba_pointer
-  61:				
-  62:				; resets LBA pointer (4-byte) to partition start
-  63:				; HL = from here
-  64:				; DE = to this destimation
-  65:     -	B163          	fat_copy_lba_pointer:
-  66: 1468+11	B163  C5      	    PUSH BC
-  67: 1479+7	B164  0600    	    LD B,0
-  68: 1486+7	B166  0E04    	    LD C,4
-  69: 1493+16+5	B168  EDB0    	    LDIR
-  70: 1509+10	B16A  C1      	    POP BC
-  71: 1519+10	B16B  C9      	    ret
-  72:				
-  73:				;-------------------------------------
-  74:				; Print current fat directory of MEM_IDE_POINTER
-  75:				;-------------------------------------
-  76:     -	B16C          	fat_print_directory:
-  77: 1529+7	B16C  3E0A    	    LD A,10                 ;New line
-  78: 1536+17	B16E  CDB702  	    CALL print_char
-  79: 1553+7	B171  3E0D    	    LD A,13
-  80: 1560+17	B173  CDB702  	    CALL print_char
-  81:				    
-  82: 1577+20	B176  ED5B0D50	    LD DE,(MEM_FAT_SECTORS)
-  83: 1597+20	B17A  ED530F50	    LD (MEM_FAT_COUNT1),DE
-  84: 1617+10	B17E  210650  	    LD HL,MEM_IDE_POINTER   ;read first sector
-  85: 1627+7	B181  0601    	    LD B,1
-  86: 1634+17	B183  CD5612  	    call read_lba_sector
-  87:				
-  88: 1651+10	B186  214150  	    LD HL, MEM_IDE_BUFFER   ;set buffer start
-  89: 1661+7	B189  0E10    	    LD C,16                  ;set entries counter
-  90:				
-  91:     -	B18B          	_fat_print_directory_loop:  ;loop over each entry (32byte)
-  92: 1668+7	B18B  7E      	    LD A,(HL) ; check first byte
-  93: 1675+11	B18C  E5      	    PUSH HL ;backup start of entry
-  94:				    ;ignore unwanted entries
-  95: 1686+7	B18D  FE41    	    CP 0x41 ;skip invisible
-  96: 1693+7+5	B18F  2826    	    JR Z, _fat_print_directory_loop_next    
-  97: 1700+7	B191  FEE5    	    CP 0xE5 ;skip deleted
-  98: 1707+7+5	B193  2822    	    JR Z, _fat_print_directory_loop_next
-  99: 1714+7	B195  FE00    	    CP 0x00 ;reached end
- 100: 1721+10	B197  CAE8B1  	    JP Z, _fat_print_directory_loop_break
- 101:				    ;print filename
- 102: 1731+7	B19A  0608    	    LD B,8
- 103: 1738+17	B19C  CD5813  	    call print_str_fixed
- 104: 1755+7	B19F  3E2E    	    ld A,'.'
- 105: 1762+17	B1A1  CDB702  	    call print_char
- 106: 1779+7	B1A4  0603    	    LD B,3
- 107: 1786+17	B1A6  CD5813  	    call print_str_fixed
+  56:				;-------------------------------------
+  57:				; Print current fat directory of MEM_IDE_POINTER
+  58:				;-------------------------------------
+  59:     -	B18C          	fat_print_directory:
+  60: 1494+7	B18C  3E0A    	    LD A,10                 ;New line
+  61: 1501+17	B18E  CDB702  	    CALL print_char
+  62: 1518+7	B191  3E0D    	    LD A,13
+  63: 1525+17	B193  CDB702  	    CALL print_char
+  64:				    
+  65: 1542+20	B196  ED5B0D50	    LD DE,(MEM_FAT_SECTORS)
+  66: 1562+20	B19A  ED530F50	    LD (MEM_FAT_COUNT1),DE
+  67: 1582+10	B19E  210650  	    LD HL,MEM_IDE_POINTER   ;read first sector
+  68: 1592+7	B1A1  0601    	    LD B,1
+  69: 1599+17	B1A3  CD5612  	    call read_lba_sector
+  70:				
+  71: 1616+10	B1A6  214150  	    LD HL, MEM_IDE_BUFFER   ;set buffer start
+  72: 1626+7	B1A9  0E10    	    LD C,16                  ;set entries counter
+  73:				
+  74:     -	B1AB          	_fat_print_directory_loop:  ;loop over each entry (32byte)
+  75: 1633+7	B1AB  7E      	    LD A,(HL) ; check first byte
+  76: 1640+11	B1AC  E5      	    PUSH HL ;backup start of entry
+  77:				    ;ignore unwanted entries
+  78: 1651+7	B1AD  FE41    	    CP 0x41 ;skip invisible
+  79: 1658+7+5	B1AF  2826    	    JR Z, _fat_print_directory_loop_next    
+  80: 1665+7	B1B1  FEE5    	    CP 0xE5 ;skip deleted
+  81: 1672+7+5	B1B3  2822    	    JR Z, _fat_print_directory_loop_next
+  82: 1679+7	B1B5  FE00    	    CP 0x00 ;reached end
+  83: 1686+10	B1B7  CA08B2  	    JP Z, _fat_print_directory_loop_break
+  84:				    ;print filename
+  85: 1696+7	B1BA  0608    	    LD B,8
+  86: 1703+17	B1BC  CD5813  	    call print_str_fixed
+  87: 1720+7	B1BF  3E2E    	    ld A,'.'
+  88: 1727+17	B1C1  CDB702  	    call print_char
+  89: 1744+7	B1C4  0603    	    LD B,3
+  90: 1751+17	B1C6  CD5813  	    call print_str_fixed
+  91:				
+  92: 1768+7	B1C9  7E      	    LD A,(HL) ; print attribute
+  93: 1775+17	B1CA  CDB702  	    call print_char
+  94:				
+  95: 1792+7	B1CD  3E0A    	    LD A,10                 ;New line
+  96: 1799+17	B1CF  CDB702  	    CALL print_char
+  97: 1816+7	B1D2  3E0D    	    LD A,13
+  98: 1823+17	B1D4  CDB702  	    CALL print_char
+  99:				    
+ 100:				
+ 101:     -	B1D7          	_fat_print_directory_loop_next: ; read next entry
+ 102: 1840+4	B1D7  0D      	    DEC C   ;next sector after 32 entries
+ 103: 1844+7+5	B1D8  2808    	    JR Z,_fat_print_directory_loop_next_sector
+ 104: 1851+10	B1DA  E1      	    POP HL      ;restore start
+ 105: 1861+10	B1DB  112000  	    LD DE, 32   ;length of entry
+ 106: 1871+11	B1DE  19      	    ADD HL,DE   ;increment
+ 107: 1882+10	B1DF  C3ABB1  	    JP _fat_print_directory_loop
  108:				
- 109: 1803+7	B1A9  7E      	    LD A,(HL) ; print attribute
- 110: 1810+17	B1AA  CDB702  	    call print_char
- 111:				
- 112: 1827+7	B1AD  3E0A    	    LD A,10                 ;New line
- 113: 1834+17	B1AF  CDB702  	    CALL print_char
- 114: 1851+7	B1B2  3E0D    	    LD A,13
- 115: 1858+17	B1B4  CDB702  	    CALL print_char
- 116:				    
- 117:				
- 118:     -	B1B7          	_fat_print_directory_loop_next: ; read next entry
- 119: 1875+4	B1B7  0D      	    DEC C   ;next sector after 32 entries
- 120: 1879+7+5	B1B8  2808    	    JR Z,_fat_print_directory_loop_next_sector
- 121: 1886+10	B1BA  E1      	    POP HL      ;restore start
- 122: 1896+10	B1BB  112000  	    LD DE, 32   ;length of entry
- 123: 1906+11	B1BE  19      	    ADD HL,DE   ;increment
- 124: 1917+10	B1BF  C38BB1  	    JP _fat_print_directory_loop
+ 109:     -	B1E2          	_fat_print_directory_loop_next_sector:  ; end fo sector. read next sector from disk
+ 110: 1892+10	B1E2  E1      	    POP HL      ;clear stack from old hl
+ 111: 1902+7	B1E3  2600    	    LD H,0
+ 112: 1909+7	B1E5  2E01    	    LD L,1      
+ 113: 1916+17	B1E7  CD84B2  	    call _fat_math_sector_add_16 ;increment sector
+ 114:				
+ 115: 1933+20	B1EA  ED5B0F50	    LD DE,(MEM_FAT_COUNT1)  ; decrement sector count (max FAT length)
+ 116: 1953+6	B1EE  1B      	    DEC DE
+ 117: 1959+20	B1EF  ED530F50	    LD (MEM_FAT_COUNT1),DE
+ 118: 1979+4	B1F3  7A      	    LD A,D
+ 119: 1983+4	B1F4  B3      	    OR E
+ 120: 1987+10	B1F5  CA09B2  	    JP Z, _fat_print_directory_loop_break_dirty ; if DE is 0, mmax is reached. End here
+ 121:				    
+ 122: 1997+10	B1F8  210650  	    LD HL,MEM_IDE_POINTER   ;read next sector
+ 123: 2007+7	B1FB  0601    	    LD B,1
+ 124: 2014+17	B1FD  CD5612  	    call read_lba_sector
  125:				
- 126:     -	B1C2          	_fat_print_directory_loop_next_sector:  ; end fo sector. read next sector from disk
- 127: 1927+10	B1C2  E1      	    POP HL      ;clear stack from old hl
- 128: 1937+7	B1C3  2600    	    LD H,0
- 129: 1944+7	B1C5  2E01    	    LD L,1      
- 130: 1951+17	B1C7  CDFAB1  	    call _fat_math_sector_add_16 ;increment sector
- 131:				
- 132: 1968+20	B1CA  ED5B0F50	    LD DE,(MEM_FAT_COUNT1)  ; decrement sector count (max FAT length)
- 133: 1988+6	B1CE  1B      	    DEC DE
- 134: 1994+20	B1CF  ED530F50	    LD (MEM_FAT_COUNT1),DE
- 135: 2014+4	B1D3  7A      	    LD A,D
- 136: 2018+4	B1D4  B3      	    OR E
- 137: 2022+10	B1D5  CAE9B1  	    JP Z, _fat_print_directory_loop_break_dirty ; if DE is 0, mmax is reached. End here
- 138:				    
- 139: 2032+10	B1D8  210650  	    LD HL,MEM_IDE_POINTER   ;read next sector
- 140: 2042+7	B1DB  0601    	    LD B,1
- 141: 2049+17	B1DD  CD5612  	    call read_lba_sector
- 142:				
- 143: 2066+10	B1E0  214150  	    LD HL, MEM_IDE_BUFFER   ;set buffer start
- 144: 2076+7	B1E3  0E10    	    LD C,16                  ;set entries counter
- 145: 2083+10	B1E5  C38BB1  	    JP _fat_print_directory_loop
- 146:				
- 147:     -	B1E8          	_fat_print_directory_loop_break
- 148: 2093+10	B1E8  E1      	    POP HL
- 149:     -	B1E9          	_fat_print_directory_loop_break_dirty
- 150: 2103+10	B1E9  21F9B0  	    ld hl, [str_sum] 
- 151: 2113+17	B1EC  CDBF02  	    call print_str  ;print 
- 152: 2130+4	B1EF  79      	    ld a,c
- 153: 2134+17	B1F0  CDE702  	    call print_a_hex
- 154: 2151+10	B1F3  2108B1  	    ld hl, [str_files]
- 155: 2161+17	B1F6  CDBF02  	    call print_str  ;print 
- 156:				
- 157: 2178+10	B1F9  C9      	    ret
- 158:				;=================== UTIL Functions ===========================
- 159:				; 32 Bit addition to pointer
- 160:				; HL has value
- 161:     -	B1FA          	_fat_math_sector_add_16:
- 162: 2188+14	B1FA  DD210650	    LD IX,MEM_IDE_POINTER; LOAD IX to sector pointer in memory
- 163: 2202+4	B1FE  7D      	    LD A,L
- 164: 2206+19	B1FF  DD8603  	    ADD A,(IX+3)
- 165: 2225+19	B202  DD7703  	    LD (IX+3),A
- 166: 2244+7+5	B205  3005    	    JR NC, _fat_math_sector_add_16_2 ;if no carry, continue
- 167: 2251+7	B207  3E01    	    LD A,1
- 168: 2258+19	B209  DD8602  	    ADD A,(IX+2)
- 169:     -	B20C          	_fat_math_sector_add_16_2:
- 170: 2277+4	B20C  7C      	    LD A,h
- 171: 2281+19	B20D  DD8602  	    ADD A,(IX+2)
- 172: 2300+19	B210  DD7702  	    LD (IX+2),A
- 173: 2319+5+6	B213  D0      	    RET NC  ;done when no carry
- 174: 2324+7	B214  3E01    	    LD A,1
- 175: 2331+19	B216  DD8601  	    ADD A,(IX+1)
- 176: 2350+19	B219  DD7701  	    LD (IX+1),A
+ 126: 2031+10	B200  214150  	    LD HL, MEM_IDE_BUFFER   ;set buffer start
+ 127: 2041+7	B203  0E10    	    LD C,16                  ;set entries counter
+ 128: 2048+10	B205  C3ABB1  	    JP _fat_print_directory_loop
+ 129:				
+ 130:     -	B208          	_fat_print_directory_loop_break
+ 131: 2058+10	B208  E1      	    POP HL
+ 132:     -	B209          	_fat_print_directory_loop_break_dirty
+ 133: 2068+10	B209  212AB1  	    ld hl, [str_sum] 
+ 134: 2078+17	B20C  CDBF02  	    call print_str  ;print 
+ 135: 2095+4	B20F  79      	    ld a,c
+ 136: 2099+17	B210  CDE702  	    call print_a_hex
+ 137: 2116+10	B213  2139B1  	    ld hl, [str_files]
+ 138: 2126+17	B216  CDBF02  	    call print_str  ;print 
+ 139: 2143+10	B219  C9      	    ret
+ 140:				
+ 141:				;-------------------------------------
+ 142:				; FAT locate file startcluster
+ 143:				;
+ 144:				; DE pointer to file name
+ 145:				;-------------------------------------
+ 146:     -	B21A          	fat_lfs:
+ 147: 2153+11	B21A  D5      	    PUSH DE
+ 148: 2164+10	B21B  211150  	    LD HL,MEM_IDE_BASE + 17   ; prepare filename
+ 149: 2174+17	B21E  CDCEB2  	    CALL format_filename_fat16
+ 150:				
+ 151: 2191+7	B221  3E10    	    LD A,16 ;init counter for FAT sectors
+ 152: 2198+13	B223  320F50  	    LD (MEM_FAT_COUNT1),A
+ 153:				
+ 154: 2211+10	B226  210650  	    LD HL,MEM_IDE_POINTER   ;read first sector
+ 155: 2221+7	B229  0601    	    LD B,1
+ 156: 2228+17	B22B  CD5612  	    call read_lba_sector
+ 157:				
+ 158: 2245+10	B22E  214150  	    LD HL, MEM_IDE_BUFFER   ;set buffer start
+ 159: 2255+7	B231  0E10    	    LD C,16                 ;set entries counter
+ 160:				
+ 161:     -	B233          	_fat_lfs_loop:
+ 162: 2262+10	B233  D1      	    POP DE
+ 163: 2272+11	B234  D5      	    PUSH DE
+ 164: 2283+17	B235  CDB8B2  	    CALL compare_filename
+ 165: 2300+7+5	B238  3833    	    JR C, _fat_lfs_loop_compare_match   ;on match
+ 166:				
+ 167:				    ; prepare next entry
+ 168: 2307+4	B23A  0D      	    DEC C   ;next sector after 16 entries
+ 169: 2311+7+5	B23B  2807    	    JR Z,_fat_lfs_loop_compare_next_sector
+ 170: 2318+10	B23D  112000  	    LD DE, 32   ;length of entry
+ 171: 2328+11	B240  19      	    ADD HL,DE   ;increment
+ 172: 2339+10	B241  C333B2  	    JP _fat_lfs_loop
+ 173:				
+ 174:     -	B244          	_fat_lfs_loop_compare_next_sector:
+ 175: 2349+7	B244  2600    	    LD H,0
+ 176: 2356+7	B246  2E01    	    LD L,1      
+ 177: 2363+17	B248  CD84B2  	    call _fat_math_sector_add_16 ;increment sector
+ 178: 2380+13	B24B  3A0F50  	    LD A,(MEM_FAT_COUNT1)  ; decrement sector count (max FAT length)
+ 179: 2393+4	B24E  3D      	    DEC A
+ 180: 2397+13	B24F  320F50  	    LD (MEM_FAT_COUNT1),A
+ 181: 2410+10	B252  CA65B2  	    JP Z, _fat_lfs_loop_compare_end ; if DE is 0, mmax is reached. End here
+ 182:				    ;call print_a_hex
+ 183:				
+ 184: 2420+10	B255  210650  	    LD HL,MEM_IDE_POINTER   ;read next sector
+ 185: 2430+7	B258  0601    	    LD B,1
+ 186: 2437+17	B25A  CD5612  	    call read_lba_sector
+ 187:				
+ 188: 2454+10	B25D  214150  	    LD HL, MEM_IDE_BUFFER   ;set buffer start
+ 189: 2464+7	B260  0E10    	    LD C,16                  ;set entries counter
+ 190: 2471+10	B262  C333B2  	    JP _fat_lfs_loop
+ 191:				
+ 192:     -	B265          	_fat_lfs_loop_compare_end:
+ 193: 2481+10	B265  D1      	    POP DE
+ 194: 2491+10	B266  21F3B2  	    LD HL, [str_file_notfound] 
+ 195: 2501+17	B269  CDBF02  	    CALL print_str  ;print 
+ 196: 2518+10	B26C  C9      	    RET
+ 197:				
+ 198:     -	B26D          	_fat_lfs_loop_compare_match:
+ 199:				    ; get entry
+ 200: 2528+10	B26D  D1      	    POP DE
+ 201: 2538+7	B26E  0608    	    LD B,8
+ 202: 2545+17	B270  CD5813  	    call print_str_fixed
+ 203: 2562+7	B273  3E2E    	    ld A,'.'
+ 204: 2569+17	B275  CDB702  	    call print_char
+ 205: 2586+7	B278  0603    	    LD B,3
+ 206: 2593+17	B27A  CD5813  	    call print_str_fixed
+ 207:				
+ 208: 2610+10	B27D  2105B3  	    LD HL, [str_file_found]
+ 209: 2620+17	B280  CDBF02  	    CALL print_str  ;print 
+ 210:				    
+ 211: 2637+10	B283  C9      	    RET
+ 212:				
+ 213:				
+ 214:				
+ 215:				;=================== UTIL Functions ===========================
+ 216:				; 32 Bit addition to pointer
+ 217:				; HL has value
+ 218:     -	B284          	_fat_math_sector_add_16:
+ 219: 2647+14	B284  DD210650	    LD IX,MEM_IDE_POINTER; LOAD IX to sector pointer in memory
+ 220: 2661+4	B288  7D      	    LD A,L
+ 221: 2665+19	B289  DD8603  	    ADD A,(IX+3)
+ 222: 2684+19	B28C  DD7703  	    LD (IX+3),A
+ 223: 2703+7+5	B28F  3005    	    JR NC, _fat_math_sector_add_16_2 ;if no carry, continue
+ 224: 2710+7	B291  3E01    	    LD A,1
+ 225: 2717+19	B293  DD8602  	    ADD A,(IX+2)
+ 226:     -	B296          	_fat_math_sector_add_16_2:
+ 227: 2736+4	B296  7C      	    LD A,h
+ 228: 2740+19	B297  DD8602  	    ADD A,(IX+2)
+ 229: 2759+19	B29A  DD7702  	    LD (IX+2),A
+ 230: 2778+5+6	B29D  D0      	    RET NC  ;done when no carry
+ 231: 2783+7	B29E  3E01    	    LD A,1
+ 232: 2790+19	B2A0  DD8601  	    ADD A,(IX+1)
+ 233: 2809+19	B2A3  DD7701  	    LD (IX+1),A
+ 234: 2828+10	B2A6  C9      	    RET
+ 235:				
+ 236:				; reset LBA pointer to first sector in partition
+ 237:     -	B2A7          	fat_reset_pointer:
+ 238: 2838+10	B2A7  210250  	    LD HL,MEM_IDE_PARTITION
+ 239: 2848+10	B2AA  110650  	    LD DE,MEM_IDE_POINTER
+ 240: 2858+12	B2AD  1800    	    jr fat_copy_lba_pointer
+ 241:				
+ 242:				; resets LBA pointer (4-byte) to partition start
+ 243:				; HL = from here
+ 244:				; DE = to this destimation
+ 245:     -	B2AF          	fat_copy_lba_pointer:
+ 246: 2870+11	B2AF  C5      	    PUSH BC
+ 247: 2881+7	B2B0  0600    	    LD B,0
+ 248: 2888+7	B2B2  0E04    	    LD C,4
+ 249: 2895+16+5	B2B4  EDB0    	    LDIR
+ 250: 2911+10	B2B6  C1      	    POP BC
+ 251: 2921+10	B2B7  C9      	    ret
+ 252:				
+ 253:				; compares filenames
+ 254:				; HL points to name1
+ 255:				; DE points to name2
+ 256:				; Carry is set if match
+ 257:				; Destroys DE, AF
+ 258:     -	B2B8          	compare_filename:
+ 259: 2931+11	B2B8  E5      	    PUSH HL
+ 260: 2942+11	B2B9  C5      	    PUSH BC
+ 261: 2953+7	B2BA  060B    	    LD B, 11    ;Counter
+ 262:     -	B2BC          	_compare_filename_loop:
+ 263: 2960+7	B2BC  1A      	    LD A,(DE)
+ 264: 2967+4	B2BD  4F      	    LD C,A
+ 265: 2971+7	B2BE  7E      	    LD A,(HL)
+ 266: 2978+4	B2BF  A9      	    XOR C   ;check if identical (should return 0)
+ 267: 2982+7+5	B2C0  2007    	    JR NZ, _compare_filename_nomatch   
+ 268: 2989+4	B2C2  05      	    DEC B   ;decrement counter
+ 269: 2993+7+5	B2C3  20F7    	    JR NZ, _compare_filename_loop   ;if not last, continue
+ 270: 3000+10	B2C5  C1      	    POP BC  ;if last, it matches
+ 271: 3010+10	B2C6  E1      	    POP HL
+ 272: 3020+4	B2C7  37      	    SCF
+ 273: 3024+10	B2C8  C9      	    RET
+ 274:     -	B2C9          	_compare_filename_nomatch:
+ 275: 3034+10	B2C9  C1      	    POP BC
+ 276: 3044+10	B2CA  E1      	    POP HL
+ 277: 3054+4	B2CB  37      	    SCF
+ 278: 3058+4	B2CC  3F      	    CCF
+ 279: 3062+10	B2CD  C9      	    RET
+ 280:				
+ 281:				; formats filename to 8+3 format
+ 282:				; DE points to source filename to string
+ 283:				; HL points to destination
+ 284:     -	B2CE          	format_filename_fat16:
+ 285: 3072+7	B2CE  060B    	    LD B, 11 ;counter
+ 286: 3079+11	B2D0  E5      	    PUSH HL
+ 287: 3090+4	B2D1  AF      	    XOR A
+ 288:     -	B2D2          	_format_filename_fat16_clean:
+ 289: 3094+7	B2D2  77      	    LD (HL),A
+ 290: 3101+6	B2D3  23      	    INC HL
+ 291: 3107+8+5	B2D4  10FC    	    DJNZ _format_filename_fat16_clean
+ 292: 3115+10	B2D6  E1      	    POP HL ; continue with copy
+ 293: 3125+7	B2D7  060D    	    LD B, 13   
+ 294:     -	B2D9          	_format_filename_fat16_loop:
+ 295: 3132+7	B2D9  1A      	    LD A, (DE)  ; load byte
+ 296: 3139+4	B2DA  B7      	    OR A
+ 297: 3143+5+6	B2DB  C8      	    RET Z ;exit on 0byte
+ 298: 3148+4	B2DC  05      	    DEC B                               ;reduce counter
+ 299: 3152+5+6	B2DD  C8      	    RET Z ;exit after 12 bytes 8+.+3
+ 300: 3157+7	B2DE  FE2E    	    CP '.' ; check if dot 
+ 301: 3164+7+5	B2E0  200A    	    JR NZ, _format_filename_fat16_loop_copy ; if not continue as usual
+ 302: 3171+6	B2E2  13      	    INC DE  ;else skip char
+ 303:     -	B2E3          	_format_filename_fat16_loop_skip_8:
+ 304: 3177+4	B2E3  78      	    LD A,B
+ 305: 3181+7	B2E4  FE05    	    CP 5
+ 306: 3188+7+5	B2E6  38F1    	    JR C, _format_filename_fat16_loop
+ 307: 3195+6	B2E8  23      	    INC HL
+ 308: 3201+4	B2E9  05      	    DEC B
+ 309: 3205+12	B2EA  18F7    	    JR _format_filename_fat16_loop_skip_8
+ 310:				
+ 311:     -	B2EC          	_format_filename_fat16_loop_copy:
+ 312: 3217+7	B2EC  1A      	    LD A, (DE)  ; load byte
+ 313: 3224+7	B2ED  77      	    LD (HL), A  ; copy byte
+ 314: 3231+6	B2EE  23      	    INC HL
+ 315: 3237+6	B2EF  13      	    INC DE
+ 316: 3243+10	B2F0  C3D9B2  	    JP _format_filename_fat16_loop
+ 317:				
+ 318:     -	B2F3          	str_file_notfound:
+ 319:     -	B2F3  46696C65	    db "File not found!",13,10,0
+	              206E6F74
+	              20666F75
+	              6E64210D
+	              0A00
+ 320:				
+ 321:     -	B305          	    str_file_found:
 **** test.asm ****
- 127: 2369+10	B21C  C9      	    RET
+ 142:     -	B305  2046696C	    db " File located!",13,10,0
+	              65206C6F
+	              63617465
+	              64210D0A
+	              00
 
 
 
@@ -720,8 +896,8 @@ Statistics:
 
      4	passes
      0	jr promotions
-   418	symbols
-   541	bytes
+   437	symbols
+   790	bytes
 
 
 
@@ -862,17 +1038,28 @@ VAR_CONSOLE_BAUD=18        24
 VAR_CONSOLE_CONF=0F        15
 VDP_MEM        =80        128
 VDP_REG        =81        129
-_fat_get_root_table_loop B14D      45389
-_fat_math_sector_add_16 B1FA      45562
-_fat_math_sector_add_16_2 B20C      45580
-_fat_print_directory_loop B18B      45451
-_fat_print_directory_loop_break B1E8      45544
-_fat_print_directory_loop_break_dirty B1E9      45545
-_fat_print_directory_loop_next B1B7      45495
-_fat_print_directory_loop_next_sector B1C2      45506
+_compare_filename_loop B2BC      45756
+_compare_filename_nomatch B2C9      45769
+_fat_get_root_table_loop B17E      45438
+_fat_lfs_loop   B233      45619
+_fat_lfs_loop_compare_end B265      45669
+_fat_lfs_loop_compare_match B26D      45677
+_fat_lfs_loop_compare_next_sector B244      45636
+_fat_math_sector_add_16 B284      45700
+_fat_math_sector_add_16_2 B296      45718
+_fat_print_directory_loop B1AB      45483
+_fat_print_directory_loop_break B208      45576
+_fat_print_directory_loop_break_dirty B209      45577
+_fat_print_directory_loop_next B1D7      45527
+_fat_print_directory_loop_next_sector B1E2      45538
+_format_filename_fat16_clean B2D2      45778
+_format_filename_fat16_loop B2D9      45785
+_format_filename_fat16_loop_copy B2EC      45804
+_format_filename_fat16_loop_skip_8 B2E3      45795
 beep           = ED7      3799
 beep_loop      = EDA      3802
 beep_pause     = EF7      3831
+compare_filename B2B8      45752
 dasm_00        = ADC      2780
 dasm_01        = DC8      3528
 dasm_02        = B62      2914
@@ -997,7 +1184,7 @@ dasm_printRegister8_table_HL= EBF      3775
 dasm_printRegisterIX_table= EA7      3751
 dasm_printRegisterIY_table= EAF      3759
 dasm_printRegisterSP_table= EB7      3767
-delay_small     B00C      45068
+delay_small     B033      45107
 disassemble    = 375      885
 disassemble_continue= 45B      1115
 disassemble_err= 44B      1099
@@ -1020,14 +1207,16 @@ dump_pretty_col=12DB      4827
 dump_pretty_end=1318      4888
 dump_pretty_nextrow=130C      4876
 dump_pretty_row=12C6      4806
-fat_copy_lba_pointer B163      45411
-fat_get_root_table B111      45329
-fat_print_directory B16C      45420
-fat_reset_pointer B15B      45403
-find_partition  B011      45073
-find_partition_loop B049      45129
-find_partition_next B053      45139
-find_partition_process B065      45157
+fat_copy_lba_pointer B2AF      45743
+fat_get_root_table B142      45378
+fat_lfs         B21A      45594
+fat_print_directory B18C      45452
+fat_reset_pointer B2A7      45735
+find_partition  B038      45112
+find_partition_loop B070      45168
+find_partition_next B07A      45178
+find_partition_process B08C      45196
+format_filename_fat16 B2CE      45774
 ide_printerror =116E      4462
 ide_readsector_256=10ED      4333
 ide_readsector_256_done=111C      4380
@@ -1091,6 +1280,10 @@ print_str_fixed=1358      4952
 print_wait_out = 2DC      732
 read_char      = 2F8      760
 read_lba_sector=1256      4694
+str1            B00F      45071
+str2            B01C      45084
+str3            B029      45097
+str4            B02E      45102
 str_dev_notfound=12B3      4787
 str_dev_ready  =129D      4765
 str_dev_ready2 =12AA      4778
@@ -1099,12 +1292,14 @@ str_error_start=11A1      4513
 str_error_start1=11BE      4542
 str_error_start2=11C7      4551
 str_error_time =11D0      4560
-str_files       B108      45320
-str_part_seek_1 B0D3      45267
-str_part_seek_2 B0DE      45278
-str_part_seek_3 B0E7      45287
-str_part_seek_4 B0F0      45296
-str_sum         B0F9      45305
+str_file_found  B305      45829
+str_file_notfound B2F3      45811
+str_files       B139      45369
+str_part_seek_1 B104      45316
+str_part_seek_2 B10F      45327
+str_part_seek_3 B118      45336
+str_part_seek_4 B121      45345
+str_sum         B12A      45354
 var_buffer     =4029      16425
 var_buffer_len =4000      16384
 var_bytes_count=411A      16666
