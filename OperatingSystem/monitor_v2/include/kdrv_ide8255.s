@@ -32,6 +32,11 @@
     IDE_REG_ALTSTS  .EQU 10110b   ;Alternate Status/Digital Output
     IDE_REG_DRVADDR .EQU 10111b   ;Drive Address  
 
+    IDE_REG_LBA0    .EQU 01011b   ;Start sector register
+    IDE_REG_LBA1    .EQU 01100b   ;Low byte of the cylinder number
+    IDE_REG_LBA2    .EQU 01101b   ;High two bits of the cylinder number
+    IDE_REG_LBA3    .EQU 01110b   ;Head and device select register
+
 
 ;================================================================
 ; I/O access functions 

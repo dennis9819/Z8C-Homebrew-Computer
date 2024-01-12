@@ -99,6 +99,12 @@ print_a_hex:
     pop de
     pop bc
     pop af
+    ret
+
+print_bcd:
+	ADD 48	;offset for ascii number
+	call print_char
+	ret
 
 read_char:
     call A_RTS_ON
@@ -111,6 +117,21 @@ read_char:
     ret	Z               ; return 0 if no char
     in a, (CS_SIO_A_D)  ; read char if avail
     ret                 ; return
+
+read_bcd;
+	call read_char
+	jp z, read_bcd
+	call print_char
+    sbc 48  ;remove ascii offset
+    jp c, _read_bcd_invalid  ;if carry, wrong input
+    cp 10 
+    jp z, _read_bcd_invalid ;if equal or greater than 10, also error
+	and 0x0F	;mask unused bits
+    ret
+_read_bcd_invalid
+	ld a, 0xFF
+	ret
+
 
 ;MSG_CRSR_0:
 ;    db 0x1B, "[?25h",0

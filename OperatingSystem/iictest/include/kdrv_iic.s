@@ -21,7 +21,7 @@ iic_init:
     LD A,0000010b
     OUT (CS_PIO_AD), A
 
-    LD BC,0x1000
+    LD BC,0x2000
     CALL _pause_loop
 
     LD A, 0x80 ;S1 -> Select S0, PIN disabled, ESO = 0, Interrupt disabled, STA, STA, ACK = 0
@@ -266,5 +266,6 @@ _slow_access:
     PUSH AF
     POP AF
     PUSH AF
+    POP AF
     POP AF
     RET

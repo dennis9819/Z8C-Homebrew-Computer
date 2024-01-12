@@ -1,141 +1,170 @@
 .include "extern_symbols.s" ;include monitor symbols.
-    org 0xB000  
-;Testing code
+    org 0x8000  
 
-    ;LD HL,MEM_IDE_BUFFER 
-    ;LD B,32
-    ;call dump_pretty
-    call find_partition
-    ;call fat_get_root_table
-    ;call fat_print_directory
+sel_dsk:
+    call ideif_drv_sel
+    call fat_print_dbg
+    ret
 
-    call fat_get_root_table
-    LD DE, [str1]
-    CALL fat_lfs
+    org 0x8010
+    call fat_print_dbg
+    ret
+
+    org 0x8020  
+    call fat_print_directory
+    ret
+
+    org 0x8030
+    ld hl,0x0006
+    ld (MEM_FAT_OF0_CCLUST),hl
+    call fat_getfatsec
+    ret
+
+fat_print_dbg:
+    call PRINTINLINE
+    db 10,13,"PTR.MEM_IDE_POINTER:    0x",0
+    ld ix,MEM_IDE_POINTER
+    call print_32_hex
+    call PRINTINLINE
+    db "  |  PTR.MEM_IDE_PARTITION:   0x",0
+    ld ix,MEM_IDE_PARTITION
+    call print_32_hex
+
+    call PRINTINLINE
+    db 10,13,"PTR.MEM_FAT_TMPPOINTER: 0x",0
+    ld ix,MEM_FAT_TMPPOINTER
+    call print_32_hex
+    call PRINTINLINE
+    db "  |  PTR.MEM_FAT_TMPPOINTER1: 0x",0
+    ld ix,MEM_FAT_TMPPOINTER1
+    call print_32_hex
+
+    call PRINTINLINE
+    db 10,13,"VAL.MEM_FAT_RESERVED:   0x",0
+    ld ix,MEM_FAT_RESERVED
+    call print_16_hex
+    call PRINTINLINE
+    db "      |  VAL.MEM_FAT_AMOUNT:      0x",0
+    ld a,(MEM_FAT_AMOUNT)
+    call print_a_hex
+
+    call PRINTINLINE
+    db 10,13,"VAL.MEM_FAT_SECTORS:    0x",0
+    ld ix,MEM_FAT_SECTORS
+    call print_16_hex
+    call PRINTINLINE
+    db "      |  VAL.MEM_FAT_COUNT1:      0x",0
+    ld a,(MEM_FAT_COUNT1)
+    call print_a_hex
+
+    call PRINTINLINE
+    db 10,13,"VAL.MEM_FAT_OF0_CCLUST: 0x",0
+    ld ix,MEM_FAT_OF0_CCLUST
+    call print_16_hex
+    call PRINTINLINE
+    db "      |  PTR.MEM_FAT_OF0_FATSEC:  0x",0
+    ld ix,MEM_FAT_OF0_FATSEC
+    call print_32_hex
+
+    call PRINTINLINE
+    db 10,13,"VAL.MEM_FAT_OF0_DATSEC: 0x",0
+    ld ix,MEM_FAT_OF0_DATSEC
+    call print_32_hex
+    call PRINTINLINE
+    db "  |  PTR.MEM_FAT_OF0_DATREM:  0x",0
+    ld ix,MEM_FAT_OF0_DATREM
+    call print_16_hex
+
+    call print_newLine
+    ret
+
+print_32_hex:
+    ld a,(ix+3)
+    call print_a_hex
+    ld a,(ix+2)
+    call print_a_hex
+    ld a,(ix+1)
+    call print_a_hex
+    ld a,(ix+0)
+    call print_a_hex
+    ret
+
+print_16_hex:
+    ld a,(ix+1)
+    call print_a_hex
+    ld a,(ix+0)
+    call print_a_hex
+    ret
+
+; a contains drive to select
+; populate fs vars as well
+ideif_drv_sel:
+    ld (MEM_IDE_SELECTED),a
+    push af
+    call ideif_get_drv_pointer  ;test if drive is marked as available
+    ld a,(ix+0)
+    or a
+    jp nz, _ideif_drv_sel_fail  ;if not-> fail
     
-    JP PROMPT_BEGIN
+    call fat_get_root_table     ;else get root table
+    ;backup tmp pointer
+    ld hl,(MEM_IDE_POINTER)
+    ld de,(MEM_IDE_PARTITION)   ;use MEM_IDE_PARTITION to backup the pointer
+    call fat_copy_lba_pointer
+    ld hl,[_ideif_drv_sel_pstr] ;print success message
+    call print_str
+    pop af
+    add 69
+    call print_char
+    ld hl,[_ideif_drv_sel_sstr0]
+    call print_str
+    ret
+_ideif_drv_sel_fail:
+    ld hl,[_ideif_drv_sel_pstr]
+    call print_str
+    pop af
+    add 69
+    call print_char
+    ld hl,[_ideif_drv_sel_fstr0]
+    call print_str
+    LD DE,0x20
+    LD BC,0x70
+    CALL beep
+    ret
 
-str1:
-    db "ILLUSION.PSG",0
-str2:
-    db "HALLOWLT.TXT",0
-str3:
-    db "TEST",0
-str4:
-    db ".ORG",0
+_ideif_drv_sel_pstr:
+    db 10,13,"Drive ",0
+_ideif_drv_sel_fstr0:
+    db ": not ready",10,13,0
+_ideif_drv_sel_sstr0:
+    db ": selected",10,13,0
+_ideif_drv_sel_syn:
+    db 10,13,"Invalid drive letter",10,13,0
+.include "fat16.s" ;include monitor symbols.
+.include "fat16_file.s" ;include monitor symbols.
 
-delay_small:
-    PUSH AF
-    POP AF
-    PUSH AF
-    POP AF
-    RET
-
-find_partition:
-    ;read bootsector
-    LD A,1                  ;read 1 sector
-    LD B,IDE_REG_SECTOR
-    CALL ide_regwrite_8
-
-    LD A,1                  ;read sector 0
-    LD B,IDE_REG_SSECTOR
-    CALL ide_regwrite_8
-
-    LD A,0                  ;read cylinder 0
-    LD B,IDE_REG_LCYL
-    CALL ide_regwrite_8
-    LD A,0                  
-    LD B,IDE_REG_HCYL
-    CALL ide_regwrite_8
-
-    LD A,10100000b          ;read head 0
-    LD B,IDE_REG_HEAD
-    CALL ide_regwrite_8
-
-    LD A,IDE_CMD_READSEC    ;send read command
-    LD B,IDE_REG_CMDSTS
-    CALL ide_regwrite_8
-
-    LD HL,MEM_IDE_BUFFER    ;set read/write buffer start address
-    call ide_readsector_512_inv ;read 256 words from device
-
-    LD B,4                      ;Partition table length
-    LD C,0                      ;Partition ID counter
-    LD IX,MEM_IDE_BUFFER+446    ;Load offest of first partition table entry
-find_partition_loop:
-    LD A,(IX+4) ;load status byte
-    OR A
-    JP NZ, find_partition_process    ;If not zero, jump to print function
-    jp find_partition_next
-
-find_partition_next:
-    LD A,10                 ;New line
-    CALL print_char
-    LD A,13
-    CALL print_char
-    LD DE,16
-    ADD IX,DE
-    DJNZ find_partition_loop    
-    RET
-
-find_partition_process: ; process table entry
-    ld hl, [str_part_seek_1]
-    call print_str  ;print 
-    LD A,(IX+0x04) ;load type
-    call print_a_hex
-    LD A,(IX+0x04) ;load type
-    CP 0x0E
-    JR NZ, find_partition_next
-
-    ld hl, [str_part_seek_2]
-    call print_str  ;print 
-    ld hl, [str_part_seek_3]
-    call print_str  ;print 
-
-    LD A,(IX+0x08) ;load start LBA
-    LD (MEM_IDE_PARTITION+3),A
-    LD A,(IX+0x09) ;load start LBA
-    LD (MEM_IDE_PARTITION+2),A
-    LD A,(IX+0x0A) ;load start LBA
-    LD (MEM_IDE_PARTITION+1),A
-    LD A,(IX+0x0B) ;load start LBA
-    LD (MEM_IDE_PARTITION+0),A
-
-    LD A,(MEM_IDE_PARTITION+3)
-    call print_a_hex
-    LD A,(MEM_IDE_PARTITION+2)
-    call print_a_hex
-    LD A,(MEM_IDE_PARTITION+1)
-    call print_a_hex
-    LD A,(MEM_IDE_PARTITION+0)
-    call print_a_hex
-    ld hl, [str_part_seek_4]
-    call print_str  ;print 
-    LD A,(IX+0x0C) ;load count LBA
-    call print_a_hex
-    LD A,(IX+0x0D) ;load count LBA
-    call print_a_hex
-    LD A,(IX+0x0E) ;load count LBA
-    call print_a_hex
-    LD A,(IX+0x0F) ;load count LBA
-    call print_a_hex
-    LD A,10                 ;New line
-    CALL print_char
-    LD A,13
-    CALL print_char
-    RET
-
-str_part_seek_1:
-    db "- Type: 0x",0
-str_part_seek_2:
-    db " State: ",0
-str_part_seek_3:
-    db " LBA: 0x",0
-str_part_seek_4:
-    db " Len: 0x",0
-str_sum:
-    db "------------",10,13,0
-str_files:
-    db " Files",10,13,0
-
-.include "include/fat16.s"
+;------------------------------------------------------------------------------
+; PRINTINLINE
+;
+; String output function
+;
+; Prints in-line data (bytes immediately following the PRINTINLINE call)
+; until a string terminator is encountered (0 - null char).
+;------------------------------------------------------------------------------
+PRINTINLINE:
+		EX 		(SP),HL 			; PUSH HL and put RET ADDress into HL
+		PUSH 	AF
+		PUSH 	BC
+nxtILC:
+		LD 		A,(HL)
+		CP		0
+		JR		Z,endPrint
+		CALL 	print_char
+		INC 	HL
+		JR		nxtILC
+endPrint:
+		INC 	HL 					; Get past "null" terminator
+		POP 	BC
+		POP 	AF
+		EX 		(SP),HL 			; PUSH new RET ADDress on stack and restore HL
+        RET

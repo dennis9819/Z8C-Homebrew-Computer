@@ -1,20 +1,54 @@
 ; VARS
 
-    MEM_FAT_RESERVED    .EQU MEM_IDE_BASE + 10  ; Reserved sectors (2byte)
-    MEM_FAT_AMOUNT      .EQU MEM_IDE_BASE + 12  ; Amount of FATs (1byte)
-    MEM_FAT_SECTORS     .EQU MEM_IDE_BASE + 13  ; Length of FAT (2byte)
+    phase MEM_IDE_FSBUFFER
+MEM_FAT_RESERVED:   ; Reserved sectors (2byte)
+    defs 2  
+MEM_FAT_AMOUNT:     ; Amount of FATs (1byte)
+    defs 1  
+MEM_FAT_SECTORS:    ; Length of FAT (2byte)
+    defs 2  
+MEM_FAT_COUNT1:     ; Counter Var for reading FAT (2byte)
+    defs 1
+MEM_FAT_TMPPOINTER: ; Temporary working pointer
+    defs 4
+MEM_FAT_TMPPOINTER1: ; Temporary working pointer
+    defs 4
+MEM_FAT_TMPFNAME:   ; Temporary filename
+    defs 16
 
-    MEM_FAT_COUNT1      .EQU MEM_IDE_BASE + 15  ;Counter Var for reading FAT (2byte)
+MEM_FAT_OF0_CCLUST: ;Current cluster of file
+    defw 0
+MEM_FAT_OF0_FATSEC: ;Current sector in FAT
+    defs 4
+MEM_FAT_OF0_DATSEC: ;Current sector in Data
+    defs 4
+MEM_FAT_OF0_DATREM: ;Remaining sector in Data
+    defs 2
+
+
+    dephase
 
 ;-------------------------------------
 ; Get FAT Root-Table position
 ;-------------------------------------
 fat_get_root_table:
     call fat_reset_pointer ;reset fat pointer
+
+    ;call fat_print_dbg
     ; Load first sector on active partition
-    LD HL, MEM_IDE_PARTITION    ; pointer to LBA address
+    LD HL, MEM_IDE_POINTER  ; pointer to LBA address
     LD A,1                  ;read 1 sector
     call read_lba_sector
+
+    ; check for valid Boot sector
+    ld a,(MEM_IDE_BUFFER)
+    cp 0xEB ;first byte should be 0xEB
+    jp nz, _fat_get_root_table_invalid
+
+    ;debug sector
+    ;ld hl, MEM_IDE_BUFFER
+    ;ld b,20
+    ;call dump_pretty
 
     ; Read and store FS Properties
     LD IX,MEM_IDE_BUFFER
@@ -53,20 +87,26 @@ _fat_get_root_table_loop:  ; multiply
     call _fat_math_sector_add_16
     ret
 
+_fat_get_root_table_invalid:
+    call PRINTINLINE
+    db 10,13,"Cannot find boot sector.",10,13,0
+    call ideif_get_drv_pointer
+    ld (ix+0),0x02
+    ret
+
 ;-------------------------------------
 ; Print current fat directory of MEM_IDE_POINTER
 ;-------------------------------------
 fat_print_directory:
-    LD A,10                 ;New line
-    CALL print_char
-    LD A,13
-    CALL print_char
-    
+
     LD DE,(MEM_FAT_SECTORS)
     LD (MEM_FAT_COUNT1),DE
     LD HL,MEM_IDE_POINTER   ;read first sector
     LD B,1
     call read_lba_sector
+
+    call PRINTINLINE
+    db 10,13,"  Filename     Cluster Size",10,13,0
 
     LD HL, MEM_IDE_BUFFER   ;set buffer start
     LD C,16                  ;set entries counter
@@ -74,14 +114,27 @@ fat_print_directory:
 _fat_print_directory_loop:  ;loop over each entry (32byte)
     LD A,(HL) ; check first byte
     PUSH HL ;backup start of entry
+    POP IX
+    PUSH HL
     ;ignore unwanted entries
     CP 0x41 ;skip invisible
-    JR Z, _fat_print_directory_loop_next    
+    JP Z, _fat_print_directory_loop_next    
     CP 0xE5 ;skip deleted
-    JR Z, _fat_print_directory_loop_next
+    JP Z, _fat_print_directory_loop_next
     CP 0x00 ;reached end
     JP Z, _fat_print_directory_loop_break
+
+    ;check file attribute
+    ld a,(IX+0x0B)
+    cp 0x10 ;if subdirectors
+    jp z, _fat_print_directory_dir  ;print dir 
+    ;else print file
+_fat_print_directory_loop_file
     ;print filename
+    ld a,' '
+    call print_char
+    ld a,' '
+    call print_char
     LD B,8
     call print_str_fixed
     ld A,'.'
@@ -89,14 +142,49 @@ _fat_print_directory_loop:  ;loop over each entry (32byte)
     LD B,3
     call print_str_fixed
 
-    LD A,(HL) ; print attribute
-    call print_char
+    call PRINTINLINE
+    db " 0x",0
+    ;first cluster number
+    ld a,(ix+0x1B)
+    call print_a_hex
+    ld a,(ix+0x1A)
+    call print_a_hex
+    call PRINTINLINE
+    db "  0x",0
+    ld a,(ix+0x1F)
+    call print_a_hex
+    ld a,(ix+0x1E)
+    call print_a_hex
+    ld a,(ix+0x1D)
+    call print_a_hex
+    ld a,(ix+0x1C)
+    call print_a_hex
 
     LD A,10                 ;New line
     CALL print_char
     LD A,13
     CALL print_char
-    
+    jr _fat_print_directory_loop_next
+_fat_print_directory_dir
+    ld a,'D'
+    call print_char
+    ld a,' '
+    call print_char
+    LD B,8
+    call print_str_fixed
+    call PRINTINLINE
+    db "     0x",0
+    ;first cluster number
+    ld a,(ix+0x1B)
+    call print_a_hex
+    ld a,(ix+0x1A)
+    call print_a_hex
+
+    LD A,10                 ;New line
+    CALL print_char
+    LD A,13
+    CALL print_char
+    jr _fat_print_directory_loop_next
 
 _fat_print_directory_loop_next: ; read next entry
     DEC C   ;next sector after 32 entries
@@ -130,12 +218,12 @@ _fat_print_directory_loop_next_sector:  ; end fo sector. read next sector from d
 _fat_print_directory_loop_break
     POP HL
 _fat_print_directory_loop_break_dirty
-    ld hl, [str_sum] 
-    call print_str  ;print 
-    ld a,c
-    call print_a_hex
-    ld hl, [str_files]
-    call print_str  ;print 
+ ;   ld hl, [str_sum] 
+ ;   call print_str  ;print 
+ ;   ld a,c
+ ;   call print_a_hex
+ ;   ld hl, [str_files]
+ ;   call print_str  ;print 
     ret
 
 ;-------------------------------------
@@ -145,7 +233,7 @@ _fat_print_directory_loop_break_dirty
 ;-------------------------------------
 fat_lfs:
     PUSH DE
-    LD HL,MEM_IDE_BASE + 17   ; prepare filename
+    LD HL,[MEM_FAT_TMPFNAME]   ; prepare filename
     CALL format_filename_fat16
 
     LD A,16 ;init counter for FAT sectors
@@ -216,27 +304,79 @@ _fat_lfs_loop_compare_match:
 ; 32 Bit addition to pointer
 ; HL has value
 _fat_math_sector_add_16:
-    LD IX,MEM_IDE_POINTER; LOAD IX to sector pointer in memory
-    LD A,L
-    ADD A,(IX+3)
-    LD (IX+3),A
-    JR NC, _fat_math_sector_add_16_2 ;if no carry, continue
-    LD A,1
-    ADD A,(IX+2)
-_fat_math_sector_add_16_2:
-    LD A,h
-    ADD A,(IX+2)
-    LD (IX+2),A
-    RET NC  ;done when no carry
-    LD A,1
-    ADD A,(IX+1)
-    LD (IX+1),A
-    RET
+    ld (MEM_FAT_TMPPOINTER), hl
+    xor a
+    ld (MEM_FAT_TMPPOINTER+2),a
+    ld (MEM_FAT_TMPPOINTER+3),a
 
-; reset LBA pointer to first sector in partition
+    ld de,[MEM_FAT_TMPPOINTER]
+    ld bc,[MEM_IDE_POINTER]
+    call _fat_math_add32
+    ret
+
+    ;bc contains pointer to a (also result)
+    ;de contains pointer to b
+_fat_math_add32
+    push hl
+    push bc
+    push de
+    ld a,(de)   ; load lower 16bit for B int from (DE) to HL
+    ld l,a
+    inc de
+    ld a,(de)
+    ld h,a
+    inc de
+    ; HL, DE dirty
+    ld a,(bc)   ; load lower 16bit for A int from (BC) to DE
+    ld e,a
+    inc bc
+    ld a,(bc)
+    ld d,a
+    ; HL now contains A, DE now contains D
+    add hl,de   ;add lower bytes, store carry
+    pop de  ;restore pointers
+    pop bc  ;both now cointain first byte of long-value
+    ld a,l      ;store lower result in (bc)
+    ld (bc),a
+    inc bc
+    ld a,h
+    ld (bc),a
+    inc bc      
+    inc de      ;also increment de to next byte
+    inc de
+    ; DE and HL now start at the upper byte
+    push bc
+    push de
+    ld a,(de)   ; load upper 16bit for B
+    ld l,a
+    inc de
+    ld a,(de)
+    ld h,a
+    inc de
+    ld a,(bc)   ; load upper 16bit for A
+    ld e,a
+    inc bc
+    ld a,(bc)
+    ld d,a
+    adc hl,de   ;add upper bytes, store carry
+    pop de
+    pop bc
+    ld a,l      ;store lower result in (bc)
+    ld(bc),a
+    inc bc
+    ld a,h
+    ld(bc),a
+    pop hl
+    ret
+
+; reset LBA pointer to first sector in selected partition
 fat_reset_pointer:
-    LD HL,MEM_IDE_PARTITION
-    LD DE,MEM_IDE_POINTER
+    call ideif_get_drv_pointer
+    inc ix
+    inc ix
+    push ix
+    pop hl  ;copy poiter to hl
+    ld de, MEM_IDE_POINTER
     jr fat_copy_lba_pointer
 
 ; resets LBA pointer (4-byte) to partition start
@@ -318,5 +458,5 @@ _format_filename_fat16_loop_copy:
 str_file_notfound:
     db "File not found!",13,10,0
 
-    str_file_found:
+str_file_found:
     db " File located!",13,10,0
