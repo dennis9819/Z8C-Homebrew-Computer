@@ -4,27 +4,27 @@
    2:				;Do not make any changes here!
    3:				
    4:     -	00D0          	ADDR_RTC equ 0xD0
-   5:     -	014F          	A_RTS_OFF equ 0x14F
-   6:     -	0158          	A_RTS_ON equ 0x158
+   5:     -	0152          	A_RTS_OFF equ 0x152
+   6:     -	015B          	A_RTS_ON equ 0x15B
    7:     -	0050          	BOOT_PHASE0 equ 0x50
    8:     -	006E          	BOOT_PHASE1 equ 0x6E
    9:     -	0077          	BOOT_PHASE1_LOOP equ 0x77
   10:     -	0082          	BOOT_PHASE2 equ 0x82
-  11:     -	11CD          	COMMAND equ 0x11CD
-  12:     -	1208          	COMMAND_BACKSPACE equ 0x1208
-  13:     -	1166          	COMMAND_LUT equ 0x1166
-  14:     -	122E          	COMMAND_PROCESS equ 0x122E
-  15:     -	1269          	COMMAND_PROCESS_FOUND equ 0x1269
-  16:     -	1231          	COMMAND_PROCESS_LOOP equ 0x1231
-  17:     -	123A          	COMMAND_PROCESS_LOOP_STR1 equ 0x123A
-  18:     -	1250          	COMMAND_PROCESS_LOOP_STR2 equ 0x1250
-  19:     -	1255          	COMMAND_PROCESS_NEXT_ENTRY equ 0x1255
-  20:     -	1254          	COMMAND_PROCESS_NEXT_ENTRYI equ 0x1254
-  21:     -	1260          	COMMAND_PROCESS_NOT_FOUND equ 0x1260
-  22:     -	11D9          	COMMAND_READ equ 0x11D9
-  23:     -	009B          	CONSOLE_INIT equ 0x9B
-  24:     -	009B          	CONSOLE_INIT_CTC equ 0x9B
-  25:     -	00A3          	CONSOLE_INIT_SIO equ 0xA3
+  11:     -	17EB          	COMMAND equ 0x17EB
+  12:     -	1826          	COMMAND_BACKSPACE equ 0x1826
+  13:     -	176B          	COMMAND_LUT equ 0x176B
+  14:     -	184C          	COMMAND_PROCESS equ 0x184C
+  15:     -	1887          	COMMAND_PROCESS_FOUND equ 0x1887
+  16:     -	184F          	COMMAND_PROCESS_LOOP equ 0x184F
+  17:     -	1858          	COMMAND_PROCESS_LOOP_STR1 equ 0x1858
+  18:     -	186E          	COMMAND_PROCESS_LOOP_STR2 equ 0x186E
+  19:     -	1873          	COMMAND_PROCESS_NEXT_ENTRY equ 0x1873
+  20:     -	1872          	COMMAND_PROCESS_NEXT_ENTRYI equ 0x1872
+  21:     -	187E          	COMMAND_PROCESS_NOT_FOUND equ 0x187E
+  22:     -	17F7          	COMMAND_READ equ 0x17F7
+  23:     -	009E          	CONSOLE_INIT equ 0x9E
+  24:     -	009E          	CONSOLE_INIT_CTC equ 0x9E
+  25:     -	00A6          	CONSOLE_INIT_SIO equ 0xA6
   26:     -	00F9          	CS_APU_CTRL equ 0xF9
   27:     -	00F8          	CS_APU_DATA equ 0xF8
   28:     -	0000          	CS_BANK equ 0x00
@@ -45,18 +45,18 @@
   43:     -	0008          	CS_SIO_A_D equ 0x08
   44:     -	000B          	CS_SIO_B_C equ 0x0B
   45:     -	000A          	CS_SIO_B_D equ 0x0A
-  46:     -	0161          	DHEX_TO_BYTE equ 0x161
-  47:     -	017D          	DHEX_TO_BYTE_FAILED equ 0x17D
-  48:     -	127F          	ERR_SYNTAX equ 0x127F
-  49:     -	0D01          	EXEC_RST_08 equ 0xD01
-  50:     -	0D05          	EXEC_RST_10 equ 0xD05
-  51:     -	0D11          	EXEC_RST_18 equ 0xD11
-  52:     -	0181          	HEX_TO_BIN equ 0x181
-  53:     -	018F          	HEX_TO_BIN_2 equ 0x18F
-  54:     -	0196          	HEX_TO_INVALID_2 equ 0x196
+  46:     -	0164          	DHEX_TO_BYTE equ 0x164
+  47:     -	0180          	DHEX_TO_BYTE_FAILED equ 0x180
+  48:     -	189D          	ERR_SYNTAX equ 0x189D
+  49:     -	0D04          	EXEC_RST_08 equ 0xD04
+  50:     -	0D08          	EXEC_RST_10 equ 0xD08
+  51:     -	0D14          	EXEC_RST_18 equ 0xD14
+  52:     -	0184          	HEX_TO_BIN equ 0x184
+  53:     -	0192          	HEX_TO_BIN_2 equ 0x192
+  54:     -	0199          	HEX_TO_INVALID_2 equ 0x199
   55:     -	00EC          	IDE_CMD_IDENT equ 0xEC
   56:     -	0020          	IDE_CMD_READSEC equ 0x20
-  57:     -	0E91          	IDE_DEF_TABLE equ 0xE91
+  57:     -	1275          	IDE_DEV_TABLE equ 0x1275
   58:     -	0040          	IDE_RD equ 0x40
   59:     -	0016          	IDE_REG_ALTSTS equ 0x16
   60:     -	000F          	IDE_REG_CMDSTS equ 0x0F
@@ -65,379 +65,413 @@
   63:     -	0009          	IDE_REG_ERROR equ 0x09
   64:     -	000D          	IDE_REG_HCYL equ 0x0D
   65:     -	000E          	IDE_REG_HEAD equ 0x0E
-  66:     -	000C          	IDE_REG_LCYL equ 0x0C
-  67:     -	000A          	IDE_REG_SECTOR equ 0x0A
-  68:     -	000B          	IDE_REG_SSECTOR equ 0x0B
-  69:     -	0080          	IDE_RST equ 0x80
-  70:     -	0020          	IDE_WR equ 0x20
-  71:     -	0001          	IIC_CLK equ 0x01
-  72:     -	0042          	IIC_DATA equ 0x42
-  73:     -	001B          	INT_VEC equ 0x1B
-  74:     -	402B          	IN_BUFFER equ 0x402B
-  75:     -	0040          	IO_AY0_ADDR equ 0x40
-  76:     -	0041          	IO_AY0_DATA equ 0x41
-  77:     -	0042          	IO_AY1_ADDR equ 0x42
-  78:     -	0043          	IO_AY1_DATA equ 0x43
-  79:     -	0020          	IO_REG0 equ 0x20
-  80:     -	0025          	IO_RTC_AMPM equ 0x25
-  81:     -	002D          	IO_RTC_CTR_D equ 0x2D
-  82:     -	002E          	IO_RTC_CTR_E equ 0x2E
-  83:     -	002F          	IO_RTC_CTR_F equ 0x2F
-  84:     -	0026          	IO_RTC_DAY0 equ 0x26
-  85:     -	0027          	IO_RTC_DAY1 equ 0x27
-  86:     -	0024          	IO_RTC_HOUR equ 0x24
-  87:     -	0022          	IO_RTC_MIN0 equ 0x22
-  88:     -	0023          	IO_RTC_MIN1 equ 0x23
-  89:     -	0028          	IO_RTC_MON0 equ 0x28
-  90:     -	0029          	IO_RTC_MON1 equ 0x29
-  91:     -	0020          	IO_RTC_SEC0 equ 0x20
-  92:     -	0021          	IO_RTC_SEC1 equ 0x21
-  93:     -	002C          	IO_RTC_WEEK equ 0x2C
-  94:     -	002B          	IO_RTC_YEAR1 equ 0x2B
-  95:     -	002A          	IO_RTC_YERR0 equ 0x2A
-  96:     -	5000          	MEM_IDE_BASE equ 0x5000
-  97:     -	5062          	MEM_IDE_BUFFER equ 0x5062
-  98:     -	5000          	MEM_IDE_DEVICE equ 0x5000
-  99:     -	5041          	MEM_IDE_DEV_TABLE equ 0x5041
- 100:     -	5002          	MEM_IDE_PARTITION equ 0x5002
- 101:     -	5006          	MEM_IDE_POINTER equ 0x5006
- 102:     -	5061          	MEM_IDE_SELECTED equ 0x5061
- 103:     -	5001          	MEM_IDE_STATUS equ 0x5001
- 104:     -	0147          	MSG_CLEAR equ 0x147
- 105:     -	1278          	NOT_IMPLEMENTED equ 0x1278
- 106:     -	12DA          	OP_CALL equ 0x12DA
- 107:     -	146E          	OP_CLR equ 0x146E
- 108:     -	135B          	OP_DASM equ 0x135B
- 109:     -	12FA          	OP_DUMP equ 0x12FA
- 110:     -	12C1          	OP_EXEC equ 0x12C1
- 111:     -	1422          	OP_IIC_IN equ 0x1422
- 112:     -	13C2          	OP_IIC_OUT equ 0x13C2
- 113:     -	138B          	OP_IO_IN equ 0x138B
- 114:     -	13A1          	OP_IO_OUT equ 0x13A1
- 115:     -	1472          	OP_RTIME equ 0x1472
- 116:     -	132A          	OP_SET equ 0x132A
- 117:     -	160A          	OP_STIME equ 0x160A
- 118:     -	16B8          	POST_CHECK_APU equ 0x16B8
- 119:     -	16E3          	POST_CHECK_IDE_30 equ 0x16E3
- 120:     -	16F7          	POST_CHECK_IDE_40 equ 0x16F7
- 121:     -	1693          	POST_CHECK_PIO equ 0x1693
- 122:     -	1683          	POST_START equ 0x1683
- 123:     -	1712          	POST_TEST_RTC equ 0x1712
- 124:     -	4110          	PRG_RAM_START equ 0x4110
- 125:     -	FF00          	PRG_RAM_TOP equ 0xFF00
- 126:     -	4000          	PROG_MEM_START equ 0x4000
- 127:     -	0100          	PROG_ROM_START equ 0x100
- 128:     -	0000          	RST_00 equ 0x00
- 129:     -	0008          	RST_08 equ 0x08
- 130:     -	0010          	RST_10 equ 0x10
- 131:     -	0018          	RST_18 equ 0x18
- 132:     -	FFFF          	STACK_RAM_TOP equ 0xFFFF
- 133:     -	0000          	START_ROM equ 0x00
- 134:     -	0198          	STRCONV_BYTES_TO_HEX equ 0x198
- 135:     -	01A7          	STRCONV_BYTES_TO_HEX_1 equ 0x1A7
- 136:     -	01B1          	STRCONV_BYTES_TO_HEX_2 equ 0x1B1
- 137:     -	1817          	STR_Banner_Start equ 0x1817
- 138:     -	111F          	STR_PD_HEADER equ 0x111F
- 139:     -	4010          	SYS_BUF_START equ 0x4010
- 140:     -	4000          	SYS_RAM_START equ 0x4000
- 141:     -	0018          	VAR_CONSOLE_BAUD equ 0x18
- 142:     -	000F          	VAR_CONSOLE_CONF equ 0x0F
- 143:     -	0080          	VDP_MEM equ 0x80
- 144:     -	0081          	VDP_REG equ 0x81
- 145:     -	1277          	_COMMAND_PROCESS_FOUND equ 0x1277
- 146:     -	12F9          	_OP_CALL equ 0x12F9
- 147:     -	1407          	_OP_IIC_ACK_ERR equ 0x1407
- 148:     -	140E          	_OP_IIC_ACK_ERR_str equ 0x140E
- 149:     -	1454          	_OP_IIC_IN_LOOP equ 0x1454
- 150:     -	1461          	_OP_IIC_IN_LOOP_TEXT equ 0x1461
- 151:     -	13D8          	_OP_IIC_OUT_LOOP equ 0x13D8
- 152:     -	13F4          	_OP_IIC_OUT_SEND equ 0x13F4
- 153:     -	1475          	_OP_RTIME_NN equ 0x1475
- 154:     -	152D          	_OP_RTIME_RD_CMD equ 0x152D
- 155:     -	1342          	_OP_SET_LOOP equ 0x1342
- 156:     -	15D0          	_OP_STIME_INVALID equ 0x15D0
- 157:     -	15E7          	_OP_STIME_PROMPT equ 0x15E7
- 158:     -	15FF          	_OP_STIME_PROMPT_ERR equ 0x15FF
- 159:     -	152E          	_OP_STIME_STR_DAY equ 0x152E
- 160:     -	157F          	_OP_STIME_STR_HOUR equ 0x157F
- 161:     -	159A          	_OP_STIME_STR_MIN equ 0x159A
- 162:     -	1549          	_OP_STIME_STR_MON equ 0x1549
- 163:     -	15B5          	_OP_STIME_STR_SEC equ 0x15B5
- 164:     -	1564          	_OP_STIME_STR_YEAR equ 0x1564
- 165:     -	16D7          	_POST_CHECK_APU_FAILED equ 0x16D7
- 166:     -	170B          	_POST_CHECK_IDE_FAILED equ 0x170B
- 167:     -	16AC          	_POST_CHECK_PIO_FAILED equ 0x16AC
- 168:     -	174C          	_POST_TEST_RTC_INVALID equ 0x174C
- 169:     -	1745          	_POST_TEST_RTC_NOTFOUND equ 0x1745
- 170:     -	129A          	_STR_NOT_FOUND equ 0x129A
- 171:     -	1286          	_STR_NOT_IMPLEMENTED equ 0x1286
- 172:     -	12AE          	_STR_SYNTAX equ 0x12AE
- 173:     -	0144          	_read_bcd_invalid equ 0x144
- 174:     -	167E          	_shift4 equ 0x167E
- 175:     -	0D14          	beep equ 0xD14
- 176:     -	0D17          	beep_loop equ 0xD17
- 177:     -	0D34          	beep_pause equ 0xD34
- 178:     -	0919          	dasm_00 equ 0x919
- 179:     -	0C05          	dasm_01 equ 0xC05
- 180:     -	099F          	dasm_02 equ 0x99F
- 181:     -	0BD7          	dasm_03 equ 0xBD7
- 182:     -	0A1C          	dasm_08 equ 0xA1C
- 183:     -	0BAA          	dasm_09 equ 0xBAA
- 184:     -	0981          	dasm_0A equ 0x981
- 185:     -	0BEE          	dasm_0B equ 0xBEE
- 186:     -	0961          	dasm_10 equ 0x961
- 187:     -	09AA          	dasm_12 equ 0x9AA
- 188:     -	0924          	dasm_18 equ 0x924
- 189:     -	098B          	dasm_1A equ 0x98B
- 190:     -	093E          	dasm_20 equ 0x93E
- 191:     -	0C4B          	dasm_22 equ 0xC4B
- 192:     -	09E4          	dasm_27 equ 0x9E4
- 193:     -	0937          	dasm_28 equ 0x937
- 194:     -	0C1C          	dasm_2A equ 0xC1C
- 195:     -	09E8          	dasm_2F equ 0x9E8
- 196:     -	092F          	dasm_30 equ 0x92F
- 197:     -	09B5          	dasm_32 equ 0x9B5
- 198:     -	09F4          	dasm_37 equ 0x9F4
- 199:     -	0928          	dasm_38 equ 0x928
- 200:     -	0995          	dasm_3A equ 0x995
- 201:     -	09F0          	dasm_3F equ 0x9F0
- 202:     -	09F8          	dasm_76 equ 0x9F8
- 203:     -	0A75          	dasm_80C6 equ 0xA75
- 204:     -	0A12          	dasm_BE equ 0xA12
- 205:     -	091D          	dasm_C3 equ 0x91D
- 206:     -	0A9B          	dasm_C88E equ 0xA9B
- 207:     -	096D          	dasm_C9 equ 0x96D
- 208:     -	0967          	dasm_CD equ 0x967
- 209:     -	0A29          	dasm_D9 equ 0xA29
- 210:     -	094F          	dasm_DD equ 0x94F
- 211:     -	0C0C          	dasm_DD_01 equ 0xC0C
- 212:     -	0BC5          	dasm_DD_09 equ 0xBC5
- 213:     -	0C61          	dasm_DD_22 equ 0xC61
- 214:     -	0BDC          	dasm_DD_23 equ 0xBDC
- 215:     -	0C33          	dasm_DD_2A equ 0xC33
- 216:     -	0BF3          	dasm_DD_2B equ 0xBF3
- 217:     -	0B75          	dasm_DD_34 equ 0xB75
- 218:     -	0B92          	dasm_DD_35 equ 0xB92
- 219:     -	0A7D          	dasm_DD_86 equ 0xA7D
- 220:     -	0AA3          	dasm_DD_8E equ 0xAA3
- 221:     -	0AC6          	dasm_DD_96 equ 0xAC6
- 222:     -	0AE6          	dasm_DD_9E equ 0xAE6
- 223:     -	0B07          	dasm_DD_A6 equ 0xB07
- 224:     -	0B3E          	dasm_DD_AE equ 0xB3E
- 225:     -	0B23          	dasm_DD_B6 equ 0xB23
- 226:     -	0B5A          	dasm_DD_BE equ 0xB5A
- 227:     -	0CB3          	dasm_DD_E1 equ 0xCB3
- 228:     -	0A39          	dasm_DD_E3 equ 0xA39
- 229:     -	0C9D          	dasm_DD_E5 equ 0xC9D
- 230:     -	0C83          	dasm_DD_F9 equ 0xC83
- 231:     -	0CAD          	dasm_E1 equ 0xCAD
- 232:     -	0A2D          	dasm_E3 equ 0xA2D
- 233:     -	0C97          	dasm_E5 equ 0xC97
- 234:     -	0946          	dasm_E9 equ 0x946
- 235:     -	0BBC          	dasm_ED_42 equ 0xBBC
- 236:     -	0C57          	dasm_ED_43 equ 0xC57
- 237:     -	09EC          	dasm_ED_44 equ 0x9EC
- 238:     -	0977          	dasm_ED_45 equ 0x977
- 239:     -	0A03          	dasm_ED_46 equ 0xA03
- 240:     -	0BB3          	dasm_ED_4A equ 0xBB3
- 241:     -	0C28          	dasm_ED_4B equ 0xC28
- 242:     -	0972          	dasm_ED_4D equ 0x972
- 243:     -	0A08          	dasm_ED_56 equ 0xA08
- 244:     -	0A0D          	dasm_ED_5E equ 0xA0D
- 245:     -	0A51          	dasm_ED_A0 equ 0xA51
- 246:     -	0A63          	dasm_ED_A1 equ 0xA63
- 247:     -	0A5A          	dasm_ED_A8 equ 0xA5A
- 248:     -	0A6C          	dasm_ED_A9 equ 0xA6C
- 249:     -	0A55          	dasm_ED_B0 equ 0xA55
- 250:     -	0A67          	dasm_ED_B1 equ 0xA67
- 251:     -	0A5E          	dasm_ED_B8 equ 0xA5E
- 252:     -	0A70          	dasm_ED_B9 equ 0xA70
- 253:     -	09FD          	dasm_F3 equ 0x9FD
- 254:     -	0C79          	dasm_F9 equ 0xC79
- 255:     -	0A00          	dasm_FB equ 0xA00
- 256:     -	0958          	dasm_FD equ 0x958
- 257:     -	0C14          	dasm_FD_01 equ 0xC14
- 258:     -	0BCE          	dasm_FD_09 equ 0xBCE
- 259:     -	0C6D          	dasm_FD_22 equ 0xC6D
- 260:     -	0BE5          	dasm_FD_23 equ 0xBE5
- 261:     -	0C3F          	dasm_FD_2A equ 0xC3F
- 262:     -	0BFC          	dasm_FD_2B equ 0xBFC
- 263:     -	0B81          	dasm_FD_34 equ 0xB81
- 264:     -	0B9E          	dasm_FD_35 equ 0xB9E
- 265:     -	0A8C          	dasm_FD_86 equ 0xA8C
- 266:     -	0AB2          	dasm_FD_8E equ 0xAB2
- 267:     -	0AD2          	dasm_FD_96 equ 0xAD2
- 268:     -	0AF4          	dasm_FD_9E equ 0xAF4
- 269:     -	0B13          	dasm_FD_A6 equ 0xB13
- 270:     -	0B4A          	dasm_FD_AE equ 0xB4A
- 271:     -	0B2E          	dasm_FD_B6 equ 0xB2E
- 272:     -	0B65          	dasm_FD_BE equ 0xB65
- 273:     -	0CBB          	dasm_FD_E1 equ 0xCBB
- 274:     -	0A45          	dasm_FD_E3 equ 0xA45
- 275:     -	0CA5          	dasm_FD_E5 equ 0xCA5
- 276:     -	0C8D          	dasm_FD_F9 equ 0xC8D
- 277:     -	097C          	dasm_FF equ 0x97C
- 278:     -	0CC3          	dasm_UU equ 0xCC3
- 279:     -	0CC7          	dasm_UW equ 0xCC7
- 280:     -	0B02          	dasm__AND equ 0xB02
- 281:     -	0B56          	dasm__CP equ 0xB56
- 282:     -	0B8D          	dasm__DEC equ 0xB8D
- 283:     -	09D4          	dasm__ED_47 equ 0x9D4
- 284:     -	09DC          	dasm__ED_4F equ 0x9DC
- 285:     -	09C4          	dasm__ED_57 equ 0x9C4
- 286:     -	09CC          	dasm__ED_5F equ 0x9CC
- 287:     -	0B70          	dasm__INC equ 0xB70
- 288:     -	09C0          	dasm__LD equ 0x9C0
- 289:     -	0B1F          	dasm__OR equ 0xB1F
- 290:     -	0ADE          	dasm__SBC equ 0xADE
- 291:     -	0AC1          	dasm__SUB equ 0xAC1
- 292:     -	0B39          	dasm__XOR equ 0xB39
- 293:     -	04C1          	dasm_opcode_table equ 0x4C1
- 294:     -	02EE          	dasm_print16hex_addr equ 0x2EE
- 295:     -	0306          	dasm_print8hex equ 0x306
- 296:     -	0CCC          	dasm_printFlags_table equ 0xCCC
- 297:     -	0CDC          	dasm_printRegister8_table equ 0xCDC
- 298:     -	0CFC          	dasm_printRegister8_table_HL equ 0xCFC
- 299:     -	0CE4          	dasm_printRegisterIX_table equ 0xCE4
- 300:     -	0CEC          	dasm_printRegisterIY_table equ 0xCEC
- 301:     -	0CF4          	dasm_printRegisterSP_table equ 0xCF4
- 302:     -	01B2          	disassemble equ 0x1B2
- 303:     -	0298          	disassemble_continue equ 0x298
- 304:     -	0288          	disassemble_err equ 0x288
- 305:     -	01B6          	disassemble_next equ 0x1B6
- 306:     -	0285          	disassemble_print_opcode_params_end equ 0x285
- 307:     -	0231          	disassemble_print_opcode_params_loop equ 0x231
- 308:     -	01F3          	disassemble_print_opcode_raw equ 0x1F3
- 309:     -	0207          	disassemble_print_opcode_raw_fill equ 0x207
- 310:     -	02CA          	disassemble_table_first_match equ 0x2CA
- 311:     -	02E4          	disassemble_table_found equ 0x2E4
- 312:     -	02E8          	disassemble_table_notfound equ 0x2E8
- 313:     -	02A6          	disassemble_table_seek equ 0x2A6
- 314:     -	02AA          	disassemble_table_seek_loop equ 0x2AA
- 315:     -	10C4          	dump_pretty equ 0x10C4
- 316:     -	10EE          	dump_pretty_ascii equ 0x10EE
- 317:     -	110C          	dump_pretty_ascii_cont equ 0x110C
- 318:     -	10F6          	dump_pretty_ascii_loop equ 0x10F6
- 319:     -	1107          	dump_pretty_ascii_none equ 0x1107
- 320:     -	10E1          	dump_pretty_col equ 0x10E1
- 321:     -	111E          	dump_pretty_end equ 0x111E
- 322:     -	1112          	dump_pretty_nextrow equ 0x1112
- 323:     -	10CC          	dump_pretty_row equ 0x10CC
- 324:     -	0E0B          	ide_printerror equ 0xE0B
- 325:     -	0D8A          	ide_readsector_256 equ 0xD8A
- 326:     -	0DB9          	ide_readsector_256_done equ 0xDB9
- 327:     -	0D8C          	ide_readsector_256_waitloop equ 0xD8C
- 328:     -	0DBA          	ide_readsector_512_inv equ 0xDBA
- 329:     -	0DBF          	ide_readsector_512_inv_waitloop equ 0xDBF
- 330:     -	0DF5          	ide_readsector_timeout equ 0xDF5
- 331:     -	0D6C          	ide_regread_8 equ 0xD6C
- 332:     -	0D50          	ide_regwrite_8 equ 0xD50
- 333:     -	0D43          	ide_reset equ 0xD43
- 334:     -	0E0A          	ide_writesector_256 equ 0xE0A
- 335:     -	0EB1          	ideif_init_drive equ 0xEB1
- 336:     -	0EDF          	ideif_init_drive_detected equ 0xEDF
- 337:     -	0EC5          	ideif_init_drive_loop1 equ 0xEC5
- 338:     -	0ED8          	ideif_init_drive_nodrv equ 0xED8
- 339:     -	0EB1          	ideif_init_dtable equ 0xEB1
- 340:     -	0FD8          	iic_init equ 0xFD8
- 341:     -	1017          	iic_read_ack equ 0x1017
- 342:     -	0FA9          	iic_receive_buffer equ 0xFA9
- 343:     -	0FCC          	iic_receive_buffer_done equ 0xFCC
- 344:     -	0FD2          	iic_receive_buffer_err equ 0xFD2
- 345:     -	0FBA          	iic_receive_buffer_loop equ 0xFBA
- 346:     -	109D          	iic_receive_byte equ 0x109D
- 347:     -	10AA          	iic_receive_byte_loop equ 0x10AA
- 348:     -	103D          	iic_send_ack equ 0x103D
- 349:     -	0F7F          	iic_send_buffer equ 0xF7F
- 350:     -	0F9D          	iic_send_buffer_done equ 0xF9D
- 351:     -	0FA3          	iic_send_buffer_err equ 0xFA3
- 352:     -	0F8F          	iic_send_buffer_loop equ 0xF8F
- 353:     -	1077          	iic_send_byte equ 0x1077
- 354:     -	1083          	iic_send_byte_loop equ 0x1083
- 355:     -	0FF6          	iic_send_ebit equ 0xFF6
- 356:     -	105A          	iic_send_nack equ 0x105A
- 357:     -	0FE1          	iic_send_sbit equ 0xFE1
- 358:     -	0044          	mon_var_template equ 0x44
- 359:     -	0070          	mon_var_template_end equ 0x70
- 360:     -	0314          	param_01 equ 0x314
- 361:     -	033B          	param_02 equ 0x33B
- 362:     -	0358          	param_03 equ 0x358
- 363:     -	0390          	param_03_done equ 0x390
- 364:     -	0379          	param_03_neg equ 0x379
- 365:     -	0394          	param_04 equ 0x394
- 366:     -	03A4          	param_04_i equ 0x3A4
- 367:     -	03AA          	param_05 equ 0x3AA
- 368:     -	03B7          	param_06 equ 0x3B7
- 369:     -	03D1          	param_07 equ 0x3D1
- 370:     -	03DE          	param_08 equ 0x3DE
- 371:     -	03F3          	param_09 equ 0x3F3
- 372:     -	03F9          	param_09_0A equ 0x3F9
- 373:     -	03EA          	param_0A equ 0x3EA
- 374:     -	0408          	param_10 equ 0x408
- 375:     -	0418          	param_11 equ 0x418
- 376:     -	0427          	param_11_12 equ 0x427
- 377:     -	0447          	param_11_12_all equ 0x447
- 378:     -	043A          	param_11_12_def equ 0x43A
- 379:     -	043F          	param_11_12_ix equ 0x43F
- 380:     -	0444          	param_11_12_iy equ 0x444
- 381:     -	0420          	param_12 equ 0x420
- 382:     -	0458          	param_13 equ 0x458
- 383:     -	0477          	param_80 equ 0x477
- 384:     -	047E          	param_80_seek equ 0x47E
- 385:     -	046E          	param_81 equ 0x46E
- 386:     -	04B2          	param_comma equ 0x4B2
- 387:     -	048D          	param_printRegister equ 0x48D
- 388:     -	04AB          	param_printRegisterA equ 0x4AB
- 389:     -	04A3          	param_printRegisterHL equ 0x4A3
- 390:     -	0104          	print_a_hex equ 0x104
- 391:     -	0116          	print_bcd equ 0x116
- 392:     -	00D4          	print_char equ 0xD4
- 393:     -	00E7          	print_clear equ 0xE7
- 394:     -	00EE          	print_newLine equ 0xEE
- 395:     -	00DC          	print_str equ 0xDC
- 396:     -	00E6          	print_str_end equ 0xE6
- 397:     -	115E          	print_str_fixed equ 0x115E
- 398:     -	00F9          	print_wait_out equ 0xF9
- 399:     -	012E          	read_bcd equ 0x12E
- 400:     -	011C          	read_char equ 0x11C
- 401:     -	0F13          	read_lba_sector equ 0xF13
- 402:     -	0F74          	str_dev_notfound equ 0xF74
- 403:     -	0F5E          	str_dev_ready equ 0xF5E
- 404:     -	0F6B          	str_dev_ready2 equ 0xF6B
- 405:     -	0F46          	str_dev_waitready equ 0xF46
- 406:     -	0E3E          	str_error_start equ 0xE3E
- 407:     -	0E5B          	str_error_start1 equ 0xE5B
- 408:     -	0E64          	str_error_start2 equ 0xE64
- 409:     -	0E6D          	str_error_time equ 0xE6D
- 410:     -	17A4          	str_post_apu equ 0x17A4
- 411:     -	1753          	str_post_ide_30 equ 0x1753
- 412:     -	176E          	str_post_ide_40 equ 0x176E
- 413:     -	17DA          	str_post_nd equ 0x17DA
- 414:     -	1812          	str_post_ok equ 0x1812
- 415:     -	1789          	str_post_pio equ 0x1789
- 416:     -	17BF          	str_post_rtc equ 0x17BF
- 417:     -	17E8          	str_post_rtc_iv equ 0x17E8
- 418:     -	400A          	var_apu_present equ 0x400A
- 419:     -	402B          	var_buffer equ 0x402B
- 420:     -	4000          	var_buffer_len equ 0x4000
- 421:     -	411A          	var_bytes_count equ 0x411A
- 422:     -	4006          	var_curserchar equ 0x4006
- 423:     -	4007          	var_curserlastaddr equ 0x4007
- 424:     -	4005          	var_curseron equ 0x4005
- 425:     -	4004          	var_curserstate equ 0x4004
- 426:     -	4002          	var_curserx equ 0x4002
- 427:     -	4003          	var_cursery equ 0x4003
- 428:     -	4001          	var_last_char equ 0x4001
- 429:     -	4114          	var_opcode equ 0x4114
- 430:     -	4116          	var_opcode_length equ 0x4116
- 431:     -	4119          	var_opcode_pcount equ 0x4119
- 432:     -	4110          	var_opcode_start equ 0x4110
- 433:     -	4117          	var_opcode_string equ 0x4117
- 434:     -	4112          	var_opcode_table equ 0x4112
- 435:     -	4115          	var_opcode_x equ 0x4115
- 436:     -	4009          	var_pio_present equ 0x4009
- 437:     -	401B          	var_ps2mem equ 0x401B
- 438:     -	400B          	var_scratch equ 0x400B
+  66:     -	000B          	IDE_REG_LBA0 equ 0x0B
+  67:     -	000C          	IDE_REG_LBA1 equ 0x0C
+  68:     -	000D          	IDE_REG_LBA2 equ 0x0D
+  69:     -	000E          	IDE_REG_LBA3 equ 0x0E
+  70:     -	000C          	IDE_REG_LCYL equ 0x0C
+  71:     -	000A          	IDE_REG_SECTOR equ 0x0A
+  72:     -	000B          	IDE_REG_SSECTOR equ 0x0B
+  73:     -	0080          	IDE_RST equ 0x80
+  74:     -	0020          	IDE_WR equ 0x20
+  75:     -	0001          	IIC_CLK equ 0x01
+  76:     -	0002          	IIC_DATA equ 0x02
+  77:     -	001B          	INT_VEC equ 0x1B
+  78:     -	0040          	IO_AY0_ADDR equ 0x40
+  79:     -	0041          	IO_AY0_DATA equ 0x41
+  80:     -	0042          	IO_AY1_ADDR equ 0x42
+  81:     -	0043          	IO_AY1_DATA equ 0x43
+  82:     -	0020          	IO_REG0 equ 0x20
+  83:     -	0025          	IO_RTC_AMPM equ 0x25
+  84:     -	002D          	IO_RTC_CTR_D equ 0x2D
+  85:     -	002E          	IO_RTC_CTR_E equ 0x2E
+  86:     -	002F          	IO_RTC_CTR_F equ 0x2F
+  87:     -	0026          	IO_RTC_DAY0 equ 0x26
+  88:     -	0027          	IO_RTC_DAY1 equ 0x27
+  89:     -	0024          	IO_RTC_HOUR equ 0x24
+  90:     -	0022          	IO_RTC_MIN0 equ 0x22
+  91:     -	0023          	IO_RTC_MIN1 equ 0x23
+  92:     -	0028          	IO_RTC_MON0 equ 0x28
+  93:     -	0029          	IO_RTC_MON1 equ 0x29
+  94:     -	0020          	IO_RTC_SEC0 equ 0x20
+  95:     -	0021          	IO_RTC_SEC1 equ 0x21
+  96:     -	002C          	IO_RTC_WEEK equ 0x2C
+  97:     -	002B          	IO_RTC_YEAR1 equ 0x2B
+  98:     -	002A          	IO_RTC_YERR0 equ 0x2A
+  99:     -	4166          	MEM_IDE_BUFFER equ 0x4166
+ 100:     -	407B          	MEM_IDE_DEVICE equ 0x407B
+ 101:     -	4085          	MEM_IDE_DEV_TABLE equ 0x4085
+ 102:     -	4366          	MEM_IDE_FSBUFFER equ 0x4366
+ 103:     -	407D          	MEM_IDE_PARTITION equ 0x407D
+ 104:     -	4081          	MEM_IDE_POINTER equ 0x4081
+ 105:     -	40C5          	MEM_IDE_SELECTED equ 0x40C5
+ 106:     -	407C          	MEM_IDE_STATUS equ 0x407C
+ 107:     -	40C6          	MEM_IDE_STRING_0 equ 0x40C6
+ 108:     -	40EE          	MEM_IDE_STRING_1 equ 0x40EE
+ 109:     -	4116          	MEM_IDE_STRING_2 equ 0x4116
+ 110:     -	413E          	MEM_IDE_STRING_3 equ 0x413E
+ 111:     -	014A          	MSG_CLEAR equ 0x14A
+ 112:     -	1896          	NOT_IMPLEMENTED equ 0x1896
+ 113:     -	18F8          	OP_CALL equ 0x18F8
+ 114:     -	1A8C          	OP_CLR equ 0x1A8C
+ 115:     -	1979          	OP_DASM equ 0x1979
+ 116:     -	1918          	OP_DUMP equ 0x1918
+ 117:     -	18DF          	OP_EXEC equ 0x18DF
+ 118:     -	1A40          	OP_IIC_IN equ 0x1A40
+ 119:     -	19E0          	OP_IIC_OUT equ 0x19E0
+ 120:     -	19A9          	OP_IO_IN equ 0x19A9
+ 121:     -	19BF          	OP_IO_OUT equ 0x19BF
+ 122:     -	1CA1          	OP_LSDSK equ 0x1CA1
+ 123:     -	1A90          	OP_RTIME equ 0x1A90
+ 124:     -	1CA5          	OP_SELDSK equ 0x1CA5
+ 125:     -	1948          	OP_SET equ 0x1948
+ 126:     -	1C28          	OP_STIME equ 0x1C28
+ 127:     -	1D12          	POST_CHECK_APU equ 0x1D12
+ 128:     -	1D3D          	POST_CHECK_IDE_30 equ 0x1D3D
+ 129:     -	1D50          	POST_CHECK_IDE_40 equ 0x1D50
+ 130:     -	1CED          	POST_CHECK_PIO equ 0x1CED
+ 131:     -	1CDD          	POST_START equ 0x1CDD
+ 132:     -	1D6A          	POST_TEST_RTC equ 0x1D6A
+ 133:     -	4110          	PRG_RAM_START equ 0x4110
+ 134:     -	FF00          	PRG_RAM_TOP equ 0xFF00
+ 135:     -	4000          	PROG_MEM_START equ 0x4000
+ 136:     -	0100          	PROG_ROM_START equ 0x100
+ 137:     -	0000          	RST_00 equ 0x00
+ 138:     -	0008          	RST_08 equ 0x08
+ 139:     -	0010          	RST_10 equ 0x10
+ 140:     -	0018          	RST_18 equ 0x18
+ 141:     -	FFFF          	STACK_RAM_TOP equ 0xFFFF
+ 142:     -	0000          	START_ROM equ 0x00
+ 143:     -	019B          	STRCONV_BYTES_TO_HEX equ 0x19B
+ 144:     -	01AA          	STRCONV_BYTES_TO_HEX_1 equ 0x1AA
+ 145:     -	01B4          	STRCONV_BYTES_TO_HEX_2 equ 0x1B4
+ 146:     -	1E6F          	STR_Banner_Start equ 0x1E6F
+ 147:     -	1724          	STR_PD_HEADER equ 0x1724
+ 148:     -	4010          	SYS_BUF_START equ 0x4010
+ 149:     -	4000          	SYS_RAM_START equ 0x4000
+ 150:     -	0018          	VAR_CONSOLE_BAUD equ 0x18
+ 151:     -	000F          	VAR_CONSOLE_CONF equ 0x0F
+ 152:     -	0080          	VDP_MEM equ 0x80
+ 153:     -	0081          	VDP_REG equ 0x81
+ 154:     -	1895          	_COMMAND_PROCESS_FOUND equ 0x1895
+ 155:     -	1917          	_OP_CALL equ 0x1917
+ 156:     -	1A25          	_OP_IIC_ACK_ERR equ 0x1A25
+ 157:     -	1A2C          	_OP_IIC_ACK_ERR_str equ 0x1A2C
+ 158:     -	1A72          	_OP_IIC_IN_LOOP equ 0x1A72
+ 159:     -	1A7F          	_OP_IIC_IN_LOOP_TEXT equ 0x1A7F
+ 160:     -	19F6          	_OP_IIC_OUT_LOOP equ 0x19F6
+ 161:     -	1A12          	_OP_IIC_OUT_SEND equ 0x1A12
+ 162:     -	1A93          	_OP_RTIME_NN equ 0x1A93
+ 163:     -	1B4B          	_OP_RTIME_RD_CMD equ 0x1B4B
+ 164:     -	1CB4          	_OP_SELDSK_INVALID equ 0x1CB4
+ 165:     -	1CC4          	_OP_SELDSK_INVALID_STR equ 0x1CC4
+ 166:     -	1960          	_OP_SET_LOOP equ 0x1960
+ 167:     -	1BEE          	_OP_STIME_INVALID equ 0x1BEE
+ 168:     -	1C05          	_OP_STIME_PROMPT equ 0x1C05
+ 169:     -	1C1D          	_OP_STIME_PROMPT_ERR equ 0x1C1D
+ 170:     -	1B4C          	_OP_STIME_STR_DAY equ 0x1B4C
+ 171:     -	1B9D          	_OP_STIME_STR_HOUR equ 0x1B9D
+ 172:     -	1BB8          	_OP_STIME_STR_MIN equ 0x1BB8
+ 173:     -	1B67          	_OP_STIME_STR_MON equ 0x1B67
+ 174:     -	1BD3          	_OP_STIME_STR_SEC equ 0x1BD3
+ 175:     -	1B82          	_OP_STIME_STR_YEAR equ 0x1B82
+ 176:     -	1D31          	_POST_CHECK_APU_FAILED equ 0x1D31
+ 177:     -	1D63          	_POST_CHECK_IDE_FAILED equ 0x1D63
+ 178:     -	1D06          	_POST_CHECK_PIO_FAILED equ 0x1D06
+ 179:     -	1DA4          	_POST_TEST_RTC_INVALID equ 0x1DA4
+ 180:     -	1D9D          	_POST_TEST_RTC_NOTFOUND equ 0x1D9D
+ 181:     -	18B8          	_STR_NOT_FOUND equ 0x18B8
+ 182:     -	18A4          	_STR_NOT_IMPLEMENTED equ 0x18A4
+ 183:     -	18CC          	_STR_SYNTAX equ 0x18CC
+ 184:     -	0D30          	_beep_pause_l1 equ 0xD30
+ 185:     -	13E9          	_ideif_init_drive_found equ 0x13E9
+ 186:     -	13D1          	_ideif_init_drive_loop equ 0x13D1
+ 187:     -	13E4          	_ideif_init_drive_nodrv equ 0x13E4
+ 188:     -	1454          	_ideif_init_drive_prt_fnd equ 0x1454
+ 189:     -	1442          	_ideif_init_drive_prt_l1 equ 0x1442
+ 190:     -	144C          	_ideif_init_drive_prt_ln equ 0x144C
+ 191:     -	1510          	_ideif_prnt_devtable_hdr equ 0x1510
+ 192:     -	12E1          	_ideif_prnt_devtable_l1 equ 0x12E1
+ 193:     -	13A7          	_ideif_prnt_devtable_l1_e2 equ 0x13A7
+ 194:     -	1326          	_ideif_prnt_devtable_l1_es equ 0x1326
+ 195:     -	13A4          	_ideif_prnt_devtable_l1_ms equ 0x13A4
+ 196:     -	12EE          	_ideif_prnt_devtable_l1_nxt equ 0x12EE
+ 197:     -	1314          	_ideif_prnt_devtable_l1_s00 equ 0x1314
+ 198:     -	1319          	_ideif_prnt_devtable_l1_s01 equ 0x1319
+ 199:     -	131E          	_ideif_prnt_devtable_l1_s02 equ 0x131E
+ 200:     -	1323          	_ideif_prnt_devtable_l1_sFF equ 0x1323
+ 201:     -	12EC          	_ideif_prnt_devtable_l1_sel equ 0x12EC
+ 202:     -	1574          	_ideif_prnt_devtable_master equ 0x1574
+ 203:     -	1548          	_ideif_prnt_devtable_s00 equ 0x1548
+ 204:     -	1553          	_ideif_prnt_devtable_s01 equ 0x1553
+ 205:     -	155E          	_ideif_prnt_devtable_s02 equ 0x155E
+ 206:     -	1569          	_ideif_prnt_devtable_sFF equ 0x1569
+ 207:     -	157C          	_ideif_prnt_devtable_slave equ 0x157C
+ 208:     -	0147          	_read_bcd_invalid equ 0x147
+ 209:     -	1C9C          	_shift4 equ 0x1C9C
+ 210:     -	0D17          	beep equ 0xD17
+ 211:     -	0D19          	beep_loop equ 0xD19
+ 212:     -	0D2F          	beep_pause equ 0xD2F
+ 213:     -	091C          	dasm_00 equ 0x91C
+ 214:     -	0C08          	dasm_01 equ 0xC08
+ 215:     -	09A2          	dasm_02 equ 0x9A2
+ 216:     -	0BDA          	dasm_03 equ 0xBDA
+ 217:     -	0A1F          	dasm_08 equ 0xA1F
+ 218:     -	0BAD          	dasm_09 equ 0xBAD
+ 219:     -	0984          	dasm_0A equ 0x984
+ 220:     -	0BF1          	dasm_0B equ 0xBF1
+ 221:     -	0964          	dasm_10 equ 0x964
+ 222:     -	09AD          	dasm_12 equ 0x9AD
+ 223:     -	0927          	dasm_18 equ 0x927
+ 224:     -	098E          	dasm_1A equ 0x98E
+ 225:     -	0941          	dasm_20 equ 0x941
+ 226:     -	0C4E          	dasm_22 equ 0xC4E
+ 227:     -	09E7          	dasm_27 equ 0x9E7
+ 228:     -	093A          	dasm_28 equ 0x93A
+ 229:     -	0C1F          	dasm_2A equ 0xC1F
+ 230:     -	09EB          	dasm_2F equ 0x9EB
+ 231:     -	0932          	dasm_30 equ 0x932
+ 232:     -	09B8          	dasm_32 equ 0x9B8
+ 233:     -	09F7          	dasm_37 equ 0x9F7
+ 234:     -	092B          	dasm_38 equ 0x92B
+ 235:     -	0998          	dasm_3A equ 0x998
+ 236:     -	09F3          	dasm_3F equ 0x9F3
+ 237:     -	09FB          	dasm_76 equ 0x9FB
+ 238:     -	0A78          	dasm_80C6 equ 0xA78
+ 239:     -	0A15          	dasm_BE equ 0xA15
+ 240:     -	0920          	dasm_C3 equ 0x920
+ 241:     -	0A9E          	dasm_C88E equ 0xA9E
+ 242:     -	0970          	dasm_C9 equ 0x970
+ 243:     -	096A          	dasm_CD equ 0x96A
+ 244:     -	0A2C          	dasm_D9 equ 0xA2C
+ 245:     -	0952          	dasm_DD equ 0x952
+ 246:     -	0C0F          	dasm_DD_01 equ 0xC0F
+ 247:     -	0BC8          	dasm_DD_09 equ 0xBC8
+ 248:     -	0C64          	dasm_DD_22 equ 0xC64
+ 249:     -	0BDF          	dasm_DD_23 equ 0xBDF
+ 250:     -	0C36          	dasm_DD_2A equ 0xC36
+ 251:     -	0BF6          	dasm_DD_2B equ 0xBF6
+ 252:     -	0B78          	dasm_DD_34 equ 0xB78
+ 253:     -	0B95          	dasm_DD_35 equ 0xB95
+ 254:     -	0A80          	dasm_DD_86 equ 0xA80
+ 255:     -	0AA6          	dasm_DD_8E equ 0xAA6
+ 256:     -	0AC9          	dasm_DD_96 equ 0xAC9
+ 257:     -	0AE9          	dasm_DD_9E equ 0xAE9
+ 258:     -	0B0A          	dasm_DD_A6 equ 0xB0A
+ 259:     -	0B41          	dasm_DD_AE equ 0xB41
+ 260:     -	0B26          	dasm_DD_B6 equ 0xB26
+ 261:     -	0B5D          	dasm_DD_BE equ 0xB5D
+ 262:     -	0CB6          	dasm_DD_E1 equ 0xCB6
+ 263:     -	0A3C          	dasm_DD_E3 equ 0xA3C
+ 264:     -	0CA0          	dasm_DD_E5 equ 0xCA0
+ 265:     -	0C86          	dasm_DD_F9 equ 0xC86
+ 266:     -	0CB0          	dasm_E1 equ 0xCB0
+ 267:     -	0A30          	dasm_E3 equ 0xA30
+ 268:     -	0C9A          	dasm_E5 equ 0xC9A
+ 269:     -	0949          	dasm_E9 equ 0x949
+ 270:     -	0BBF          	dasm_ED_42 equ 0xBBF
+ 271:     -	0C5A          	dasm_ED_43 equ 0xC5A
+ 272:     -	09EF          	dasm_ED_44 equ 0x9EF
+ 273:     -	097A          	dasm_ED_45 equ 0x97A
+ 274:     -	0A06          	dasm_ED_46 equ 0xA06
+ 275:     -	0BB6          	dasm_ED_4A equ 0xBB6
+ 276:     -	0C2B          	dasm_ED_4B equ 0xC2B
+ 277:     -	0975          	dasm_ED_4D equ 0x975
+ 278:     -	0A0B          	dasm_ED_56 equ 0xA0B
+ 279:     -	0A10          	dasm_ED_5E equ 0xA10
+ 280:     -	0A54          	dasm_ED_A0 equ 0xA54
+ 281:     -	0A66          	dasm_ED_A1 equ 0xA66
+ 282:     -	0A5D          	dasm_ED_A8 equ 0xA5D
+ 283:     -	0A6F          	dasm_ED_A9 equ 0xA6F
+ 284:     -	0A58          	dasm_ED_B0 equ 0xA58
+ 285:     -	0A6A          	dasm_ED_B1 equ 0xA6A
+ 286:     -	0A61          	dasm_ED_B8 equ 0xA61
+ 287:     -	0A73          	dasm_ED_B9 equ 0xA73
+ 288:     -	0A00          	dasm_F3 equ 0xA00
+ 289:     -	0C7C          	dasm_F9 equ 0xC7C
+ 290:     -	0A03          	dasm_FB equ 0xA03
+ 291:     -	095B          	dasm_FD equ 0x95B
+ 292:     -	0C17          	dasm_FD_01 equ 0xC17
+ 293:     -	0BD1          	dasm_FD_09 equ 0xBD1
+ 294:     -	0C70          	dasm_FD_22 equ 0xC70
+ 295:     -	0BE8          	dasm_FD_23 equ 0xBE8
+ 296:     -	0C42          	dasm_FD_2A equ 0xC42
+ 297:     -	0BFF          	dasm_FD_2B equ 0xBFF
+ 298:     -	0B84          	dasm_FD_34 equ 0xB84
+ 299:     -	0BA1          	dasm_FD_35 equ 0xBA1
+ 300:     -	0A8F          	dasm_FD_86 equ 0xA8F
+ 301:     -	0AB5          	dasm_FD_8E equ 0xAB5
+ 302:     -	0AD5          	dasm_FD_96 equ 0xAD5
+ 303:     -	0AF7          	dasm_FD_9E equ 0xAF7
+ 304:     -	0B16          	dasm_FD_A6 equ 0xB16
+ 305:     -	0B4D          	dasm_FD_AE equ 0xB4D
+ 306:     -	0B31          	dasm_FD_B6 equ 0xB31
+ 307:     -	0B68          	dasm_FD_BE equ 0xB68
+ 308:     -	0CBE          	dasm_FD_E1 equ 0xCBE
+ 309:     -	0A48          	dasm_FD_E3 equ 0xA48
+ 310:     -	0CA8          	dasm_FD_E5 equ 0xCA8
+ 311:     -	0C90          	dasm_FD_F9 equ 0xC90
+ 312:     -	097F          	dasm_FF equ 0x97F
+ 313:     -	0CC6          	dasm_UU equ 0xCC6
+ 314:     -	0CCA          	dasm_UW equ 0xCCA
+ 315:     -	0B05          	dasm__AND equ 0xB05
+ 316:     -	0B59          	dasm__CP equ 0xB59
+ 317:     -	0B90          	dasm__DEC equ 0xB90
+ 318:     -	09D7          	dasm__ED_47 equ 0x9D7
+ 319:     -	09DF          	dasm__ED_4F equ 0x9DF
+ 320:     -	09C7          	dasm__ED_57 equ 0x9C7
+ 321:     -	09CF          	dasm__ED_5F equ 0x9CF
+ 322:     -	0B73          	dasm__INC equ 0xB73
+ 323:     -	09C3          	dasm__LD equ 0x9C3
+ 324:     -	0B22          	dasm__OR equ 0xB22
+ 325:     -	0AE1          	dasm__SBC equ 0xAE1
+ 326:     -	0AC4          	dasm__SUB equ 0xAC4
+ 327:     -	0B3C          	dasm__XOR equ 0xB3C
+ 328:     -	04C4          	dasm_opcode_table equ 0x4C4
+ 329:     -	02F1          	dasm_print16hex_addr equ 0x2F1
+ 330:     -	0309          	dasm_print8hex equ 0x309
+ 331:     -	0CCF          	dasm_printFlags_table equ 0xCCF
+ 332:     -	0CDF          	dasm_printRegister8_table equ 0xCDF
+ 333:     -	0CFF          	dasm_printRegister8_table_HL equ 0xCFF
+ 334:     -	0CE7          	dasm_printRegisterIX_table equ 0xCE7
+ 335:     -	0CEF          	dasm_printRegisterIY_table equ 0xCEF
+ 336:     -	0CF7          	dasm_printRegisterSP_table equ 0xCF7
+ 337:     -	01B5          	disassemble equ 0x1B5
+ 338:     -	029B          	disassemble_continue equ 0x29B
+ 339:     -	028B          	disassemble_err equ 0x28B
+ 340:     -	01B9          	disassemble_next equ 0x1B9
+ 341:     -	0288          	disassemble_print_opcode_params_end equ 0x288
+ 342:     -	0234          	disassemble_print_opcode_params_loop equ 0x234
+ 343:     -	01F6          	disassemble_print_opcode_raw equ 0x1F6
+ 344:     -	020A          	disassemble_print_opcode_raw_fill equ 0x20A
+ 345:     -	02CD          	disassemble_table_first_match equ 0x2CD
+ 346:     -	02E7          	disassemble_table_found equ 0x2E7
+ 347:     -	02EB          	disassemble_table_notfound equ 0x2EB
+ 348:     -	02A9          	disassemble_table_seek equ 0x2A9
+ 349:     -	02AD          	disassemble_table_seek_loop equ 0x2AD
+ 350:     -	16C9          	dump_pretty equ 0x16C9
+ 351:     -	16F3          	dump_pretty_ascii equ 0x16F3
+ 352:     -	1711          	dump_pretty_ascii_cont equ 0x1711
+ 353:     -	16FB          	dump_pretty_ascii_loop equ 0x16FB
+ 354:     -	170C          	dump_pretty_ascii_none equ 0x170C
+ 355:     -	16E6          	dump_pretty_col equ 0x16E6
+ 356:     -	1723          	dump_pretty_end equ 0x1723
+ 357:     -	1717          	dump_pretty_nextrow equ 0x1717
+ 358:     -	16D1          	dump_pretty_row equ 0x16D1
+ 359:     -	0E04          	ide_printerror equ 0xE04
+ 360:     -	0D83          	ide_readsector_256 equ 0xD83
+ 361:     -	0DB2          	ide_readsector_256_done equ 0xDB2
+ 362:     -	0D85          	ide_readsector_256_waitloop equ 0xD85
+ 363:     -	0DB3          	ide_readsector_512_inv equ 0xDB3
+ 364:     -	0DB8          	ide_readsector_512_inv_waitloop equ 0xDB8
+ 365:     -	0DEE          	ide_readsector_timeout equ 0xDEE
+ 366:     -	0D65          	ide_regread_8 equ 0xD65
+ 367:     -	0D49          	ide_regwrite_8 equ 0xD49
+ 368:     -	0D3C          	ide_reset equ 0xD3C
+ 369:     -	0E03          	ide_writesector_256 equ 0xE03
+ 370:     -	1497          	ideif_get_drv_pointer equ 0x1497
+ 371:     -	14AB          	ideif_init_all equ 0x14AB
+ 372:     -	12B5          	ideif_init_devtable equ 0x12B5
+ 373:     -	13C8          	ideif_init_drive equ 0x13C8
+ 374:     -	12D3          	ideif_prnt_devtable equ 0x12D3
+ 375:     -	15DD          	iic_init equ 0x15DD
+ 376:     -	161C          	iic_read_ack equ 0x161C
+ 377:     -	15AE          	iic_receive_buffer equ 0x15AE
+ 378:     -	15D1          	iic_receive_buffer_done equ 0x15D1
+ 379:     -	15D7          	iic_receive_buffer_err equ 0x15D7
+ 380:     -	15BF          	iic_receive_buffer_loop equ 0x15BF
+ 381:     -	16A2          	iic_receive_byte equ 0x16A2
+ 382:     -	16AF          	iic_receive_byte_loop equ 0x16AF
+ 383:     -	1642          	iic_send_ack equ 0x1642
+ 384:     -	1584          	iic_send_buffer equ 0x1584
+ 385:     -	15A2          	iic_send_buffer_done equ 0x15A2
+ 386:     -	15A8          	iic_send_buffer_err equ 0x15A8
+ 387:     -	1594          	iic_send_buffer_loop equ 0x1594
+ 388:     -	167C          	iic_send_byte equ 0x167C
+ 389:     -	1688          	iic_send_byte_loop equ 0x1688
+ 390:     -	15FB          	iic_send_ebit equ 0x15FB
+ 391:     -	165F          	iic_send_nack equ 0x165F
+ 392:     -	15E6          	iic_send_sbit equ 0x15E6
+ 393:     -	0044          	mon_var_template equ 0x44
+ 394:     -	03BF          	mon_var_template_end equ 0x3BF
+ 395:     -	0317          	param_01 equ 0x317
+ 396:     -	033E          	param_02 equ 0x33E
+ 397:     -	035B          	param_03 equ 0x35B
+ 398:     -	0393          	param_03_done equ 0x393
+ 399:     -	037C          	param_03_neg equ 0x37C
+ 400:     -	0397          	param_04 equ 0x397
+ 401:     -	03A7          	param_04_i equ 0x3A7
+ 402:     -	03AD          	param_05 equ 0x3AD
+ 403:     -	03BA          	param_06 equ 0x3BA
+ 404:     -	03D4          	param_07 equ 0x3D4
+ 405:     -	03E1          	param_08 equ 0x3E1
+ 406:     -	03F6          	param_09 equ 0x3F6
+ 407:     -	03FC          	param_09_0A equ 0x3FC
+ 408:     -	03ED          	param_0A equ 0x3ED
+ 409:     -	040B          	param_10 equ 0x40B
+ 410:     -	041B          	param_11 equ 0x41B
+ 411:     -	042A          	param_11_12 equ 0x42A
+ 412:     -	044A          	param_11_12_all equ 0x44A
+ 413:     -	043D          	param_11_12_def equ 0x43D
+ 414:     -	0442          	param_11_12_ix equ 0x442
+ 415:     -	0447          	param_11_12_iy equ 0x447
+ 416:     -	0423          	param_12 equ 0x423
+ 417:     -	045B          	param_13 equ 0x45B
+ 418:     -	047A          	param_80 equ 0x47A
+ 419:     -	0481          	param_80_seek equ 0x481
+ 420:     -	0471          	param_81 equ 0x471
+ 421:     -	04B5          	param_comma equ 0x4B5
+ 422:     -	0490          	param_printRegister equ 0x490
+ 423:     -	04AE          	param_printRegisterA equ 0x4AE
+ 424:     -	04A6          	param_printRegisterHL equ 0x4A6
+ 425:     -	0107          	print_a_hex equ 0x107
+ 426:     -	0119          	print_bcd equ 0x119
+ 427:     -	00D7          	print_char equ 0xD7
+ 428:     -	00EA          	print_clear equ 0xEA
+ 429:     -	00F1          	print_newLine equ 0xF1
+ 430:     -	00DF          	print_str equ 0xDF
+ 431:     -	00E9          	print_str_end equ 0xE9
+ 432:     -	1763          	print_str_fixed equ 0x1763
+ 433:     -	00FC          	print_wait_out equ 0xFC
+ 434:     -	0131          	read_bcd equ 0x131
+ 435:     -	011F          	read_char equ 0x11F
+ 436:     -	14BE          	read_lba_sector equ 0x14BE
+ 437:     -	1508          	str_dev_done equ 0x1508
+ 438:     -	14F0          	str_dev_waitready equ 0x14F0
+ 439:     -	0E37          	str_error_start equ 0xE37
+ 440:     -	0E54          	str_error_start1 equ 0xE54
+ 441:     -	0E5D          	str_error_start2 equ 0xE5D
+ 442:     -	0E66          	str_error_time equ 0xE66
+ 443:     -	1DFC          	str_post_apu equ 0x1DFC
+ 444:     -	1DAB          	str_post_ide_30 equ 0x1DAB
+ 445:     -	1DC6          	str_post_ide_40 equ 0x1DC6
+ 446:     -	1E32          	str_post_nd equ 0x1E32
+ 447:     -	1E6A          	str_post_ok equ 0x1E6A
+ 448:     -	1DE1          	str_post_pio equ 0x1DE1
+ 449:     -	1E17          	str_post_rtc equ 0x1E17
+ 450:     -	1E40          	str_post_rtc_iv equ 0x1E40
+ 451:     -	400A          	var_apu_present equ 0x400A
+ 452:     -	4000          	var_buffer_len equ 0x4000
+ 453:     -	411A          	var_bytes_count equ 0x411A
+ 454:     -	4006          	var_curserchar equ 0x4006
+ 455:     -	4007          	var_curserlastaddr equ 0x4007
+ 456:     -	4005          	var_curseron equ 0x4005
+ 457:     -	4004          	var_curserstate equ 0x4004
+ 458:     -	4002          	var_curserx equ 0x4002
+ 459:     -	4003          	var_cursery equ 0x4003
+ 460:     -	407B          	var_idebuffer equ 0x407B
+ 461:     -	402B          	var_input equ 0x402B
+ 462:     -	4001          	var_last_char equ 0x4001
+ 463:     -	4114          	var_opcode equ 0x4114
+ 464:     -	4116          	var_opcode_length equ 0x4116
+ 465:     -	4119          	var_opcode_pcount equ 0x4119
+ 466:     -	4110          	var_opcode_start equ 0x4110
+ 467:     -	4117          	var_opcode_string equ 0x4117
+ 468:     -	4112          	var_opcode_table equ 0x4112
+ 469:     -	4115          	var_opcode_x equ 0x4115
+ 470:     -	4009          	var_pio_present equ 0x4009
+ 471:     -	401B          	var_ps2mem equ 0x401B
+ 472:     -	400B          	var_scratch equ 0x400B
 **** test.asm ****
    2:     -	8000          	    org 0x8000  
    3:				
@@ -493,7 +527,7 @@
   53:  146+10	801F  21E084  	    ld      hl, TmsFont
   54:  156+17	8022  CD3783  	    call    TmsTextMode                     ; initialize text mode
   55:				
-  56:  173+7	8025  3E0C    	    ld      a, TmsDarkGreen                  ; set colors
+  56:  173+7	8025  3E06    	    ld      a, TmsDarkRed                  ; set colors
   57:  180+17	8027  CD9C82  	    call    TmsBackground
   58:  197+7	802A  3E0F    	    ld      a, TmsWhite
   59:  204+17	802C  CD4D84  	    call    TmsTextColor
@@ -4051,7 +4085,7 @@ Statistics:
 
      4	passes
      0	jr promotions
-   577	symbols
+   611	symbols
   3338	bytes
 
 
@@ -4059,27 +4093,27 @@ Statistics:
 Symbol Table:
 
 ADDR_RTC       =D0        208
-A_RTS_OFF      = 14F      335
-A_RTS_ON       = 158      344
+A_RTS_OFF      = 152      338
+A_RTS_ON       = 15B      347
 BOOT_PHASE0    =50        80
 BOOT_PHASE1    =6E        110
 BOOT_PHASE1_LOOP=77        119
 BOOT_PHASE2    =82        130
-COMMAND        =11CD      4557
-COMMAND_BACKSPACE=1208      4616
-COMMAND_LUT    =1166      4454
-COMMAND_PROCESS=122E      4654
-COMMAND_PROCESS_FOUND=1269      4713
-COMMAND_PROCESS_LOOP=1231      4657
-COMMAND_PROCESS_LOOP_STR1=123A      4666
-COMMAND_PROCESS_LOOP_STR2=1250      4688
-COMMAND_PROCESS_NEXT_ENTRY=1255      4693
-COMMAND_PROCESS_NEXT_ENTRYI=1254      4692
-COMMAND_PROCESS_NOT_FOUND=1260      4704
-COMMAND_READ   =11D9      4569
-CONSOLE_INIT   =9B        155
-CONSOLE_INIT_CTC=9B        155
-CONSOLE_INIT_SIO=A3        163
+COMMAND        =17EB      6123
+COMMAND_BACKSPACE=1826      6182
+COMMAND_LUT    =176B      5995
+COMMAND_PROCESS=184C      6220
+COMMAND_PROCESS_FOUND=1887      6279
+COMMAND_PROCESS_LOOP=184F      6223
+COMMAND_PROCESS_LOOP_STR1=1858      6232
+COMMAND_PROCESS_LOOP_STR2=186E      6254
+COMMAND_PROCESS_NEXT_ENTRY=1873      6259
+COMMAND_PROCESS_NEXT_ENTRYI=1872      6258
+COMMAND_PROCESS_NOT_FOUND=187E      6270
+COMMAND_READ   =17F7      6135
+CONSOLE_INIT   =9E        158
+CONSOLE_INIT_CTC=9E        158
+CONSOLE_INIT_SIO=A6        166
 CS_APU_CTRL    =F9        249
 CS_APU_DATA    =F8        248
 CS_BANK        =00        0
@@ -4100,18 +4134,18 @@ CS_SIO_A_C     =09        9
 CS_SIO_A_D     =08        8
 CS_SIO_B_C     =0B        11
 CS_SIO_B_D     =0A        10
-DHEX_TO_BYTE   = 161      353
-DHEX_TO_BYTE_FAILED= 17D      381
-ERR_SYNTAX     =127F      4735
-EXEC_RST_08    = D01      3329
-EXEC_RST_10    = D05      3333
-EXEC_RST_18    = D11      3345
-HEX_TO_BIN     = 181      385
-HEX_TO_BIN_2   = 18F      399
-HEX_TO_INVALID_2= 196      406
+DHEX_TO_BYTE   = 164      356
+DHEX_TO_BYTE_FAILED= 180      384
+ERR_SYNTAX     =189D      6301
+EXEC_RST_08    = D04      3332
+EXEC_RST_10    = D08      3336
+EXEC_RST_18    = D14      3348
+HEX_TO_BIN     = 184      388
+HEX_TO_BIN_2   = 192      402
+HEX_TO_INVALID_2= 199      409
 IDE_CMD_IDENT  =EC        236
 IDE_CMD_READSEC=20        32
-IDE_DEF_TABLE  = E91      3729
+IDE_DEV_TABLE  =1275      4725
 IDE_RD         =40        64
 IDE_REG_ALTSTS =16        22
 IDE_REG_CMDSTS =0F        15
@@ -4120,15 +4154,18 @@ IDE_REG_DRVADDR=17        23
 IDE_REG_ERROR  =09        9
 IDE_REG_HCYL   =0D        13
 IDE_REG_HEAD   =0E        14
+IDE_REG_LBA0   =0B        11
+IDE_REG_LBA1   =0C        12
+IDE_REG_LBA2   =0D        13
+IDE_REG_LBA3   =0E        14
 IDE_REG_LCYL   =0C        12
 IDE_REG_SECTOR =0A        10
 IDE_REG_SSECTOR=0B        11
 IDE_RST        =80        128
 IDE_WR         =20        32
 IIC_CLK        =01        1
-IIC_DATA       =42        66
+IIC_DATA       =02        2
 INT_VEC        =1B        27
-IN_BUFFER      =402B      16427
 IO_AY0_ADDR    =40        64
 IO_AY0_DATA    =41        65
 IO_AY1_ADDR    =42        66
@@ -4150,34 +4187,40 @@ IO_RTC_SEC1    =21        33
 IO_RTC_WEEK    =2C        44
 IO_RTC_YEAR1   =2B        43
 IO_RTC_YERR0   =2A        42
-MEM_IDE_BASE   =5000      20480
-MEM_IDE_BUFFER =5062      20578
-MEM_IDE_DEVICE =5000      20480
-MEM_IDE_DEV_TABLE=5041      20545
-MEM_IDE_PARTITION=5002      20482
-MEM_IDE_POINTER=5006      20486
-MEM_IDE_SELECTED=5061      20577
-MEM_IDE_STATUS =5001      20481
-MSG_CLEAR      = 147      327
-NOT_IMPLEMENTED=1278      4728
-OP_CALL        =12DA      4826
-OP_CLR         =146E      5230
-OP_DASM        =135B      4955
-OP_DUMP        =12FA      4858
-OP_EXEC        =12C1      4801
-OP_IIC_IN      =1422      5154
-OP_IIC_OUT     =13C2      5058
-OP_IO_IN       =138B      5003
-OP_IO_OUT      =13A1      5025
-OP_RTIME       =1472      5234
-OP_SET         =132A      4906
-OP_STIME       =160A      5642
-POST_CHECK_APU =16B8      5816
-POST_CHECK_IDE_30=16E3      5859
-POST_CHECK_IDE_40=16F7      5879
-POST_CHECK_PIO =1693      5779
-POST_START     =1683      5763
-POST_TEST_RTC  =1712      5906
+MEM_IDE_BUFFER =4166      16742
+MEM_IDE_DEVICE =407B      16507
+MEM_IDE_DEV_TABLE=4085      16517
+MEM_IDE_FSBUFFER=4366      17254
+MEM_IDE_PARTITION=407D      16509
+MEM_IDE_POINTER=4081      16513
+MEM_IDE_SELECTED=40C5      16581
+MEM_IDE_STATUS =407C      16508
+MEM_IDE_STRING_0=40C6      16582
+MEM_IDE_STRING_1=40EE      16622
+MEM_IDE_STRING_2=4116      16662
+MEM_IDE_STRING_3=413E      16702
+MSG_CLEAR      = 14A      330
+NOT_IMPLEMENTED=1896      6294
+OP_CALL        =18F8      6392
+OP_CLR         =1A8C      6796
+OP_DASM        =1979      6521
+OP_DUMP        =1918      6424
+OP_EXEC        =18DF      6367
+OP_IIC_IN      =1A40      6720
+OP_IIC_OUT     =19E0      6624
+OP_IO_IN       =19A9      6569
+OP_IO_OUT      =19BF      6591
+OP_LSDSK       =1CA1      7329
+OP_RTIME       =1A90      6800
+OP_SELDSK      =1CA5      7333
+OP_SET         =1948      6472
+OP_STIME       =1C28      7208
+POST_CHECK_APU =1D12      7442
+POST_CHECK_IDE_30=1D3D      7485
+POST_CHECK_IDE_40=1D50      7504
+POST_CHECK_PIO =1CED      7405
+POST_START     =1CDD      7389
+POST_TEST_RTC  =1D6A      7530
 PRG_RAM_START  =4110      16656
 PRG_RAM_TOP    =FF00      65280
 PROG_MEM_START =4000      16384
@@ -4188,11 +4231,11 @@ RST_10         =10        16
 RST_18         =18        24
 STACK_RAM_TOP  =FFFF      65535
 START_ROM      =00        0
-STRCONV_BYTES_TO_HEX= 198      408
-STRCONV_BYTES_TO_HEX_1= 1A7      423
-STRCONV_BYTES_TO_HEX_2= 1B1      433
-STR_Banner_Start=1817      6167
-STR_PD_HEADER  =111F      4383
+STRCONV_BYTES_TO_HEX= 19B      411
+STRCONV_BYTES_TO_HEX_1= 1AA      426
+STRCONV_BYTES_TO_HEX_2= 1B4      436
+STR_Banner_Start=1E6F      7791
+STR_PD_HEADER  =1724      5924
 SYS_BUF_START  =4010      16400
 SYS_RAM_START  =4000      16384
 TermClear       8CE0      36064
@@ -4340,282 +4383,305 @@ VDPTextBufferStart=00        0
 VDPWait         8164      33124
 VDP_MEM        =80        128
 VDP_REG        =81        129
-_COMMAND_PROCESS_FOUND=1277      4727
-_OP_CALL       =12F9      4857
-_OP_IIC_ACK_ERR=1407      5127
-_OP_IIC_ACK_ERR_str=140E      5134
-_OP_IIC_IN_LOOP=1454      5204
-_OP_IIC_IN_LOOP_TEXT=1461      5217
-_OP_IIC_OUT_LOOP=13D8      5080
-_OP_IIC_OUT_SEND=13F4      5108
-_OP_RTIME_NN   =1475      5237
-_OP_RTIME_RD_CMD=152D      5421
-_OP_SET_LOOP   =1342      4930
-_OP_STIME_INVALID=15D0      5584
-_OP_STIME_PROMPT=15E7      5607
-_OP_STIME_PROMPT_ERR=15FF      5631
-_OP_STIME_STR_DAY=152E      5422
-_OP_STIME_STR_HOUR=157F      5503
-_OP_STIME_STR_MIN=159A      5530
-_OP_STIME_STR_MON=1549      5449
-_OP_STIME_STR_SEC=15B5      5557
-_OP_STIME_STR_YEAR=1564      5476
-_POST_CHECK_APU_FAILED=16D7      5847
-_POST_CHECK_IDE_FAILED=170B      5899
-_POST_CHECK_PIO_FAILED=16AC      5804
-_POST_TEST_RTC_INVALID=174C      5964
-_POST_TEST_RTC_NOTFOUND=1745      5957
-_STR_NOT_FOUND =129A      4762
-_STR_NOT_IMPLEMENTED=1286      4742
-_STR_SYNTAX    =12AE      4782
-_read_bcd_invalid= 144      324
-_shift4        =167E      5758
-beep           = D14      3348
-beep_loop      = D17      3351
-beep_pause     = D34      3380
-dasm_00        = 919      2329
-dasm_01        = C05      3077
-dasm_02        = 99F      2463
-dasm_03        = BD7      3031
-dasm_08        = A1C      2588
-dasm_09        = BAA      2986
-dasm_0A        = 981      2433
-dasm_0B        = BEE      3054
-dasm_10        = 961      2401
-dasm_12        = 9AA      2474
-dasm_18        = 924      2340
-dasm_1A        = 98B      2443
-dasm_20        = 93E      2366
-dasm_22        = C4B      3147
-dasm_27        = 9E4      2532
-dasm_28        = 937      2359
-dasm_2A        = C1C      3100
-dasm_2F        = 9E8      2536
-dasm_30        = 92F      2351
-dasm_32        = 9B5      2485
-dasm_37        = 9F4      2548
-dasm_38        = 928      2344
-dasm_3A        = 995      2453
-dasm_3F        = 9F0      2544
-dasm_76        = 9F8      2552
-dasm_80C6      = A75      2677
-dasm_BE        = A12      2578
-dasm_C3        = 91D      2333
-dasm_C88E      = A9B      2715
-dasm_C9        = 96D      2413
-dasm_CD        = 967      2407
-dasm_D9        = A29      2601
-dasm_DD        = 94F      2383
-dasm_DD_01     = C0C      3084
-dasm_DD_09     = BC5      3013
-dasm_DD_22     = C61      3169
-dasm_DD_23     = BDC      3036
-dasm_DD_2A     = C33      3123
-dasm_DD_2B     = BF3      3059
-dasm_DD_34     = B75      2933
-dasm_DD_35     = B92      2962
-dasm_DD_86     = A7D      2685
-dasm_DD_8E     = AA3      2723
-dasm_DD_96     = AC6      2758
-dasm_DD_9E     = AE6      2790
-dasm_DD_A6     = B07      2823
-dasm_DD_AE     = B3E      2878
-dasm_DD_B6     = B23      2851
-dasm_DD_BE     = B5A      2906
-dasm_DD_E1     = CB3      3251
-dasm_DD_E3     = A39      2617
-dasm_DD_E5     = C9D      3229
-dasm_DD_F9     = C83      3203
-dasm_E1        = CAD      3245
-dasm_E3        = A2D      2605
-dasm_E5        = C97      3223
-dasm_E9        = 946      2374
-dasm_ED_42     = BBC      3004
-dasm_ED_43     = C57      3159
-dasm_ED_44     = 9EC      2540
-dasm_ED_45     = 977      2423
-dasm_ED_46     = A03      2563
-dasm_ED_4A     = BB3      2995
-dasm_ED_4B     = C28      3112
-dasm_ED_4D     = 972      2418
-dasm_ED_56     = A08      2568
-dasm_ED_5E     = A0D      2573
-dasm_ED_A0     = A51      2641
-dasm_ED_A1     = A63      2659
-dasm_ED_A8     = A5A      2650
-dasm_ED_A9     = A6C      2668
-dasm_ED_B0     = A55      2645
-dasm_ED_B1     = A67      2663
-dasm_ED_B8     = A5E      2654
-dasm_ED_B9     = A70      2672
-dasm_F3        = 9FD      2557
-dasm_F9        = C79      3193
-dasm_FB        = A00      2560
-dasm_FD        = 958      2392
-dasm_FD_01     = C14      3092
-dasm_FD_09     = BCE      3022
-dasm_FD_22     = C6D      3181
-dasm_FD_23     = BE5      3045
-dasm_FD_2A     = C3F      3135
-dasm_FD_2B     = BFC      3068
-dasm_FD_34     = B81      2945
-dasm_FD_35     = B9E      2974
-dasm_FD_86     = A8C      2700
-dasm_FD_8E     = AB2      2738
-dasm_FD_96     = AD2      2770
-dasm_FD_9E     = AF4      2804
-dasm_FD_A6     = B13      2835
-dasm_FD_AE     = B4A      2890
-dasm_FD_B6     = B2E      2862
-dasm_FD_BE     = B65      2917
-dasm_FD_E1     = CBB      3259
-dasm_FD_E3     = A45      2629
-dasm_FD_E5     = CA5      3237
-dasm_FD_F9     = C8D      3213
-dasm_FF        = 97C      2428
-dasm_UU        = CC3      3267
-dasm_UW        = CC7      3271
-dasm__AND      = B02      2818
-dasm__CP       = B56      2902
-dasm__DEC      = B8D      2957
-dasm__ED_47    = 9D4      2516
-dasm__ED_4F    = 9DC      2524
-dasm__ED_57    = 9C4      2500
-dasm__ED_5F    = 9CC      2508
-dasm__INC      = B70      2928
-dasm__LD       = 9C0      2496
-dasm__OR       = B1F      2847
-dasm__SBC      = ADE      2782
-dasm__SUB      = AC1      2753
-dasm__XOR      = B39      2873
-dasm_opcode_table= 4C1      1217
-dasm_print16hex_addr= 2EE      750
-dasm_print8hex = 306      774
-dasm_printFlags_table= CCC      3276
-dasm_printRegister8_table= CDC      3292
-dasm_printRegister8_table_HL= CFC      3324
-dasm_printRegisterIX_table= CE4      3300
-dasm_printRegisterIY_table= CEC      3308
-dasm_printRegisterSP_table= CF4      3316
-disassemble    = 1B2      434
-disassemble_continue= 298      664
-disassemble_err= 288      648
-disassemble_next= 1B6      438
-disassemble_print_opcode_params_end= 285      645
-disassemble_print_opcode_params_loop= 231      561
-disassemble_print_opcode_raw= 1F3      499
-disassemble_print_opcode_raw_fill= 207      519
-disassemble_table_first_match= 2CA      714
-disassemble_table_found= 2E4      740
-disassemble_table_notfound= 2E8      744
-disassemble_table_seek= 2A6      678
-disassemble_table_seek_loop= 2AA      682
-dump_pretty    =10C4      4292
-dump_pretty_ascii=10EE      4334
-dump_pretty_ascii_cont=110C      4364
-dump_pretty_ascii_loop=10F6      4342
-dump_pretty_ascii_none=1107      4359
-dump_pretty_col=10E1      4321
-dump_pretty_end=111E      4382
-dump_pretty_nextrow=1112      4370
-dump_pretty_row=10CC      4300
-ide_printerror = E0B      3595
-ide_readsector_256= D8A      3466
-ide_readsector_256_done= DB9      3513
-ide_readsector_256_waitloop= D8C      3468
-ide_readsector_512_inv= DBA      3514
-ide_readsector_512_inv_waitloop= DBF      3519
-ide_readsector_timeout= DF5      3573
-ide_regread_8  = D6C      3436
-ide_regwrite_8 = D50      3408
-ide_reset      = D43      3395
-ide_writesector_256= E0A      3594
-ideif_init_drive= EB1      3761
-ideif_init_drive_detected= EDF      3807
-ideif_init_drive_loop1= EC5      3781
-ideif_init_drive_nodrv= ED8      3800
-ideif_init_dtable= EB1      3761
-iic_init       = FD8      4056
-iic_read_ack   =1017      4119
-iic_receive_buffer= FA9      4009
-iic_receive_buffer_done= FCC      4044
-iic_receive_buffer_err= FD2      4050
-iic_receive_buffer_loop= FBA      4026
-iic_receive_byte=109D      4253
-iic_receive_byte_loop=10AA      4266
-iic_send_ack   =103D      4157
-iic_send_buffer= F7F      3967
-iic_send_buffer_done= F9D      3997
-iic_send_buffer_err= FA3      4003
-iic_send_buffer_loop= F8F      3983
-iic_send_byte  =1077      4215
-iic_send_byte_loop=1083      4227
-iic_send_ebit  = FF6      4086
-iic_send_nack  =105A      4186
-iic_send_sbit  = FE1      4065
+_COMMAND_PROCESS_FOUND=1895      6293
+_OP_CALL       =1917      6423
+_OP_IIC_ACK_ERR=1A25      6693
+_OP_IIC_ACK_ERR_str=1A2C      6700
+_OP_IIC_IN_LOOP=1A72      6770
+_OP_IIC_IN_LOOP_TEXT=1A7F      6783
+_OP_IIC_OUT_LOOP=19F6      6646
+_OP_IIC_OUT_SEND=1A12      6674
+_OP_RTIME_NN   =1A93      6803
+_OP_RTIME_RD_CMD=1B4B      6987
+_OP_SELDSK_INVALID=1CB4      7348
+_OP_SELDSK_INVALID_STR=1CC4      7364
+_OP_SET_LOOP   =1960      6496
+_OP_STIME_INVALID=1BEE      7150
+_OP_STIME_PROMPT=1C05      7173
+_OP_STIME_PROMPT_ERR=1C1D      7197
+_OP_STIME_STR_DAY=1B4C      6988
+_OP_STIME_STR_HOUR=1B9D      7069
+_OP_STIME_STR_MIN=1BB8      7096
+_OP_STIME_STR_MON=1B67      7015
+_OP_STIME_STR_SEC=1BD3      7123
+_OP_STIME_STR_YEAR=1B82      7042
+_POST_CHECK_APU_FAILED=1D31      7473
+_POST_CHECK_IDE_FAILED=1D63      7523
+_POST_CHECK_PIO_FAILED=1D06      7430
+_POST_TEST_RTC_INVALID=1DA4      7588
+_POST_TEST_RTC_NOTFOUND=1D9D      7581
+_STR_NOT_FOUND =18B8      6328
+_STR_NOT_IMPLEMENTED=18A4      6308
+_STR_SYNTAX    =18CC      6348
+_beep_pause_l1 = D30      3376
+_ideif_init_drive_found=13E9      5097
+_ideif_init_drive_loop=13D1      5073
+_ideif_init_drive_nodrv=13E4      5092
+_ideif_init_drive_prt_fnd=1454      5204
+_ideif_init_drive_prt_l1=1442      5186
+_ideif_init_drive_prt_ln=144C      5196
+_ideif_prnt_devtable_hdr=1510      5392
+_ideif_prnt_devtable_l1=12E1      4833
+_ideif_prnt_devtable_l1_e2=13A7      5031
+_ideif_prnt_devtable_l1_es=1326      4902
+_ideif_prnt_devtable_l1_ms=13A4      5028
+_ideif_prnt_devtable_l1_nxt=12EE      4846
+_ideif_prnt_devtable_l1_s00=1314      4884
+_ideif_prnt_devtable_l1_s01=1319      4889
+_ideif_prnt_devtable_l1_s02=131E      4894
+_ideif_prnt_devtable_l1_sFF=1323      4899
+_ideif_prnt_devtable_l1_sel=12EC      4844
+_ideif_prnt_devtable_master=1574      5492
+_ideif_prnt_devtable_s00=1548      5448
+_ideif_prnt_devtable_s01=1553      5459
+_ideif_prnt_devtable_s02=155E      5470
+_ideif_prnt_devtable_sFF=1569      5481
+_ideif_prnt_devtable_slave=157C      5500
+_read_bcd_invalid= 147      327
+_shift4        =1C9C      7324
+beep           = D17      3351
+beep_loop      = D19      3353
+beep_pause     = D2F      3375
+dasm_00        = 91C      2332
+dasm_01        = C08      3080
+dasm_02        = 9A2      2466
+dasm_03        = BDA      3034
+dasm_08        = A1F      2591
+dasm_09        = BAD      2989
+dasm_0A        = 984      2436
+dasm_0B        = BF1      3057
+dasm_10        = 964      2404
+dasm_12        = 9AD      2477
+dasm_18        = 927      2343
+dasm_1A        = 98E      2446
+dasm_20        = 941      2369
+dasm_22        = C4E      3150
+dasm_27        = 9E7      2535
+dasm_28        = 93A      2362
+dasm_2A        = C1F      3103
+dasm_2F        = 9EB      2539
+dasm_30        = 932      2354
+dasm_32        = 9B8      2488
+dasm_37        = 9F7      2551
+dasm_38        = 92B      2347
+dasm_3A        = 998      2456
+dasm_3F        = 9F3      2547
+dasm_76        = 9FB      2555
+dasm_80C6      = A78      2680
+dasm_BE        = A15      2581
+dasm_C3        = 920      2336
+dasm_C88E      = A9E      2718
+dasm_C9        = 970      2416
+dasm_CD        = 96A      2410
+dasm_D9        = A2C      2604
+dasm_DD        = 952      2386
+dasm_DD_01     = C0F      3087
+dasm_DD_09     = BC8      3016
+dasm_DD_22     = C64      3172
+dasm_DD_23     = BDF      3039
+dasm_DD_2A     = C36      3126
+dasm_DD_2B     = BF6      3062
+dasm_DD_34     = B78      2936
+dasm_DD_35     = B95      2965
+dasm_DD_86     = A80      2688
+dasm_DD_8E     = AA6      2726
+dasm_DD_96     = AC9      2761
+dasm_DD_9E     = AE9      2793
+dasm_DD_A6     = B0A      2826
+dasm_DD_AE     = B41      2881
+dasm_DD_B6     = B26      2854
+dasm_DD_BE     = B5D      2909
+dasm_DD_E1     = CB6      3254
+dasm_DD_E3     = A3C      2620
+dasm_DD_E5     = CA0      3232
+dasm_DD_F9     = C86      3206
+dasm_E1        = CB0      3248
+dasm_E3        = A30      2608
+dasm_E5        = C9A      3226
+dasm_E9        = 949      2377
+dasm_ED_42     = BBF      3007
+dasm_ED_43     = C5A      3162
+dasm_ED_44     = 9EF      2543
+dasm_ED_45     = 97A      2426
+dasm_ED_46     = A06      2566
+dasm_ED_4A     = BB6      2998
+dasm_ED_4B     = C2B      3115
+dasm_ED_4D     = 975      2421
+dasm_ED_56     = A0B      2571
+dasm_ED_5E     = A10      2576
+dasm_ED_A0     = A54      2644
+dasm_ED_A1     = A66      2662
+dasm_ED_A8     = A5D      2653
+dasm_ED_A9     = A6F      2671
+dasm_ED_B0     = A58      2648
+dasm_ED_B1     = A6A      2666
+dasm_ED_B8     = A61      2657
+dasm_ED_B9     = A73      2675
+dasm_F3        = A00      2560
+dasm_F9        = C7C      3196
+dasm_FB        = A03      2563
+dasm_FD        = 95B      2395
+dasm_FD_01     = C17      3095
+dasm_FD_09     = BD1      3025
+dasm_FD_22     = C70      3184
+dasm_FD_23     = BE8      3048
+dasm_FD_2A     = C42      3138
+dasm_FD_2B     = BFF      3071
+dasm_FD_34     = B84      2948
+dasm_FD_35     = BA1      2977
+dasm_FD_86     = A8F      2703
+dasm_FD_8E     = AB5      2741
+dasm_FD_96     = AD5      2773
+dasm_FD_9E     = AF7      2807
+dasm_FD_A6     = B16      2838
+dasm_FD_AE     = B4D      2893
+dasm_FD_B6     = B31      2865
+dasm_FD_BE     = B68      2920
+dasm_FD_E1     = CBE      3262
+dasm_FD_E3     = A48      2632
+dasm_FD_E5     = CA8      3240
+dasm_FD_F9     = C90      3216
+dasm_FF        = 97F      2431
+dasm_UU        = CC6      3270
+dasm_UW        = CCA      3274
+dasm__AND      = B05      2821
+dasm__CP       = B59      2905
+dasm__DEC      = B90      2960
+dasm__ED_47    = 9D7      2519
+dasm__ED_4F    = 9DF      2527
+dasm__ED_57    = 9C7      2503
+dasm__ED_5F    = 9CF      2511
+dasm__INC      = B73      2931
+dasm__LD       = 9C3      2499
+dasm__OR       = B22      2850
+dasm__SBC      = AE1      2785
+dasm__SUB      = AC4      2756
+dasm__XOR      = B3C      2876
+dasm_opcode_table= 4C4      1220
+dasm_print16hex_addr= 2F1      753
+dasm_print8hex = 309      777
+dasm_printFlags_table= CCF      3279
+dasm_printRegister8_table= CDF      3295
+dasm_printRegister8_table_HL= CFF      3327
+dasm_printRegisterIX_table= CE7      3303
+dasm_printRegisterIY_table= CEF      3311
+dasm_printRegisterSP_table= CF7      3319
+disassemble    = 1B5      437
+disassemble_continue= 29B      667
+disassemble_err= 28B      651
+disassemble_next= 1B9      441
+disassemble_print_opcode_params_end= 288      648
+disassemble_print_opcode_params_loop= 234      564
+disassemble_print_opcode_raw= 1F6      502
+disassemble_print_opcode_raw_fill= 20A      522
+disassemble_table_first_match= 2CD      717
+disassemble_table_found= 2E7      743
+disassemble_table_notfound= 2EB      747
+disassemble_table_seek= 2A9      681
+disassemble_table_seek_loop= 2AD      685
+dump_pretty    =16C9      5833
+dump_pretty_ascii=16F3      5875
+dump_pretty_ascii_cont=1711      5905
+dump_pretty_ascii_loop=16FB      5883
+dump_pretty_ascii_none=170C      5900
+dump_pretty_col=16E6      5862
+dump_pretty_end=1723      5923
+dump_pretty_nextrow=1717      5911
+dump_pretty_row=16D1      5841
+ide_printerror = E04      3588
+ide_readsector_256= D83      3459
+ide_readsector_256_done= DB2      3506
+ide_readsector_256_waitloop= D85      3461
+ide_readsector_512_inv= DB3      3507
+ide_readsector_512_inv_waitloop= DB8      3512
+ide_readsector_timeout= DEE      3566
+ide_regread_8  = D65      3429
+ide_regwrite_8 = D49      3401
+ide_reset      = D3C      3388
+ide_writesector_256= E03      3587
+ideif_get_drv_pointer=1497      5271
+ideif_init_all =14AB      5291
+ideif_init_devtable=12B5      4789
+ideif_init_drive=13C8      5064
+ideif_prnt_devtable=12D3      4819
+iic_init       =15DD      5597
+iic_read_ack   =161C      5660
+iic_receive_buffer=15AE      5550
+iic_receive_buffer_done=15D1      5585
+iic_receive_buffer_err=15D7      5591
+iic_receive_buffer_loop=15BF      5567
+iic_receive_byte=16A2      5794
+iic_receive_byte_loop=16AF      5807
+iic_send_ack   =1642      5698
+iic_send_buffer=1584      5508
+iic_send_buffer_done=15A2      5538
+iic_send_buffer_err=15A8      5544
+iic_send_buffer_loop=1594      5524
+iic_send_byte  =167C      5756
+iic_send_byte_loop=1688      5768
+iic_send_ebit  =15FB      5627
+iic_send_nack  =165F      5727
+iic_send_sbit  =15E6      5606
 mon_var_template=44        68
-mon_var_template_end=70        112
-param_01       = 314      788
-param_02       = 33B      827
-param_03       = 358      856
-param_03_done  = 390      912
-param_03_neg   = 379      889
-param_04       = 394      916
-param_04_i     = 3A4      932
-param_05       = 3AA      938
-param_06       = 3B7      951
-param_07       = 3D1      977
-param_08       = 3DE      990
-param_09       = 3F3      1011
-param_09_0A    = 3F9      1017
-param_0A       = 3EA      1002
-param_10       = 408      1032
-param_11       = 418      1048
-param_11_12    = 427      1063
-param_11_12_all= 447      1095
-param_11_12_def= 43A      1082
-param_11_12_ix = 43F      1087
-param_11_12_iy = 444      1092
-param_12       = 420      1056
-param_13       = 458      1112
-param_80       = 477      1143
-param_80_seek  = 47E      1150
-param_81       = 46E      1134
-param_comma    = 4B2      1202
-param_printRegister= 48D      1165
-param_printRegisterA= 4AB      1195
-param_printRegisterHL= 4A3      1187
-print_a_hex    = 104      260
-print_bcd      = 116      278
-print_char     =D4        212
-print_clear    =E7        231
-print_newLine  =EE        238
-print_str      =DC        220
-print_str_end  =E6        230
-print_str_fixed=115E      4446
-print_wait_out =F9        249
-read_bcd       = 12E      302
-read_char      = 11C      284
-read_lba_sector= F13      3859
+mon_var_template_end= 3BF      959
+param_01       = 317      791
+param_02       = 33E      830
+param_03       = 35B      859
+param_03_done  = 393      915
+param_03_neg   = 37C      892
+param_04       = 397      919
+param_04_i     = 3A7      935
+param_05       = 3AD      941
+param_06       = 3BA      954
+param_07       = 3D4      980
+param_08       = 3E1      993
+param_09       = 3F6      1014
+param_09_0A    = 3FC      1020
+param_0A       = 3ED      1005
+param_10       = 40B      1035
+param_11       = 41B      1051
+param_11_12    = 42A      1066
+param_11_12_all= 44A      1098
+param_11_12_def= 43D      1085
+param_11_12_ix = 442      1090
+param_11_12_iy = 447      1095
+param_12       = 423      1059
+param_13       = 45B      1115
+param_80       = 47A      1146
+param_80_seek  = 481      1153
+param_81       = 471      1137
+param_comma    = 4B5      1205
+param_printRegister= 490      1168
+param_printRegisterA= 4AE      1198
+param_printRegisterHL= 4A6      1190
+print_a_hex    = 107      263
+print_bcd      = 119      281
+print_char     =D7        215
+print_clear    =EA        234
+print_newLine  =F1        241
+print_str      =DF        223
+print_str_end  =E9        233
+print_str_fixed=1763      5987
+print_wait_out =FC        252
+read_bcd       = 131      305
+read_char      = 11F      287
+read_lba_sector=14BE      5310
 setup_vars      81F1      33265
-str_dev_notfound= F74      3956
-str_dev_ready  = F5E      3934
-str_dev_ready2 = F6B      3947
-str_dev_waitready= F46      3910
-str_error_start= E3E      3646
-str_error_start1= E5B      3675
-str_error_start2= E64      3684
-str_error_time = E6D      3693
-str_post_apu   =17A4      6052
-str_post_ide_30=1753      5971
-str_post_ide_40=176E      5998
-str_post_nd    =17DA      6106
-str_post_ok    =1812      6162
-str_post_pio   =1789      6025
-str_post_rtc   =17BF      6079
-str_post_rtc_iv=17E8      6120
+str_dev_done   =1508      5384
+str_dev_waitready=14F0      5360
+str_error_start= E37      3639
+str_error_start1= E54      3668
+str_error_start2= E5D      3677
+str_error_time = E66      3686
+str_post_apu   =1DFC      7676
+str_post_ide_30=1DAB      7595
+str_post_ide_40=1DC6      7622
+str_post_nd    =1E32      7730
+str_post_ok    =1E6A      7786
+str_post_pio   =1DE1      7649
+str_post_rtc   =1E17      7703
+str_post_rtc_iv=1E40      7744
 var_apu_present=400A      16394
-var_buffer     =402B      16427
 var_buffer_len =4000      16384
 var_bytes_count=411A      16666
 var_curserchar =4006      16390
@@ -4624,6 +4690,8 @@ var_curseron   =4005      16389
 var_curserstate=4004      16388
 var_curserx    =4002      16386
 var_cursery    =4003      16387
+var_idebuffer  =407B      16507
+var_input      =402B      16427
 var_last_char  =4001      16385
 var_opcode     =4114      16660
 var_opcode_length=4116      16662

@@ -389,6 +389,7 @@ ideif_init_all:
 ;
 ; Reads A*512 byte sector into memory
 ; HL contains pointer to LBA address
+; DE contains destination location
 ; A contains sector count
 ;------------------------------------------------------------------------------
 read_lba_sector:
@@ -416,10 +417,59 @@ read_lba_sector:
     LD A,IDE_CMD_READSEC    ;send read command
     LD B,IDE_REG_CMDSTS
     CALL ide_regwrite_8
-    LD HL,MEM_IDE_BUFFER    ;set read/write buffer start address
+    ;LD HL,MEM_IDE_BUFFER    ;set read/write buffer start address
+    EX DE,HL                ;transfer destination in DE to HL
     call ide_readsector_512_inv ;read 256 words from device
     ret
     
+;------------------------------------------------------------------------------
+; ideif_drv_sel
+;
+; Select drive from table
+; Prepare variables
+;
+; A contains drive number
+;------------------------------------------------------------------------------
+ideif_drv_sel:
+    ld (MEM_IDE_SELECTED),a
+    push af
+    call ideif_get_drv_pointer  ;test if drive is marked as available
+    ld a,(ix+0)
+    or a
+    jp nz, _ideif_drv_sel_fail  ;if not-> fail
+    
+    call fat_get_root_table     ;else get root table
+
+    ld hl,[_ideif_drv_sel_pstr] ;print success message
+    call print_str
+    pop af
+    add 69
+    ld (var_dir),a  ;store drive letter
+    call print_char
+    ld a, ':'
+    ld (var_dir+1),a
+    ld a, '\'
+    ld (var_dir+2),a
+    xor a   ;set dir to empty
+    ld (var_dir+3),a
+    ld (var_dir+79),a ;set depth counter
+    ld hl,[_ideif_drv_sel_sstr0]
+    call print_str
+    ret
+_ideif_drv_sel_fail:
+    ld hl,[_ideif_drv_sel_pstr]
+    call print_str
+    pop af
+    add 69
+    call print_char
+    ld hl,[_ideif_drv_sel_fstr0]
+    call print_str
+    xor a   ;set dir to empty
+    ld (var_dir),a
+    LD DE,0x20
+    LD BC,0x70
+    CALL beep
+    ret
 
 
 
@@ -447,3 +497,11 @@ _ideif_prnt_devtable_master:
     db "Master ",0
 _ideif_prnt_devtable_slave:
     db "Slave  ",0
+_ideif_drv_sel_pstr:
+    db 10,13,"Drive ",0
+_ideif_drv_sel_fstr0:
+    db ": not ready",10,13,0
+_ideif_drv_sel_sstr0:
+    db ": selected",10,13,0
+_ideif_drv_sel_syn:
+    db 10,13,"Invalid drive letter",10,13,0

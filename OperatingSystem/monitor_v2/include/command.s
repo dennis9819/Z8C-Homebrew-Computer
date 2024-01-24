@@ -13,6 +13,9 @@ COMMAND_LUT:
     db "rst", 0,0x00,0x00         ;soft reset
     db "lsdsk", 0,[OP_LSDSK], [OP_LSDSK]>>8         ;list disks
     db "seldsk ", 0,[OP_SELDSK], [OP_SELDSK]>>8         ;select disk
+    db "cd ", 0 , [OP_CD], [OP_CD]>>8    ;Read time
+    db "ls", 0 , [OP_DIR], [OP_DIR]>>8    ;Read time
+    db "run ", 0 , [OP_FSEXEC], [OP_FSEXEC]>>8    ;Read time
     db "$", 0, [OP_EXEC], [OP_EXEC]>>8          ;jump to addr
     db "i", 0, [OP_IO_IN], [OP_IO_IN]>>8       ;Read port
     db "o", 0, [OP_IO_OUT], [OP_IO_OUT]>>8       ;Write port
@@ -20,14 +23,14 @@ COMMAND_LUT:
     db "?", 0, [OP_DUMP], [OP_DUMP]>>8        ;Print memory
     db 0xFF             ;End of Table
 
-IN_BUFFER   .equ   var_buffer 
-
 COMMAND:
     call print_newLine
+    ld hl,[var_dir]
+    call print_str
     ld a,'>'
     call print_char
     xor a  ;reset buffer len
-    ld (var_buffer_len),a
+    ld (var_buffer_len),a   ;set buffer len to 0
 COMMAND_READ:
     call read_char
     jp z, COMMAND_READ   ;wait for input
@@ -40,7 +43,7 @@ COMMAND_READ:
 
     push af
     ; a contains latest char
-    ld hl,[var_buffer]
+    ld hl,[var_input]
     ld d,0
     ld a,(var_buffer_len)
     ld e,a
@@ -65,7 +68,7 @@ COMMAND_BACKSPACE:
     ld (var_buffer_len),a   ;and store it
     ld e,a      ;load de with decremented value
     ld d,0
-    ld hl,[var_buffer]
+    ld hl,[var_input]
     add hl,de   ;hl now contains pointer to last position in buffer
     xor a       ; store null byte to current location
     ld (hl),a
@@ -81,7 +84,7 @@ COMMAND_PROCESS:
     ;compare
     LD HL,[COMMAND_LUT] ;Lookup table
 COMMAND_PROCESS_LOOP:
-    LD DE,[var_buffer]  ;Buffer
+    LD DE,[var_input]  ;Buffer
     LD A,(HL)           ;Load first byte of entry
     CP 0xFF
     JP Z,COMMAND_PROCESS_NOT_FOUND ;if first byte is 0xFF, End is reached

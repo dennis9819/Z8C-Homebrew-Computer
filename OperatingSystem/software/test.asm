@@ -1,170 +1,107 @@
 .include "extern_symbols.s" ;include monitor symbols.
-    org 0x8000  
+    org 0x6000  
 
-sel_dsk:
-    call ideif_drv_sel
-    call fat_print_dbg
-    ret
-
-    org 0x8010
-    call fat_print_dbg
-    ret
-
-    org 0x8020  
-    call fat_print_directory
-    ret
-
-    org 0x8030
-    ld hl,0x0006
-    ld (MEM_FAT_OF0_CCLUST),hl
-    call fat_getfatsec
-    ret
-
-fat_print_dbg:
-    call PRINTINLINE
-    db 10,13,"PTR.MEM_IDE_POINTER:    0x",0
-    ld ix,MEM_IDE_POINTER
-    call print_32_hex
-    call PRINTINLINE
-    db "  |  PTR.MEM_IDE_PARTITION:   0x",0
-    ld ix,MEM_IDE_PARTITION
-    call print_32_hex
-
-    call PRINTINLINE
-    db 10,13,"PTR.MEM_FAT_TMPPOINTER: 0x",0
-    ld ix,MEM_FAT_TMPPOINTER
-    call print_32_hex
-    call PRINTINLINE
-    db "  |  PTR.MEM_FAT_TMPPOINTER1: 0x",0
-    ld ix,MEM_FAT_TMPPOINTER1
-    call print_32_hex
-
-    call PRINTINLINE
-    db 10,13,"VAL.MEM_FAT_RESERVED:   0x",0
-    ld ix,MEM_FAT_RESERVED
-    call print_16_hex
-    call PRINTINLINE
-    db "      |  VAL.MEM_FAT_AMOUNT:      0x",0
-    ld a,(MEM_FAT_AMOUNT)
-    call print_a_hex
-
-    call PRINTINLINE
-    db 10,13,"VAL.MEM_FAT_SECTORS:    0x",0
-    ld ix,MEM_FAT_SECTORS
-    call print_16_hex
-    call PRINTINLINE
-    db "      |  VAL.MEM_FAT_COUNT1:      0x",0
-    ld a,(MEM_FAT_COUNT1)
-    call print_a_hex
-
-    call PRINTINLINE
-    db 10,13,"VAL.MEM_FAT_OF0_CCLUST: 0x",0
-    ld ix,MEM_FAT_OF0_CCLUST
-    call print_16_hex
-    call PRINTINLINE
-    db "      |  PTR.MEM_FAT_OF0_FATSEC:  0x",0
-    ld ix,MEM_FAT_OF0_FATSEC
-    call print_32_hex
-
-    call PRINTINLINE
-    db 10,13,"VAL.MEM_FAT_OF0_DATSEC: 0x",0
-    ld ix,MEM_FAT_OF0_DATSEC
-    call print_32_hex
-    call PRINTINLINE
-    db "  |  PTR.MEM_FAT_OF0_DATREM:  0x",0
-    ld ix,MEM_FAT_OF0_DATREM
-    call print_16_hex
-
-    call print_newLine
-    ret
-
-print_32_hex:
-    ld a,(ix+3)
-    call print_a_hex
-    ld a,(ix+2)
-    call print_a_hex
-    ld a,(ix+1)
-    call print_a_hex
-    ld a,(ix+0)
-    call print_a_hex
-    ret
-
-print_16_hex:
-    ld a,(ix+1)
-    call print_a_hex
-    ld a,(ix+0)
-    call print_a_hex
-    ret
-
-; a contains drive to select
-; populate fs vars as well
-ideif_drv_sel:
-    ld (MEM_IDE_SELECTED),a
-    push af
-    call ideif_get_drv_pointer  ;test if drive is marked as available
-    ld a,(ix+0)
+MEM_FAT_EXEC_CURR   .equ     var_scratch+10
+MEM_FAT_EXEC_COUNT  .equ     var_scratch+12
+MEM_FAT_EXEC_START  .equ     var_scratch+14
+fat_exec:
+    ld de,[var_input+6]   ;prepare input like to mimic rom behaviour
+    push de
+    ;DE has pointer to arguments
+    call fat_openfile
     or a
-    jp nz, _ideif_drv_sel_fail  ;if not-> fail
-    
-    call fat_get_root_table     ;else get root table
-    ;backup tmp pointer
-    ld hl,(MEM_IDE_POINTER)
-    ld de,(MEM_IDE_PARTITION)   ;use MEM_IDE_PARTITION to backup the pointer
-    call fat_copy_lba_pointer
-    ld hl,[_ideif_drv_sel_pstr] ;print success message
+    jp nz, _fat_exec_notfound   ;if not found, abort
+    ;call fat_print_dbg
+    ;load header
+    ld de, MEM_IDE_BUFFER
+    call fat_readfilesec
+
+
+    ;ld hl, MEM_IDE_BUFFER       ;print sector
+    ;ld b,0x20
+    ;call dump_pretty
+
+    ld a,(MEM_IDE_BUFFER)
+    cp 0xC3
+    jp nz, _fat_exec_notexec
+
+    call PRINTINLINE
+    db 10,13,"Loading ",0
+    ld hl,[var_input+6]
     call print_str
-    pop af
-    add 69
-    call print_char
-    ld hl,[_ideif_drv_sel_sstr0]
-    call print_str
-    ret
-_ideif_drv_sel_fail:
-    ld hl,[_ideif_drv_sel_pstr]
-    call print_str
-    pop af
-    add 69
-    call print_char
-    ld hl,[_ideif_drv_sel_fstr0]
-    call print_str
-    LD DE,0x20
-    LD BC,0x70
-    CALL beep
+    call PRINTINLINE
+    db " to 0x",0
+    ;get start address
+    ld bc,(MEM_IDE_BUFFER + 10)
+    ld a,b
+    call print_a_hex
+    ld a,c
+    call print_a_hex
+    call PRINTINLINE
+    db " ... ",0
+    ;bc has start addr
+    ld (MEM_FAT_EXEC_CURR),bc
+    ld (MEM_FAT_EXEC_START),bc
+
+    ;get amount of sectors to load
+    ld hl,(MEM_IDE_BUFFER + 14)
+    ld l,h
+    srl l
+    ld h,0  ;divide by 512
+    inc hl  ;increment because first sector is always loaded
+    ; hl contains sector count
+    ld (MEM_FAT_EXEC_COUNT), hl
+
+    pop de  ; restore filename
+    call fat_openfile   ;reset file information
+    ;start reading
+_fat_exec_readloop1:
+    ld de,(MEM_FAT_EXEC_CURR)
+    call fat_readfilesec
+    ld hl,(MEM_FAT_EXEC_CURR)
+    ld de,512
+    add hl,de
+    ld (MEM_FAT_EXEC_CURR),hl
+
+    ld hl,(MEM_FAT_EXEC_COUNT)
+    dec hl
+    ld (MEM_FAT_EXEC_COUNT),hl
+    ld a,h
+    or l
+    jr z, _fat_exec_read_done
+    jr _fat_exec_readloop1
+_fat_exec_read_done:
+    call PRINTINLINE
+    db "Load complete!",10,13,0
+    ld hl,(MEM_FAT_EXEC_START)
+    jp (hl)
+
+
+_fat_exec_notfound:
+    call PRINTINLINE
+    db 10,13,"File not found!",10,13,0
     ret
 
-_ideif_drv_sel_pstr:
-    db 10,13,"Drive ",0
-_ideif_drv_sel_fstr0:
-    db ": not ready",10,13,0
-_ideif_drv_sel_sstr0:
-    db ": selected",10,13,0
-_ideif_drv_sel_syn:
-    db 10,13,"Invalid drive letter",10,13,0
-.include "fat16.s" ;include monitor symbols.
-.include "fat16_file.s" ;include monitor symbols.
+_fat_exec_notexec:
+    call PRINTINLINE
+    db 10,13,"File is not an executable!",10,13,0
+    ret
+  
 
-;------------------------------------------------------------------------------
-; PRINTINLINE
-;
-; String output function
-;
-; Prints in-line data (bytes immediately following the PRINTINLINE call)
-; until a string terminator is encountered (0 - null char).
-;------------------------------------------------------------------------------
-PRINTINLINE:
-		EX 		(SP),HL 			; PUSH HL and put RET ADDress into HL
-		PUSH 	AF
-		PUSH 	BC
-nxtILC:
-		LD 		A,(HL)
-		CP		0
-		JR		Z,endPrint
-		CALL 	print_char
-		INC 	HL
-		JR		nxtILC
-endPrint:
-		INC 	HL 					; Get past "null" terminator
-		POP 	BC
-		POP 	AF
-		EX 		(SP),HL 			; PUSH new RET ADDress on stack and restore HL
-        RET
+
+_test_loop:
+    call fat_readfilesec
+    push af
+    ld hl, MEM_IDE_BUFFER       ;print sector
+    ld b,0x20
+    call dump_pretty
+    ;call PRINTINLINE
+    ;db 10,13,"SECREAD",10,13,0
+    pop af
+    or a
+    jp z, _test_loop
+
+    ;check if end of file
+
+
+    ret

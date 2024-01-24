@@ -53,7 +53,7 @@ TermInit_copy_loop:
     ld      hl, TmsFont
     call    TmsTextMode                     ; initialize text mode
 
-    ld      a, TmsDarkGreen                  ; set colors
+    ld      a, TmsDarkRed                  ; set colors
     call    TmsBackground
     ld      a, TmsWhite
     call    TmsTextColor

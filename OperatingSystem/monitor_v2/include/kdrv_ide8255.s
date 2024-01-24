@@ -130,7 +130,7 @@ ide_regread_8:
 ; HL contains destination address
 ;------------------------------------------------------------------------------
 ide_readsector_256:
-    LD C,255    ;Setup counter for 256 words
+    LD C,0    ;Setup counter for 256 words
 
 ide_readsector_256_waitloop:
     LD B, IDE_REG_CMDSTS
@@ -147,32 +147,27 @@ ide_readsector_256_waitloop:
     OR  IDE_RD         ;Set Read bit
     OUT (CS_PIA_PC), A ;Write Read to bit controll lines
     NOP
-    NOP
-    NOP
+    ;NOP
+    ;NOP
     IN A,(CS_PIA_PB)    ;Load 16-Bit data to buffer
     LD (HL), A
     INC HL
     IN A,(CS_PIA_PA)
     LD (HL), A
     INC HL
-
-    LD A,C
-    OR A
-    JP Z,ide_readsector_256_done
     DEC C
+    RET Z
     JR ide_readsector_256_waitloop
 
-ide_readsector_256_done:
-    RET
-
 ide_readsector_512_inv:
-    LD C,255    ;Setup counter for 256 words
+    LD C,0    ;Setup counter for 256 words
     LD DE, 4096 ;Timeout counter
 ide_readsector_512_inv_waitloop:
     DEC DE
     LD A,D
     OR E
     JP Z, ide_readsector_timeout
+    ;timeout checked. continue
     LD B, IDE_REG_CMDSTS
     CALL ide_regread_8
     BIT 0,a                             ;Error Bit set.
@@ -180,15 +175,17 @@ ide_readsector_512_inv_waitloop:
     BIT 3,a                             ;DRQ Bit set. If set, disk has data
     JR Z, ide_readsector_512_inv_waitloop    ;If not set, wait
     LD DE, 2048 ;Timeout counter
+    
     LD A, 10010010b    ;CommandByte-A, Mode 0, PA IN, PC Out, PB IN
     OUT (CS_PIA_CR), A ;Set Data direction to IN
     LD A, IDE_REG_DATA ;CS0 and A=0 -> I/O register
     OUT (CS_PIA_PC), A ;set register
     OR  IDE_RD         ;Set Read bit
     OUT (CS_PIA_PC), A ;Write Read to bit controll lines
+    ;NOP
+    ;NOP
     NOP
-    NOP
-    NOP
+
     IN A,(CS_PIA_PA)    ;Load 16-Bit data to buffer
     LD (HL), A
     INC HL
@@ -196,10 +193,8 @@ ide_readsector_512_inv_waitloop:
     LD (HL), A
     INC HL
 
-    LD A,C
-    OR A
-    JP Z,ide_readsector_256_done
     DEC C
+    RET Z
     JR ide_readsector_512_inv_waitloop
 
 ide_readsector_timeout:

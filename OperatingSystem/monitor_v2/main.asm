@@ -85,8 +85,10 @@ var_scratch:
     defs 16 ;16 bytes space for scratch vars
 var_ps2mem:
     defs 16 ;16 bytes space for scratch vars
-var_buffer:
-    defb 0  ;var lentgh 
+var_dir:
+    defs 80 
+var_input:
+    defs 80 
 var_idebuffer:
     defs 768
 
@@ -116,7 +118,6 @@ BOOT_PHASE0:     ;Setup Hardware
     ld (var_curseron),a
     ld a, " "
     ld (var_curserchar),a
-
     ;Initialize Console (Serial-Port)
     call CONSOLE_INIT
 
@@ -134,7 +135,10 @@ BOOT_PHASE1_LOOP:
     pop hl
     jp nz, BOOT_PHASE1_LOOP
     ;template copy done
-
+    xor a   ;set dir to empty
+    ld (var_dir),a
+    ld (var_dir+1),a
+    
 BOOT_PHASE2:    ;Hardware initialized.
     ; Print banner
     call print_clear
@@ -177,6 +181,8 @@ BOOT_PHASE2:    ;Hardware initialized.
 .include "cmd_date.s"
 .include "cmd_disk.s"
 .include "post.s"
+.include "fat16.s"
+.include "fat16_cmd.s"
 
 ;================================================================
 ; Strings

@@ -177,300 +177,250 @@ _fat_get_root_table_invalid:
     ret
 
 ;-------------------------------------
-; Print current fat directory of MEM_FAT_CURRDIR
+; fat_getfatsec
+;
+; gets sector in FAT table for the cluster stored in MEM_FAT_OF0_CCLUST
+;
+; store result in MEM_FAT_OF0_FATSEC
+; stores next cluster in MEM_FAT_OF0_CCLUST
 ;-------------------------------------
-fat_print_directory:
+fat_getfatsec:
+    ld HL,(MEM_FAT_OF0_CCLUST)  ;load cluster 
+    ld a,h  ;if not 0x0000
+    or l
+    jp nz, _fat_getfatsec_notroot
+    ;if 0x0000, goto root directory
+    ld hl,MEM_FAT_ROOTSTART
+    ld de,MEM_FAT_OF0_DATSEC
+    ldi ;quick and dirty hack to go back to root directory
+    ldi
+    ldi
+    ldi
+    ret
+
+_fat_getfatsec_notroot:
+    ld HL,(MEM_FAT_OF0_CCLUST)  ;load cluster 
+    ;each sector contains 256 clusters
+    ;first 8bits are not needed (/256)
+    ld a,h  ;divide by 256
+    ld l,a
+    xor a
+    ld h,a
+
+    ld bc,(MEM_FAT_RESERVED)    ;add reserved sectors
+    add hl,bc
+    ld(MEM_FAT_OF0_FATSEC+0),hl;store sector 
+    xor a
+    ld(MEM_FAT_OF0_FATSEC+2),a
+    ld(MEM_FAT_OF0_FATSEC+3),a
+
+    call ideif_get_drv_pointer
+    inc ix
+    inc ix
+    push ix
+    pop de  ;copy poiter to hl
+    ld bc,[MEM_FAT_OF0_FATSEC]
+    call _fat_math_add32    ;MEM_FAT_OF0_FATSEC now contains the correct sector
+                            ;in the FAT
+
+    ;read FAT sector
+    ld hl,MEM_FAT_OF0_FATSEC   ;read next sector
+    ld b,1
+    LD DE, MEM_IDE_BUFFER   ;where to store data?
+    call read_lba_sector
+
+    ;calculate data sector
+    ;multiply cluster by length of cluster
+    xor a   ;clear carry
+    ld a,(MEM_FAT_CLUSTERLEN)
+    ld b,0
+    ld c,a
+    ld de,(MEM_FAT_OF0_CCLUST)  ;load cluster number
+    dec de  ; sub 2 becaus fat starts at 3    
+    dec de
+    call _fat_math_mul32
+    ; BCHL contains result -> store to PTR.MEM_FAT_OF0_DATSEC
+    ld (MEM_FAT_OF0_DATSEC+0),hl
+    ld (MEM_FAT_OF0_DATSEC+2),bc
+
+    ; add start of data region to addr
+    ld bc,[MEM_FAT_OF0_DATSEC]
+    ld de,[MEM_FAT_DATASTART]
+    call _fat_math_add32    ;MEM_FAT_OF0_FATSEC now contains the correct sector
+                            ;in the FAT
+    ;MEM_FAT_OF0_DATSEC now has the first sector of the selected cluster
+
+    ;reset MEM_FAT_OF0_DATREM to default cluster length
+    ld a,(MEM_FAT_CLUSTERLEN)
+    ld l,a
+    ld h,0
+    ld (MEM_FAT_OF0_DATREM), hl
+
+    ;get next cluster
+    ;calculate offset address
+    ld a,(MEM_FAT_OF0_CCLUST)
+    RLA ;shift to left (x2)
+    ld l, a
+    ld a,0
+    RLA ;shift in carry flag
+    ld h,a
+    ld de,MEM_IDE_BUFFER
+    add hl,de
+    ;copy pointer (hl to de)
+    ld de,MEM_FAT_OF0_CCLUST
+    ldi ;copy byte for next cluster from FAT
+    ldi
+    ret
+    ;store data
+
+;-------------------------------------
+; fat_readfilesec
+;
+; reads single sector of file
+; must run fat_readfilesec before to initialize
+; if a ix 0x00, success
+; if a is 0xFF, end reached
+;
+; DE contains destination address
+;-------------------------------------
+fat_readfilesec:
+    ;call fat_print_dbg
+    ld hl,[MEM_FAT_OF0_DATSEC]
+    ld b,1
+    ;LD DE, MEM_IDE_BUFFER   ;where to store data?
+    call read_lba_sector        ;read sectore
+    ld hl,[MEM_FAT_OF0_DATSEC]  ;increment pointer to next sector
+    call _fat_increment_32      ;***
+    ld hl,(MEM_FAT_OF0_DATREM)  ;reduce counter
+    xor a
+    ld de,1
+    sbc hl,de ;decrement counter
+    ld (MEM_FAT_OF0_DATREM),hl  ;store decremented counter
+    ret nz                      ;when not zero, exit function
+    ;if zero: 
+    ld a, 0xFF                  ;preload error code
+    ld hl,(MEM_FAT_OF0_CCLUST)  ;check next chunk
+    ld de,0xFFFF    ;end mark
+    sbc hl,de       ;if Z match
+    ret z                       ;If 0xFFFF, end is reched. Return 
+    ;if next cluster available:
+    xor a
+    call fat_getfatsec    ; read next cluster information
+    ret
+
+
+;-------------------------------------
+; fat_openfile
+; search for entry in current directory
+;
+; DE pointer to file name
+; sets:
+; - MEM_FAT_OF0_CCLUST
+; - MEM_FAT_OF0_ATTRIBUTE
+; - MEM_FAT_FILEREMAIN
+; if a is 0x00, success
+; if a is 0xFF, end reached
+;-------------------------------------
+fat_openfile:
+    PUSH DE
+    ;MEM_FAT_TMPFNAME now has valid text to compare
+    LD HL,[MEM_FAT_TMPFNAME]
+    call format_filename_fat16
+    POP DE
+fat_openfile_noprepare:
+    PUSH DE
+    ;prepare pointer
     ld hl,MEM_FAT_CURRDIR
     ld de,MEM_IDE_POINTER
     ldi 
     ldi
     ldi
     ldi
-    
-    LD DE,(MEM_FAT_SECTORS)
-    LD (MEM_FAT_COUNT1),DE
+
+    LD A,(MEM_FAT_DIRSEC) ;init counter for FAT sectors
+    LD (MEM_FAT_COUNT1),A
+
     LD HL,MEM_IDE_POINTER   ;read first sector
     LD B,1
     LD DE, MEM_IDE_BUFFER   ;where to store data?
     call read_lba_sector
 
-    call PRINTINLINE
-    db 10,13,"  Filename     Cluster Size",10,13,0
-
     LD HL, MEM_IDE_BUFFER   ;set buffer start
-    LD C,16                  ;set entries counter
+    LD C,16                 ;set entries counter
 
-_fat_print_directory_loop:  ;loop over each entry (32byte)
-    LD A,(HL) ; check first byte
-    PUSH HL ;backup start of entry
-    POP IX
-    PUSH HL
-    ;ignore unwanted entries
-    CP 0x41 ;skip invisible
-    JP Z, _fat_print_directory_loop_next    
-    CP 0xE5 ;skip deleted
-    JP Z, _fat_print_directory_loop_next
-    CP 0x00 ;reached end
-    JP Z, _fat_print_directory_loop_break
+_fat_lfs_loop:
+    LD DE,[MEM_FAT_TMPFNAME]
+    CALL compare_filename
+    JR C, _fat_lfs_loop_compare_match   ;on match
 
-    ;check file attribute
-    ld a,(IX+0x0B)
-    cp 0x10 ;if subdirectors
-    jp z, _fat_print_directory_dir  ;print dir 
-    ;else print file
-_fat_print_directory_loop_file
-    ;print filename
-    ld a,' '
-    call print_char
-    ld a,' '
-    call print_char
-    LD B,8
-    call print_str_fixed
-    ld A,'.'
-    call print_char
-    LD B,3
-    call print_str_fixed
-
-    call PRINTINLINE
-    db " 0x",0
-    ;first cluster number
-    ld a,(ix+0x1B)
-    call print_a_hex
-    ld a,(ix+0x1A)
-    call print_a_hex
-    call PRINTINLINE
-    db "  0x",0
-    ld a,(ix+0x1F)
-    call print_a_hex
-    ld a,(ix+0x1E)
-    call print_a_hex
-    ld a,(ix+0x1D)
-    call print_a_hex
-    ld a,(ix+0x1C)
-    call print_a_hex
-
-    LD A,10                 ;New line
-    CALL print_char
-    LD A,13
-    CALL print_char
-    jr _fat_print_directory_loop_next
-_fat_print_directory_dir
-    ld a,'D'
-    call print_char
-    ld a,' '
-    call print_char
-    LD B,8
-    call print_str_fixed
-    call PRINTINLINE
-    db "     0x",0
-    ;first cluster number
-    ld a,(ix+0x1B)
-    call print_a_hex
-    ld a,(ix+0x1A)
-    call print_a_hex
-
-    LD A,10                 ;New line
-    CALL print_char
-    LD A,13
-    CALL print_char
-    jr _fat_print_directory_loop_next
-
-_fat_print_directory_loop_next: ; read next entry
-    DEC C   ;next sector after 32 entries
-    JR Z,_fat_print_directory_loop_next_sector
-    POP HL      ;restore start
+    ; prepare next entry
+    DEC C   ;next sector after 16 entries
+    JR Z,_fat_lfs_loop_compare_next_sector
     LD DE, 32   ;length of entry
     ADD HL,DE   ;increment
-    JP _fat_print_directory_loop
+    JP _fat_lfs_loop
 
-_fat_print_directory_loop_next_sector:  ; end fo sector. read next sector from disk
-    POP HL      ;clear stack from old hl
-    LD H,0
-    LD L,1      
-    call _fat_math_sector_add_16 ;increment sector
+_fat_lfs_loop_compare_next_sector:
+    ld hl,[MEM_IDE_POINTER]
+    call _fat_increment_32 ;increment sector
 
-    LD DE,(MEM_FAT_COUNT1)  ; decrement sector count (max FAT length)
-    DEC DE
-    LD (MEM_FAT_COUNT1),DE
-    LD A,D
-    OR E
-    JP Z, _fat_print_directory_loop_break_dirty ; if DE is 0, mmax is reached. End here
-    
+    LD A,(MEM_FAT_COUNT1)  ; decrement sector count (max FAT length)
+    DEC A
+    LD (MEM_FAT_COUNT1),A
+    JP Z, _fat_lfs_loop_compare_end ; if DE is 0, mmax is reached. End here
+    ;call print_a_hex
+
     LD HL,MEM_IDE_POINTER   ;read next sector
     LD B,1
-    
     LD DE, MEM_IDE_BUFFER   ;where to store data?
     call read_lba_sector
 
     LD HL, MEM_IDE_BUFFER   ;set buffer start
     LD C,16                  ;set entries counter
-    JP _fat_print_directory_loop
 
-_fat_print_directory_loop_break
-    POP HL
-_fat_print_directory_loop_break_dirty
- ;   ld hl, [str_sum] 
- ;   call print_str  ;print 
- ;   ld a,c
- ;   call print_a_hex
- ;   ld hl, [str_files]
- ;   call print_str  ;print 
-    ret
-
-; fat change directory
-; relative path 
-; DE pointer to path
-fat_cd_single:
-    push de
-    ; check if user wants to go back (input = '..')
-    ld a,(de)
-    cp '.'
-    jr nz,  _fat_cd_navigate; if not, skip
-    inc de  ;check next
-    ld a,(de)
-    cp '.'
-    jr nz,  _fat_cd_navigate; if not, skip
-    ld a,(var_dir+79)   ;last byte contains depth
-    or a;   Test if 0
-    jp z, _fat_cd_navigate_error    ;cannot go back any more (already at root)
-    ; check if .. exists in directory
-    ld a,'.'    ;prepare filename buffer
-    ld hl,[MEM_FAT_TMPFNAME]
-    ld (hl),a
-    inc hl
-    ld (hl),a
-    inc hl
-    ld a,0x20   ;clear char 3-11
-    ld b,11
-_fat_cd_navigate_goback_fl:
-    ld (hl),a
-    inc hl
-    djnz _fat_cd_navigate_goback_fl ;fill loop end
-    call fat_openfile_noprepare     ;load file table (only 1st sector needed)
-    or a                            ;check for error
-    jp nz, _fat_cd_navigate_error   ;entry not found exception
-
-
-    ; find end of path
-    ld hl,[var_dir+3]   ;current position
-    ld bc,76
-    ld a,0x00           ;termination char
-    cpir                ;find end
-    jp po,_fat_cd_navigate_inerror    ;in case of error, abort
-    ;hl is now at end of string
-    ld bc,76
-    ld a,'\'            ;seperation char
-    cpdr                ;serach backwards for "/"
-    jp po,_fat_cd_navigate_inerror    ;in case of error, abort
-    ;hl is now at end of string
-    inc hl
-    xor a
-    ld (hl),a           ;set termination char
-    inc hl
-    ld (hl),a           ;set termination char
-    ld a,(var_dir+79)
-    dec a
-    ld (var_dir+79),a   ;decrement dir depth counter
-
-    pop de
-
-    ld hl,[var_dir+2]   
-    ld a,'\'
-    ld (hl),a           ;set first /
-
-    ld hl,MEM_FAT_OF0_DATSEC        ;setup directory pointer
-    ld de,MEM_FAT_CURRDIR
-    ldi 
-    ldi
-    ldi
-    ldi
-
-    ret
-
-_fat_cd_navigate
-    pop de              ;get pointer to directory namme
-    push de             ;and re-store it for next use
-    call fat_openfile   ;find 'file' in current directory
-_fat_cd_navigate_findsec
+    ld a,(HL)
     or a
-    jp nz, _fat_cd_navigate_error   ;entry not found
-    ld a, (MEM_FAT_OF0_ATTRIBUTE)
-    cp 0x10
-    jp nz, _fat_cd_navigate_errfile
-    ld a,(var_dir+79)
-    inc a
-    ld (var_dir+79),a   ;increment dir depth counter
-    ld hl,[var_dir+2]   ;load start of path string
-    ld a,0              ;load termination char
-    ld bc,76            ;max length of string
-    cpir                ;find end of path string
-    dec hl
-    jp po,_fat_cd_navigate_inerror    ;in case of error, abort
-    ;HL now has last element, BC has remaining max length
-    ld a,(var_dir+79)   ;last byte contains depth
-    cp 1                ;if first path, skip /
-    jr z, _fat_cd_navigate_findsec_skipslash
-    ld a,'\'
-    ld (hl),a
-    inc hl
-_fat_cd_navigate_findsec_skipslash
-    pop de              ;get argument from stack
-    ex de,hl
-    push de             ;store start to stack
-    ;HL now has start of input string, DE has end of current path
-    ld bc,09            ;maximum length of directory name +1
-_fat_cd_navigate_l2:    ;copy new subdirectory
-    ldi                 ;copy
-    jp po,_fat_cd_navigate_inerrorS    ;in case of error, abort    
-    ld a,(hl)           ;check next char
-    cp '\'              ;end at '\'
-    jr z, _fat_cd_navigate_end  ;else next byte
-    or a                ;or and at 0x00
-    jr z, _fat_cd_navigate_end  ;else next byte
-    jr _fat_cd_navigate_l2
-_fat_cd_navigate_end:
+    jp z, _fat_lfs_loop_compare_end ;skip empty sectors
+
+    JP _fat_lfs_loop
+
+_fat_lfs_loop_compare_end:
+    POP DE
+    ld a,0xFF
+    RET
+
+_fat_lfs_loop_compare_match:
+    ; get entry
+    POP DE
+
+    ; HL points to Start of Table item
+    PUSH HL
+    POP IX
+    ; get important information
+    ld a,(ix+0x1B)  ;first cluster number
+    ld (MEM_FAT_OF0_CCLUST+1),a
+    ld a,(ix+0x1A)
+    ld (MEM_FAT_OF0_CCLUST+0),a
+    ld a,(ix+0x0B)
+    ld (MEM_FAT_OF0_ATTRIBUTE+0),a
+
+    xor a   ;clear carry    ;set MEM_FAT_OF0_DATREM to remaining sectors
+    ld a,(ix+0x1F)  ;cluste length  shift by 256
+    rra
+    ld (MEM_FAT_FILEREMAIN+2),a
+    ld a,(ix+0x1E)
+    rra
+    ld (MEM_FAT_FILEREMAIN+1),a
+    ld a,(ix+0x1D)
+    rra
+    ld (MEM_FAT_FILEREMAIN+0),a
+    ld a,0
+    ld (MEM_FAT_FILEREMAIN+3),a
+    call fat_getfatsec  ;get sector information
+
     xor a
-    ld (de),a           ;set last byte to 0x00 (termination)
-    ld hl,MEM_FAT_OF0_DATSEC
-    ;setup directory pointer
-    ld de,MEM_FAT_CURRDIR
-    ldi 
-    ldi
-    ldi
-    ldi
-    pop de              ;stack cleanup
-    ret
+    RET
 
-_fat_cd_navigate_error:
-    ld hl,[_fat_cd_navigate_error_str]
-    call print_str
-    pop de
-    ret
-
-_fat_cd_navigate_inerrorS:  ;with path reset
-    pop de              ;restore former path
-    dec de              ;change pointer to remove previous '\' as well
-    xor a               ;clear a to 0x00
-    ld (de),a           ;set last byte to 0x00 (termination)
-    jr _fat_cd_navigate_inerrore
-_fat_cd_navigate_inerror:   ;without path reset
-    pop de
-_fat_cd_navigate_inerrore:  
-    ld hl,[_fat_cd_navigate_inputerr_str]
-    call print_str
-    ret
-_fat_cd_navigate_errfile:
-    pop de
-    ld hl,[_fat_cd_navigate_errfile_str]
-    call print_str
-    ret
-
-_fat_cd_navigate_error_str:
-    db 10,13,"No such directory!",10,13,0
-_fat_cd_navigate_inputerr_str:
-    db 10,13,"Invalid input!",10,13,0
-_fat_cd_navigate_errfile_str:
-    db 10,13,"Cannot cd to file!",10,13,0
 
 ;=================== UTIL Functions ===========================
 ; 32 Bit addition to pointer
@@ -606,3 +556,67 @@ fat_copy_lba_pointer:
     POP BC
     ret
 
+; compares filenames
+; HL points to name1
+; DE points to name2
+; Carry is set if match
+; Destroys DE, AF
+compare_filename:
+    PUSH HL
+    push BC
+    LD B, 11    ;Counter
+_compare_filename_loop:
+    LD A,(DE)
+    LD C,A
+    LD A,(HL)
+    INC HL
+    INC DE
+    XOR C   ;check if identical (should return 0)
+    JR NZ, _compare_filename_nomatch   
+    djnz _compare_filename_loop   ;if not last, continue
+    POP BC
+    POP HL
+    SCF
+    RET
+_compare_filename_nomatch:
+    POP BC
+    POP HL
+    XOR A   ; clear carry flag
+    RET
+
+; formats filename to 8+3 format
+; DE points to source filename to string
+; HL points to destination
+format_filename_fat16:
+    LD B, 11 ;counter
+    PUSH HL
+    LD A, ' '
+_format_filename_fat16_clean:
+    LD (HL),A
+    INC HL
+    DJNZ _format_filename_fat16_clean
+    POP HL ; continue with copy
+    LD B, 13   
+_format_filename_fat16_loop:
+    LD A, (DE)  ; load byte
+    OR A
+    RET Z ;exit on 0byte
+    DEC B                               ;reduce counter
+    RET Z ;exit after 12 bytes 8+.+3
+    CP '.' ; check if dot 
+    JR NZ, _format_filename_fat16_loop_copy ; if not continue as usual
+    INC DE  ;else skip char
+_format_filename_fat16_loop_skip_8:
+    LD A,B
+    CP 5
+    JR C, _format_filename_fat16_loop
+    INC HL
+    DEC B
+    JR _format_filename_fat16_loop_skip_8
+
+_format_filename_fat16_loop_copy:
+    LD A, (DE)  ; load byte
+    LD (HL), A  ; copy byte
+    INC HL
+    INC DE
+    JP _format_filename_fat16_loop

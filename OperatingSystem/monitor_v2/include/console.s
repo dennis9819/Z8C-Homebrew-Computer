@@ -132,6 +132,24 @@ _read_bcd_invalid
 	ld a, 0xFF
 	ret
 
+print_32_hex:
+    ld a,(ix+3)
+    call print_a_hex
+    ld a,(ix+2)
+    call print_a_hex
+    ld a,(ix+1)
+    call print_a_hex
+    ld a,(ix+0)
+    call print_a_hex
+    ret
+
+print_16_hex:
+    ld a,(ix+1)
+    call print_a_hex
+    ld a,(ix+0)
+    call print_a_hex
+    ret
+
 
 ;MSG_CRSR_0:
 ;    db 0x1B, "[?25h",0
@@ -154,4 +172,66 @@ A_RTS_ON:
     out (CS_SIO_A_C),A
     ld a,0EAh ;DTR active, TX 8bit, BREAK off, TX on, RTS active
     out (CS_SIO_A_C),A
+    ret
+
+;------------------------------------------------------------------------------
+; PRINTINLINE
+;
+; String output function
+;
+; Prints in-line data (bytes immediately following the PRINTINLINE call)
+; until a string terminator is encountered (0 - null char).
+;------------------------------------------------------------------------------
+PRINTINLINE:
+		EX 		(SP),HL 			; PUSH HL and put RET ADDress into HL
+		PUSH 	AF
+		PUSH 	BC
+nxtILC:
+		LD 		A,(HL)
+		CP		0
+		JR		Z,endPrint
+		CALL 	print_char
+		INC 	HL
+		JR		nxtILC
+endPrint:
+		INC 	HL 					; Get past "null" terminator
+		POP 	BC
+		POP 	AF
+		EX 		(SP),HL 			; PUSH new RET ADDress on stack and restore HL
+        RET
+
+print_reg:
+    push af
+    push de
+    push bc
+    push hl
+    push af
+    call PRINTINLINE
+    db 10,13,"A:  ",0
+    pop af
+    call print_a_hex
+    call PRINTINLINE
+    db 10,13,"BC: ",0
+    ld a,b
+    call print_a_hex
+    ld a,c
+    call print_a_hex
+    call PRINTINLINE
+    db 10,13,"DE: ",0
+    ld a,d
+    call print_a_hex
+    ld a,e
+    call print_a_hex
+    pop af
+    call PRINTINLINE
+    db 10,13,"HL: ",0
+    ld a,h
+    call print_a_hex
+    ld a,l
+    call print_a_hex
+    call print_newLine
+    pop hl
+    pop bc
+    pop de
+    pop af
     ret
