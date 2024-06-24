@@ -1,1 +1,0 @@
-../../monitor_v2/zout/symbols.s
