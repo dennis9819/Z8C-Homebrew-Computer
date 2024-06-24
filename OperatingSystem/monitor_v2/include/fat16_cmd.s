@@ -13,6 +13,7 @@ fat_print_directory:
     LD (MEM_FAT_COUNT1),DE
     LD HL,MEM_IDE_POINTER   ;read first sector
     LD B,1
+    ld a,1
     LD DE, MEM_IDE_BUFFER   ;where to store data?
     call read_lba_sector
 
@@ -112,7 +113,7 @@ _fat_print_directory_loop_next_sector:  ; end fo sector. read next sector from d
     
     LD HL,MEM_IDE_POINTER   ;read next sector
     LD B,1
-    
+    ld a,1
     LD DE, MEM_IDE_BUFFER   ;where to store data?
     call read_lba_sector
 
@@ -303,7 +304,8 @@ fat_exec:
 
     call PRINTINLINE
     db 10,13,"Loading ",0
-    ld hl,[var_input+6]
+    pop hl  ;get and re-store pointer ot filename from and to stack
+    push hl
     call print_str
     call PRINTINLINE
     db " to 0x",0

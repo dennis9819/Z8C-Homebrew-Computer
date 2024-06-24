@@ -1,0 +1,31 @@
+(kicad_sch (version 20230121) (generator eeschema)
+
+  (uuid 8044c9b1-64a4-4a64-b1c3-91b168a1f5a9)
+
+  (paper "A4")
+
+  (lib_symbols
+  )
+
+
+  (sheet (at 109.22 63.5) (size 23.495 23.495) (fields_autoplaced)
+    (stroke (width 0.1524) (type solid))
+    (fill (color 0 0 0 0.0000))
+    (uuid 9f90cdb4-92bd-4bcb-9c00-80cabcb040d3)
+    (property "Sheetname" "QuadIO" (at 109.22 62.7884 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheetfile" "frontend.kicad_sch" (at 109.22 87.5796 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+    (instances
+      (project "TRIGGER_PANEL"
+        (path "/8044c9b1-64a4-4a64-b1c3-91b168a1f5a9" (page "2"))
+      )
+    )
+  )
+
+  (sheet_instances
+    (path "/" (page "1"))
+  )
+)

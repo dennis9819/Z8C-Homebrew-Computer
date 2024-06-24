@@ -240,7 +240,7 @@ ideif_init_drive:
     ;ld e,a
     call ide_reset
     
-    ld bc, 0x5FFF   ;preload timeout counter
+    ld de, 0xAFFF   ;preload timeout counter
 _ideif_init_drive_loop:
     ld b, IDE_REG_CMDSTS 
     call ide_regread_8  ;read drive status register
@@ -265,36 +265,50 @@ _ideif_init_drive_found:
     ld a, IDE_CMD_IDENT
     call ide_regwrite_8     ;Write command to drive
     ld hl, MEM_IDE_BUFFER   ;set read/write buffer start address
-    call ide_readsector_256 ;read 256 words from device
+    call ide_readsector_512_fast ;read 256 words from device
     ld hl,MEM_IDE_BUFFER + 54  ;print device serial
     ld a,(ix+12)  ;load str pointer into de
     ld e,a
     ld a,(ix+13)
     ld d,a
-    ld bc,40    ;copy 40 char
-    ldir
+    ld b,20
+_ideif_init_drive_charloop:
+    ld a,(hl)   ;load data from HL (buffer)
+    inc hl
+    ex af,af'
+    ld a,(hl)
+    inc hl
+    ld (de),a
+    inc de
+    ex af,af'
+    ld (de),a
+    inc de
+    djnz _ideif_init_drive_charloop
     ;get partition table
     ;read bootsector
+    ide_wait_rdy
     ld a,1                  ;read 1 sector
     ld B,IDE_REG_SECTOR
     call ide_regwrite_8
-    ld a,1                  ;read sector 0
-    ld b,IDE_REG_SSECTOR
+    ld a,0                  ;read sector 0
+    ld b,IDE_REG_LBA0
     call ide_regwrite_8
     ld a,0                  ;read cylinder 0
-    ld b,IDE_REG_LCYL
+    ld b,IDE_REG_LBA1
     call ide_regwrite_8
     ld a,0                  
-    ld b,IDE_REG_HCYL
+    ld b,IDE_REG_LBA2
     call ide_regwrite_8
-    ld a,10100000b          ;read head 0
-    ld b,IDE_REG_HEAD
+    ld a,11100000b          ;read head 0
+    ld b,IDE_REG_LBA3
     call ide_regwrite_8
+
     ld a,IDE_CMD_READSEC    ;send read command
     ld b,IDE_REG_CMDSTS
     call ide_regwrite_8
+    
     ld hl, MEM_IDE_BUFFER   ;set read/write buffer start address
-    call ide_readsector_512_inv ;read 256 words from device
+    call ide_readsector_512_fast ;read 256 words from device
     ;prepare partitions
     ld b,4                      ;Partition table length
     ld c,0                      ;Partition ID counter
@@ -393,6 +407,9 @@ ideif_init_all:
 ; A contains sector count
 ;------------------------------------------------------------------------------
 read_lba_sector:
+    push af
+    ide_wait_rdy
+    pop af
     LD B,IDE_REG_SECTOR ;amount of sectores
     CALL ide_regwrite_8
 
@@ -417,10 +434,10 @@ read_lba_sector:
     LD A,IDE_CMD_READSEC    ;send read command
     LD B,IDE_REG_CMDSTS
     CALL ide_regwrite_8
+
     ;LD HL,MEM_IDE_BUFFER    ;set read/write buffer start address
     EX DE,HL                ;transfer destination in DE to HL
-    call ide_readsector_512_inv ;read 256 words from device
-    ret
+    jp ide_readsector_512_fast ;read 256 words from device
     
 ;------------------------------------------------------------------------------
 ; ideif_drv_sel

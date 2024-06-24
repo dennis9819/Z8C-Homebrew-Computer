@@ -58,12 +58,11 @@ print_char:
 print_str:
     ld a, (hl)
     or a
-    jr z,print_str_end
+    ret z
     call print_char
     inc hl
     jr print_str
-print_str_end:
-    ret
+
 
 print_clear:
     ld hl, [MSG_CLEAR]
@@ -118,6 +117,15 @@ read_char:
     in a, (CS_SIO_A_D)  ; read char if avail
     ret                 ; return
 
+
+read_in_sts:
+    out (CS_SIO_A_C), a ; select reg 0
+    in a, (CS_SIO_A_C)  ; read reg 0
+    and	1               ; mask D0 (recieve char available)
+    ret z
+    ld a, 0xFF
+    ret
+    
 read_bcd;
 	call read_char
 	jp z, read_bcd

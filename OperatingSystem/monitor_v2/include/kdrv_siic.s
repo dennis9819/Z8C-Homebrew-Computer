@@ -90,6 +90,9 @@ iic_receive_buffer_err:
 
 ;Reset PIO configuration
 iic_init:
+    ;SCL HIGH, SDA HIGH
+    LD A,0x03
+    OUT (CS_PIO_AD), A
     ;Set port to controll mode (MODE3)
     LD A,0xCF
     OUT (CS_PIO_AC), A
@@ -100,6 +103,9 @@ iic_init:
 
 ; send start bit
 iic_send_sbit:
+    ;SCL HIGH, SDA HIGH
+    LD A,0x03
+    OUT (CS_PIO_AD), A
     ;Set port to controll mode (MODE3)
     LD A,0xCF
     OUT (CS_PIO_AC), A

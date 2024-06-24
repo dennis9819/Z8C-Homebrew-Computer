@@ -1,107 +1,107 @@
 .include "extern_symbols.s" ;include monitor symbols.
+
+CS_VT82C42_DATA .EQU 0xF0
+CS_VT82C42_CTRL .EQU 0xF1
+
     org 0x6000  
+    ;VT82C42
 
-MEM_FAT_EXEC_CURR   .equ     var_scratch+10
-MEM_FAT_EXEC_COUNT  .equ     var_scratch+12
-MEM_FAT_EXEC_START  .equ     var_scratch+14
-fat_exec:
-    ld de,[var_input+6]   ;prepare input like to mimic rom behaviour
-    push de
-    ;DE has pointer to arguments
-    call fat_openfile
+    ld a, 0xA7                   ;Disable Mouse
+    out (CS_VT82C42_CTRL), A
+    ld a, 0xAD                   ;Disable Keyboard
+    out (CS_VT82C42_CTRL), A
+_keyboard_init_flush_buffer:
+    in a,(CS_VT82C42_DATA)      ;Read buffer
+    in a,(CS_VT82C42_CTRL)      ;Read status byte
+    bit 0,a                     ;Test if buffer is empty
+    jr nz, _keyboard_init_flush_buffer
+    ;buffer is now flushed. Now set the Controller Configuration Byte
+
+    ld a, 0x60              ;next byte is command byte register write
+    ld b, 11111100b         ;Disable bits 0,1,6 (disable IRQ and Translation)
+    call keyb_cmd_wr
+
+    ;Perform Controller Self Test 
+    ld a, 0xAA
+    call keyb_cmd_rd
+    cp 0x55
+    jr nz, _keyboard_init_failed
+    
+    ;Perform Interface Tests 
+    ld a, 0xAB
+    call keyb_cmd_rd
     or a
-    jp nz, _fat_exec_notfound   ;if not found, abort
-    ;call fat_print_dbg
-    ;load header
-    ld de, MEM_IDE_BUFFER
-    call fat_readfilesec
+    jr nz, _keyboard_init_failed
 
+    ;Enable Devices
+    ld a,0xAE
+    out (CS_VT82C42_CTRL), A
+    call keyb_wait_ibf_empty
 
-    ;ld hl, MEM_IDE_BUFFER       ;print sector
-    ;ld b,0x20
-    ;call dump_pretty
-
-    ld a,(MEM_IDE_BUFFER)
-    cp 0xC3
-    jp nz, _fat_exec_notexec
-
-    call PRINTINLINE
-    db 10,13,"Loading ",0
-    ld hl,[var_input+6]
+    ;Test if device is present Devices 
+    ld a,0xEE      
+    out (CS_VT82C42_DATA), A    ;Send echo to keboard (0xEE command)
+    call keyb_wait_ibf_empty
+    call keyb_wait_obf
+    in a,(CS_VT82C42_DATA)
+    cp a, 0xEE
+    jr z, _keyboard_init_okay    ; 0xFC -> Success. Init done!
+    ;Else device error
+    ld hl, [STR_keyboard_init_failed]
     call print_str
-    call PRINTINLINE
-    db " to 0x",0
-    ;get start address
-    ld bc,(MEM_IDE_BUFFER + 10)
-    ld a,b
+    ret
+_keyboard_init_failed:
+    LD HL, [STR_keyboard_init_err]
+    CALL print_str
+    RET
+_keyboard_init_dev_missing:
+    LD HL, [STR_keyboard_init_missing]
+    CALL print_str
+    RET
+_keyboard_init_okay:
+    LD HL, [STR_keyboard_init_okay]
+    CALL print_str
+    RET
+
+; a contains command
+; b conatins data
+keyb_cmd_wr:    
+    out (CS_VT82C42_CTRL),a ;write command byte
+    ld a, b
+    out (CS_VT82C42_DATA),a
+    ret
+
+; a contains command
+; a returns data
+keyb_cmd_rd:
+    out (CS_VT82C42_CTRL),a ;write command byte
+_keyb_cmd_rd_l1:
+    in a, (CS_VT82C42_CTRL) ;read status
     call print_a_hex
-    ld a,c
-    call print_a_hex
-    call PRINTINLINE
-    db " ... ",0
-    ;bc has start addr
-    ld (MEM_FAT_EXEC_CURR),bc
-    ld (MEM_FAT_EXEC_START),bc
-
-    ;get amount of sectors to load
-    ld hl,(MEM_IDE_BUFFER + 14)
-    ld l,h
-    srl l
-    ld h,0  ;divide by 512
-    inc hl  ;increment because first sector is always loaded
-    ; hl contains sector count
-    ld (MEM_FAT_EXEC_COUNT), hl
-
-    pop de  ; restore filename
-    call fat_openfile   ;reset file information
-    ;start reading
-_fat_exec_readloop1:
-    ld de,(MEM_FAT_EXEC_CURR)
-    call fat_readfilesec
-    ld hl,(MEM_FAT_EXEC_CURR)
-    ld de,512
-    add hl,de
-    ld (MEM_FAT_EXEC_CURR),hl
-
-    ld hl,(MEM_FAT_EXEC_COUNT)
-    dec hl
-    ld (MEM_FAT_EXEC_COUNT),hl
-    ld a,h
-    or l
-    jr z, _fat_exec_read_done
-    jr _fat_exec_readloop1
-_fat_exec_read_done:
-    call PRINTINLINE
-    db "Load complete!",10,13,0
-    ld hl,(MEM_FAT_EXEC_START)
-    jp (hl)
-
-
-_fat_exec_notfound:
-    call PRINTINLINE
-    db 10,13,"File not found!",10,13,0
+    rra
+    jr nc, _keyb_cmd_rd_l1   ;wait until OBF is set (data avail)
+    in a, (CS_VT82C42_DATA)
     ret
 
-_fat_exec_notexec:
-    call PRINTINLINE
-    db 10,13,"File is not an executable!",10,13,0
+keyb_wait_ibf_empty:
+    in a, (CS_VT82C42_CTRL) ;read status
+    rra
+    rra
+    jr c, keyb_wait_ibf_empty  ;if IBF, wait
     ret
-  
 
-
-_test_loop:
-    call fat_readfilesec
-    push af
-    ld hl, MEM_IDE_BUFFER       ;print sector
-    ld b,0x20
-    call dump_pretty
-    ;call PRINTINLINE
-    ;db 10,13,"SECREAD",10,13,0
-    pop af
-    or a
-    jp z, _test_loop
-
-    ;check if end of file
-
-
+keyb_wait_obf:
+    in a, (CS_VT82C42_CTRL) ;read status
+    rra
+    jr nc, keyb_wait_obf  ;if IBF, wait
     ret
+
+;Status message strings
+STR_keyboard_init_okay:
+    .BYTE "PS/2 Keyboard initialized.",0
+STR_keyboard_init_err:
+    .BYTE "PS/2 Controller error! System HALT!",0
+STR_keyboard_init_failed:
+    .BYTE "PS/2 Keyboard error! System HALT!",0
+STR_keyboard_init_missing:
+    .BYTE "PS/2 no keyboard found!",0

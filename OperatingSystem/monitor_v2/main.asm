@@ -60,7 +60,8 @@ INT_VEC:
 ;================================================================
 mon_var_template:
     phase SYS_RAM_START
-
+interrupt_vectors:
+    defs 256
 var_buffer_len:
     defb 0
 var_last_char:
@@ -100,6 +101,8 @@ mon_var_template_end:
 ; Start of monitor
 ;================================================================
     org 0x0050
+    .include "ref.s"    ;static bios calls for programs
+    
 BOOT_PHASE0:     ;Setup Hardware
     ;Setup Stack-Pointer
     ld sp, STACK_RAM_TOP
@@ -118,6 +121,11 @@ BOOT_PHASE0:     ;Setup Hardware
     ld (var_curseron),a
     ld a, " "
     ld (var_curserchar),a
+
+    ;setup interrupt table
+    ld a,[interrupt_vectors]>>8
+    ld i,a
+
     ;Initialize Console (Serial-Port)
     call CONSOLE_INIT
 
@@ -135,9 +143,7 @@ BOOT_PHASE1_LOOP:
     pop hl
     jp nz, BOOT_PHASE1_LOOP
     ;template copy done
-    xor a   ;set dir to empty
-    ld (var_dir),a
-    ld (var_dir+1),a
+
     
 BOOT_PHASE2:    ;Hardware initialized.
     ; Print banner
@@ -156,6 +162,9 @@ BOOT_PHASE2:    ;Hardware initialized.
     LD BC,0x48
     CALL beep
 
+    xor a   ;set dir to empty
+    ld (var_dir),a
+    ld (var_dir+1),a
     ; Start commandline
     jp COMMAND
     

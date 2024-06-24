@@ -157,14 +157,6 @@ fat_openfile_noprepare:
     LD DE, MEM_IDE_BUFFER   ;where to store data?
     call read_lba_sector
 
-    ;LD HL,MEM_IDE_BUFFER   ;Dump IDE Buffer
-    ;LD B,32
-    ;call dump_pretty
-
-    ;LD HL,MEM_FAT_TMPFNAME   ;Dump IDE Buffer
-    ;LD B,1
-    ;call dump_pretty
-
     LD HL, MEM_IDE_BUFFER   ;set buffer start
     LD C,16                 ;set entries counter
 

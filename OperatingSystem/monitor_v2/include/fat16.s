@@ -46,6 +46,8 @@ MEM_FAT_EXEC_START:
 
     dephase
 
+
+
 ;-------------------------------------
 ; Get FAT Root-Table position
 ;-------------------------------------
@@ -226,6 +228,7 @@ _fat_getfatsec_notroot:
     ;read FAT sector
     ld hl,MEM_FAT_OF0_FATSEC   ;read next sector
     ld b,1
+    ld a,1
     LD DE, MEM_IDE_BUFFER   ;where to store data?
     call read_lba_sector
 
@@ -287,6 +290,7 @@ fat_readfilesec:
     ;call fat_print_dbg
     ld hl,[MEM_FAT_OF0_DATSEC]
     ld b,1
+    ld a,1
     ;LD DE, MEM_IDE_BUFFER   ;where to store data?
     call read_lba_sector        ;read sectore
     ld hl,[MEM_FAT_OF0_DATSEC]  ;increment pointer to next sector
@@ -342,6 +346,7 @@ fat_openfile_noprepare:
 
     LD HL,MEM_IDE_POINTER   ;read first sector
     LD B,1
+    ld a,1
     LD DE, MEM_IDE_BUFFER   ;where to store data?
     call read_lba_sector
 
@@ -372,6 +377,7 @@ _fat_lfs_loop_compare_next_sector:
 
     LD HL,MEM_IDE_POINTER   ;read next sector
     LD B,1
+    ld a,1
     LD DE, MEM_IDE_BUFFER   ;where to store data?
     call read_lba_sector
 

@@ -37,6 +37,26 @@
     IDE_REG_LBA2    .EQU 01101b   ;High two bits of the cylinder number
     IDE_REG_LBA3    .EQU 01110b   ;Head and device select register
 
+ide_wait_rdy macro
+    local wait
+wait:
+    ld b, IDE_REG_CMDSTS
+    call ide_regread_8
+    rla
+    jr c, wait
+    endm
+
+ide_wait_drq macro
+	local wait
+wait:
+    ld b, IDE_REG_CMDSTS
+    call ide_regread_8
+    bit 0,a                             ;Error Bit set.
+    jp nz, ide_printerror  
+	bit 3,a
+	jr z,wait
+	endm
+
 
 ;================================================================
 ; I/O access functions 
@@ -53,7 +73,6 @@ ide_reset:
     OUT (CS_PIA_CR), A  ;Set Data direction to out
     LD A, IDE_RST
     OUT (CS_PIA_PC), A  ;Reset IDE Device
-    NOP
     XOR A
     OUT (CS_PIA_PC), A  ;end device reset
     RET
@@ -80,11 +99,11 @@ ide_regwrite_8:
     OUT (CS_PIA_PC), A  ;Write Data to bit controll lines
     OR  IDE_WR      ;Set Write bit
     OUT (CS_PIA_PC), A  ;Set write signal
-    NOP                 ;delay to wait for processing
+    ;NOP                 ;delay to wait for processing
     LD  A, B        ;Load register address
     AND 00011111b  ;Mask unused bits
     OUT (CS_PIA_PC), A  ;disable write signal
-    NOP
+    ;NOP
     XOR A               ;clear register A
     OUT (CS_PIA_PC), A  ;clear controll lines
     RET
@@ -106,15 +125,7 @@ ide_regread_8:
     OUT (CS_PIA_PC), A  ;Write Data to bit controll lines
     OR  IDE_RD      ;Set Write bit
     OUT (CS_PIA_PC), A  ;Write Data to bit controll lines
-    NOP                 ;delay to wait for processing
-    PUSH AF
-    POP AF
-    PUSH AF
-    POP AF
-    PUSH AF
-    POP AF
-    PUSH AF
-    POP AF
+    NOP
     IN  A,(CS_PIA_PA)   ;read data from ide device to b (because a is used later)
     PUSH AF
     XOR A               ;clear register A
@@ -122,80 +133,42 @@ ide_regread_8:
     POP AF          ;put data in accumulator
     RET
 
-
 ;------------------------------------------------------------------------------
-; ide_readsector_256
+; ide_readsector_512_fast
 ;
-; Reads IDE Data
+; Reads IDE Data until no more data is available (multiple sectors)
 ; HL contains destination address
+; A returns 0 on success, 1 on error
 ;------------------------------------------------------------------------------
-ide_readsector_256:
-    LD C,0    ;Setup counter for 256 words
-
-ide_readsector_256_waitloop:
-    LD B, IDE_REG_CMDSTS
-    CALL ide_regread_8
-    BIT 0,a                             ;Error Bit set.
-    JP NZ, ide_printerror  
-    BIT 3,a                             ;DRQ Bit set. If set, disk has data
-    JR Z, ide_readsector_256_waitloop    ;If not set, wait
-
-    LD A, 10010010b    ;CommandByte-A, Mode 0, PA IN, PC Out, PB IN
-    OUT (CS_PIA_CR), A ;Set Data direction to IN
-    LD A, IDE_REG_DATA ;CS0 and A=0 -> I/O register
-    OUT (CS_PIA_PC), A ;set register
-    OR  IDE_RD         ;Set Read bit
-    OUT (CS_PIA_PC), A ;Write Read to bit controll lines
-    NOP
-    ;NOP
-    ;NOP
-    IN A,(CS_PIA_PB)    ;Load 16-Bit data to buffer
-    LD (HL), A
-    INC HL
-    IN A,(CS_PIA_PA)
-    LD (HL), A
-    INC HL
-    DEC C
-    RET Z
-    JR ide_readsector_256_waitloop
-
-ide_readsector_512_inv:
-    LD C,0    ;Setup counter for 256 words
-    LD DE, 4096 ;Timeout counter
-ide_readsector_512_inv_waitloop:
-    DEC DE
-    LD A,D
-    OR E
-    JP Z, ide_readsector_timeout
-    ;timeout checked. continue
-    LD B, IDE_REG_CMDSTS
-    CALL ide_regread_8
-    BIT 0,a                             ;Error Bit set.
-    JP NZ, ide_printerror  
-    BIT 3,a                             ;DRQ Bit set. If set, disk has data
-    JR Z, ide_readsector_512_inv_waitloop    ;If not set, wait
-    LD DE, 2048 ;Timeout counter
-    
-    LD A, 10010010b    ;CommandByte-A, Mode 0, PA IN, PC Out, PB IN
-    OUT (CS_PIA_CR), A ;Set Data direction to IN
-    LD A, IDE_REG_DATA ;CS0 and A=0 -> I/O register
-    OUT (CS_PIA_PC), A ;set register
-    OR  IDE_RD         ;Set Read bit
-    OUT (CS_PIA_PC), A ;Write Read to bit controll lines
-    ;NOP
-    ;NOP
-    NOP
-
-    IN A,(CS_PIA_PA)    ;Load 16-Bit data to buffer
-    LD (HL), A
-    INC HL
-    IN A,(CS_PIA_PB)
-    LD (HL), A
-    INC HL
-
-    DEC C
-    RET Z
-    JR ide_readsector_512_inv_waitloop
+ide_readsector_512_fast:
+    ld b, IDE_REG_CMDSTS    ;check status
+    call ide_regread_8
+    bit 0,a                 ;Error Bit set
+    jp nz, ide_printerror   ;then abort
+	bit 3,a                 ;wait for drq
+	jr z,ide_readsector_512_fast
+    ld b,0             ;256x
+    ld a, 10010010b    ;CommandByte-A, Mode 0, PA IN, PC Out, PB IN
+    out (CS_PIA_CR), a ;Set Data direction to IN
+_ide_readsector_512_floop:
+    ld a, IDE_REG_DATA ;CS0 and A=0 -> I/O register
+    out (CS_PIA_PC), a ;set register
+    or  IDE_RD         ;Set Read bit
+    out (CS_PIA_PC), a ;Write Read to bit controll lines
+    in a,(CS_PIA_PA)   ;load first byte
+    ld (hl), a
+    inc hl
+    in a,(CS_PIA_PB)   ;load second byte
+    ld (hl), a
+    inc hl
+    djnz _ide_readsector_512_floop  ;loop 256 times (256words = 512 bytes)
+    ld b, IDE_REG_CMDSTS;check drive status
+    call ide_regread_8  ;
+    and	10001001b       ;busy, DRQ, or error?
+    ret	z               ;no more data or errors -> exit
+    bit 3,a             ;test if more data available
+    jr nz,ide_readsector_512_fast   ;if true, repeat read function
+    jp ide_printerror   ;else exit function
 
 ide_readsector_timeout:
     LD HL, [str_error_time]
@@ -208,9 +181,6 @@ ide_readsector_timeout:
     CALL print_char
     RET
     
-
-
-
 ;------------------------------------------------------------------------------
 ; ide_writesector_256
 ;
@@ -249,7 +219,7 @@ ide_printerror:
     CALL print_char
     LD A,13
     CALL print_char
-
+    LD A,1
     RET
 
 str_error_start:
