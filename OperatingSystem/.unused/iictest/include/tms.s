@@ -208,7 +208,7 @@ TmsProbeFailed:
         ret
 
 TmsPorts:                               ; List of ports to probe:
-        defb 0x80                       ; ColecoVision / SG-1000
+        defb 0xE0                       ; ColecoVision / SG-1000
         defb 98h                        ; MSX
         defb 10h                        ; Sord M5 (conflicts with z80ctrl SIO port)
         ;defb 8                         ; Tatung Einstein (conflicts with z80ctrl drive ports)

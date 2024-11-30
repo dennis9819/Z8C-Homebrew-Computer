@@ -6,6 +6,7 @@ CS_VT82C42_CTRL .EQU 0xF1
     org 0x6000  
     ;VT82C42
 
+keyboard_init:
     ld a, 0xA7                   ;Disable Mouse
     out (CS_VT82C42_CTRL), A
     ld a, 0xAD                   ;Disable Keyboard

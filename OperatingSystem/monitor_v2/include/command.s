@@ -23,6 +23,10 @@ COMMAND_LUT:
     db "?", 0, [OP_DUMP], [OP_DUMP]>>8        ;Print memory
     db 0xFF             ;End of Table
 
+COMMAND_ABORT:
+    ;cleanup stack
+    ld sp, STACK_RAM_TOP
+    ; return to prompt
 COMMAND:
     call print_newLine
     ld hl,[var_dir]
@@ -147,6 +151,8 @@ COMMAND_PROCESS_FOUND:
     JP COMMAND
 _COMMAND_PROCESS_FOUND
     JP (HL)
+
+
 
 NOT_IMPLEMENTED:
     LD HL,[_STR_NOT_IMPLEMENTED]

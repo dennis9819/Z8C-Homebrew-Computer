@@ -6,51 +6,19 @@
 ;9600 -> 12 / 00110000
 ;
 
+
 CONSOLE_INIT:
-CONSOLE_INIT_CTC:
-    ;LD A,00001111b      ; Set /16 Divider, CPU Trigger, Time COnstant Follows
-    LD A,01001111b      ; External Trigger, Time COnstant Follows
-    OUT (CS_CTC_0),A    
-    IN A,(CS_DIP)       ; Read BAUD from DIP-Switches
-    ;LD A,39
-    OUT (CS_CTC_0),A
-CONSOLE_INIT_SIO:
-    LD A,00110000b      ;write into WR0: error reset, select WR0
-    OUT (CS_SIO_A_C),A
-    LD a,018h           ;write into WR0: channel reset
-    OUT (CS_SIO_A_C),A
-    LD a,004h           ;write into WR0: select WR4
-    OUT (CS_SIO_A_C),A
-    LD a,01000100b       ;write into WR4: clkx16,1 stop bit, no parity
-    OUT (CS_SIO_A_C),A
-    LD a,005h ;write into WR0: select WR5
-    OUT (CS_SIO_A_C),A
-    LD a,11101000b ;DTR inactive, TX 8bit, BREAK off, TX on, RTS inactive
-    OUT (CS_SIO_A_C),A
-    LD a,01h ;write into WR0: select WR1
-    OUT (CS_SIO_A_C),A
-    LD a,00000100b ;no interrupt in CH B, special RX condition affects vect
-    OUT (CS_SIO_A_C),A
-    LD a,02h ;write into WR0: select WR2
-    OUT (CS_SIO_A_C),A
-    LD a,0h ;write into WR2: cmd line int vect (see int vec table)
-            ;bits D3,D2,D1 are changed according to RX condition
-    OUT (CS_SIO_A_C),A
-    LD a,003h ;write into WR0: select WR3
-    OUT (CS_SIO_A_C),A
-    LD a,0C1h ;RX 8bit, auto enable off, RX on
-    OUT (CS_SIO_A_C),A
-    ;Channel A RX active
-    RET
+    call con_rb_init; initialize ring buffer
+    call consio_init_a
+    ret
+
 
 ; A contains char
 ; Destroys A
 print_char:
     push af
-    out (CS_SIO_A_D),a
-    call print_wait_out
+    call consio_tx_a
     pop af
-    ;call print_char
     ret
 ; HL contains pointer to string
 ; Destroy A, HL
@@ -105,7 +73,7 @@ print_bcd:
 	call print_char
 	ret
 
-read_char:
+read_char_raw:
     call A_RTS_ON
     nop
     xor a               ; a = 0
@@ -117,14 +85,8 @@ read_char:
     in a, (CS_SIO_A_D)  ; read char if avail
     ret                 ; return
 
-
-read_in_sts:
-    out (CS_SIO_A_C), a ; select reg 0
-    in a, (CS_SIO_A_C)  ; read reg 0
-    and	1               ; mask D0 (recieve char available)
-    ret z
-    ld a, 0xFF
-    ret
+read_char:
+    jp consio_rx_a
     
 read_bcd;
 	call read_char
@@ -156,6 +118,59 @@ print_16_hex:
     call print_a_hex
     ld a,(ix+0)
     call print_a_hex
+    ret
+
+;input ringbuffer
+;initialize ringbuffer
+con_rb_init:
+    xor a
+    ld (var_buffer_conin_in),a  
+    ld (var_buffer_conin_out),a  
+    ld (var_buffer_conin_sts),a
+    ret
+
+con_rb_read:
+    push hl
+    push de
+    ld a,(var_buffer_conin_in)
+    ld b,a
+    ld a,(var_buffer_conin_out)
+    cp b    ;check if equal
+    jp z, con_rb_read_empty
+    ;if not equal, buffer contians data
+    ld h, high [var_buffer_conin_data]  ;load high byte for pointer
+    ld l, a
+    ld a,(hl)
+    push af
+    ;move pointer
+    ld a,(var_buffer_conin_out)
+    inc a
+    ld (var_buffer_conin_out),a
+    pop af
+    pop de
+    pop hl
+    ret
+con_rb_read_empty:
+    ld a,1
+    ld (var_buffer_conin_sts),a
+    xor a
+    pop de
+    pop hl
+    ret
+
+con_rb_write:
+    push hl
+    push af
+    ld h, high [var_buffer_conin_data]  ;load high byte for pointer
+    ld a,(var_buffer_conin_in)
+    ld l,a
+    pop af
+    ld (hl),a
+    ld a,(var_buffer_conin_in)
+    inc a
+    ld (var_buffer_conin_in),a 
+    ;TODO: check for overflow
+    pop hl
     ret
 
 

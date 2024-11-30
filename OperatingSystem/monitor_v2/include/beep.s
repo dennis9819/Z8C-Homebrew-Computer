@@ -7,6 +7,7 @@
 beep:
     push    AF
     push    DE
+    di
 beep_loop:
 	LD      A,0x08
     OUT     (CS_PIO_AD), A
@@ -20,6 +21,7 @@ beep_loop:
     jr      NZ, beep_loop
     pop     de
     pop     af
+    ei
 	ret
 
 beep_pause:

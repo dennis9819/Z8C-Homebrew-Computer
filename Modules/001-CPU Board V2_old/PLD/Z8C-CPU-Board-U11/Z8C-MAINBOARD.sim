@@ -1,0 +1,35 @@
+%SIGNAL
+PIN   1 =  A0 
+PIN   2 =  A1 
+PIN   3 =  A2 
+PIN   4 =  A3 
+PIN   5 =  A4 
+PIN   6 =  A5 
+PIN   7 =  A6 
+PIN   8 =  A7 
+PIN  15 =  CS_BANK 
+PIN  17 =  CS_CTC 
+PIN  19 =  CS_DIP 
+PIN  16 =  CS_SIO 
+PIN   9 =  IOREQ 
+PIN  11 =  RD 
+PIN  12 =  WR 
+%END
+
+%FIELD
+%END
+
+%EQUATION
+CS_BANK =>
+    !A0 & !A1 & !A2 & !A3 & !A4 & !A5 & !A6 & !A7 & !IOREQ & !WR
+
+CS_CTC =>
+    A2 & !A3 & !A4 & !A5 & !A6 & !A7 & !IOREQ
+
+CS_DIP =>
+    A0 & !A1 & !A2 & !A3 & !A4 & !A5 & !A6 & !A7 & !IOREQ & !RD
+
+CS_SIO =>
+    !A2 & A3 & !A4 & !A5 & !A6 & !A7 & !IOREQ
+
+%END

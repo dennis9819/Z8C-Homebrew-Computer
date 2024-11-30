@@ -2,7 +2,7 @@
 ; BIOS Routines entry points
 ; Do not move in memory!!!!
 ;-------------------------------------
-.org 0x0050
+    org 0x0050
 B_BEEP:
     jp beep
 

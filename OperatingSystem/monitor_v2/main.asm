@@ -58,10 +58,23 @@ INT_VEC:
 ;================================================================
 ; Memory layout
 ;================================================================
+
+mon_var_template_sof .EQU mon_var_template + 1024
+
 mon_var_template:
     phase SYS_RAM_START
 interrupt_vectors:
     defs 256
+var_buffer_conin_data:  ;contains console input
+    defs 256
+var_buffer_conin_in:    ;pointer to write position of buffer
+    defb 0
+var_buffer_conin_out:   ;pointer to read position of buffer
+    defb 0
+var_buffer_conin_sts:   
+    defb 0
+var_buffer_conout:
+    defb 0
 var_buffer_len:
     defb 0
 var_last_char:
@@ -100,8 +113,7 @@ mon_var_template_end:
 ;================================================================
 ; Start of monitor
 ;================================================================
-    org 0x0050
-    .include "ref.s"    ;static bios calls for programs
+.include "ref.s"    ;static bios calls for programs
     
 BOOT_PHASE0:     ;Setup Hardware
     ;Setup Stack-Pointer
@@ -122,15 +134,23 @@ BOOT_PHASE0:     ;Setup Hardware
     ld a, " "
     ld (var_curserchar),a
 
-    ;setup interrupt table
-    ld a,[interrupt_vectors]>>8
-    ld i,a
-
+    ;Enable interupts
+    call intctrl_init
     ;Initialize Console (Serial-Port)
-    call CONSOLE_INIT
+    call CONSOLE_INIT   
+    
 
+    ;clear memory area
+    ld hl, [mon_var_template_sof]
+    ld bc, [mon_var_template_end-mon_var_template_sof]
+    ld de, [mon_var_template_sof+1]
+    xor a
+    ld (hl),a
+    ldir
+
+    jp BOOT_PHASE2  ;skip rest of table init
 BOOT_PHASE1:    ;Copy default values to RAM
-    ld hl,mon_var_template
+    ld hl,mon_var_template + 1024
     ld de,mon_var_template_end
     ld bc,SYS_RAM_START
 BOOT_PHASE1_LOOP:
@@ -165,6 +185,8 @@ BOOT_PHASE2:    ;Hardware initialized.
     xor a   ;set dir to empty
     ld (var_dir),a
     ld (var_dir+1),a
+    ;enable interrupts
+    ei
     ; Start commandline
     jp COMMAND
     
@@ -183,6 +205,8 @@ BOOT_PHASE2:    ;Hardware initialized.
 .include "kdrv_ide8255.s" ;include ide interface driver.
 .include "kdrv_ideif.s" ;include ide driver.
 .include "kdrv_siic.s"
+.include "kdrv_int.s"
+.include "kdrv_sio.s"
 .include "prettydump.s"
 .include "command.s"
 .include "cmd_mem.s"

@@ -8,6 +8,7 @@
 ;================================================================
     IDE_CMD_IDENT   .EQU 0xEC    ;Identify drive.
     IDE_CMD_READSEC .EQU 0x20    ;Read sectors.
+    IDE_CMD_WRITESEC .EQU 0x30   ;Write sectors.
 
 ;================================================================
 ; IDE Variables
