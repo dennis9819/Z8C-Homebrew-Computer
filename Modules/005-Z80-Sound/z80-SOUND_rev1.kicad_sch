@@ -7,9 +7,10 @@
 	(title_block
 		(title "Z8C Audio Interface")
 		(date "2022-10-14")
-		(rev "0")
+		(rev "1")
 		(comment 1 "1) All 74HC parts could be substituted by 74HCT")
 		(comment 2 "2) All 74LS Parts could be substituted by 74HCT")
+		(comment 3 "3) Rev1: Fix I2C lines to SI5351")
 	)
 	(lib_symbols
 		(symbol "74xx:74HC245"
@@ -13088,196 +13089,6 @@
 				)
 			)
 		)
-		(symbol "Transistor_BJT:2N3904"
-			(pin_names
-				(offset 0) hide)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "Q"
-				(at 5.08 1.905 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Value" "2N3904"
-				(at 5.08 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Footprint" "Package_TO_SOT_THT:TO-92_Inline"
-				(at 5.08 -1.905 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-						(italic yes)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "https://www.onsemi.com/pub/Collateral/2N3903-D.PDF"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Description" "0.2A Ic, 40V Vce, Small Signal NPN Transistor, TO-92"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "NPN Transistor"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_fp_filters" "TO?92*"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "2N3904_0_1"
-				(polyline
-					(pts
-						(xy 0.635 0.635) (xy 2.54 2.54)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0.635 -0.635) (xy 2.54 -2.54) (xy 2.54 -2.54)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0.635 1.905) (xy 0.635 -1.905) (xy 0.635 -1.905)
-					)
-					(stroke
-						(width 0.508)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 1.27 -1.778) (xy 1.778 -1.27) (xy 2.286 -2.286) (xy 1.27 -1.778) (xy 1.27 -1.778)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(circle
-					(center 1.27 0)
-					(radius 2.8194)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "2N3904_1_1"
-				(pin passive line
-					(at 2.54 -5.08 90)
-					(length 2.54)
-					(name "E"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -5.08 0 0)
-					(length 5.715)
-					(name "B"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 2.54 5.08 270)
-					(length 2.54)
-					(name "C"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-		)
 		(symbol "Zilog_Z80_Peripherals:SIO0-DIP-40"
 			(pin_names
 				(offset 0.762)
@@ -16223,12 +16034,6 @@
 		(uuid "b248bb1a-5127-4d12-8506-207a0867cb7e")
 	)
 	(junction
-		(at 339.09 216.535)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "b44d794f-a008-4254-8324-be263549be6b")
-	)
-	(junction
 		(at 372.11 236.855)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -16311,12 +16116,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "d2a2f8fb-5d82-4636-b8cb-a4a9c5f811c5")
-	)
-	(junction
-		(at 344.17 221.615)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "d91a8c3b-ea71-4c22-a9b7-b2d86315155c")
 	)
 	(junction
 		(at 276.86 248.285)
@@ -16403,12 +16202,6 @@
 		(uuid "f91e0be3-ff85-4e27-b49f-86c8fca7d10e")
 	)
 	(junction
-		(at 341.63 219.075)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "fa1561e8-9fe5-4f85-899e-f9b50e92aaf4")
-	)
-	(junction
 		(at 219.71 113.665)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -16485,10 +16278,6 @@
 	(no_connect
 		(at 166.37 81.28)
 		(uuid "832ea421-c405-4ac7-8604-f704c884f7a8")
-	)
-	(no_connect
-		(at 346.71 214.63)
-		(uuid "847ff48b-8bff-41e4-9522-504c6077aa73")
 	)
 	(no_connect
 		(at 236.22 52.07)
@@ -19182,16 +18971,6 @@
 		)
 		(uuid "26779a3d-5041-430d-a70b-059356cdc53a")
 	)
-	(wire
-		(pts
-			(xy 339.09 216.535) (xy 339.09 217.805)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2761f51b-8425-4ed8-bead-f10481c14966")
-	)
 	(bus
 		(pts
 			(xy 58.42 49.53) (xy 58.42 52.07)
@@ -19401,16 +19180,6 @@
 			(type default)
 		)
 		(uuid "2cbd606a-e1c1-4a14-a6c0-de6ace49b516")
-	)
-	(wire
-		(pts
-			(xy 344.17 221.615) (xy 359.41 221.615)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2ce5d341-8600-4111-b972-f061a5fa4eee")
 	)
 	(wire
 		(pts
@@ -20251,16 +20020,6 @@
 			(type default)
 		)
 		(uuid "4b0bd71d-3b99-4796-bb29-14d7148df8f6")
-	)
-	(wire
-		(pts
-			(xy 344.17 221.615) (xy 344.17 244.475)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4ba7c44f-58d3-4e83-a04c-c97e2487ee83")
 	)
 	(bus
 		(pts
@@ -21174,16 +20933,6 @@
 	)
 	(wire
 		(pts
-			(xy 323.85 222.885) (xy 313.69 222.885)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "664e3553-4c4a-4ddc-bf0b-bf3e76c96f17")
-	)
-	(wire
-		(pts
 			(xy 281.94 260.35) (xy 288.29 260.35)
 		)
 		(stroke
@@ -21891,26 +21640,6 @@
 			(type default)
 		)
 		(uuid "7c2ffbc2-64bf-42bf-a691-b9ba17826e02")
-	)
-	(wire
-		(pts
-			(xy 339.09 216.535) (xy 359.41 216.535)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7c43beee-736b-423a-a277-6fe39e0971ca")
-	)
-	(wire
-		(pts
-			(xy 341.63 214.63) (xy 341.63 219.075)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7c65151f-1eb7-4320-a49a-47b33d16da6d")
 	)
 	(wire
 		(pts
@@ -23354,16 +23083,6 @@
 	)
 	(wire
 		(pts
-			(xy 344.17 214.63) (xy 344.17 221.615)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "af4fa64a-4c94-46b8-806f-1c0cb43b36b3")
-	)
-	(wire
-		(pts
 			(xy 66.04 257.81) (xy 55.88 257.81)
 		)
 		(stroke
@@ -23491,16 +23210,6 @@
 			(type default)
 		)
 		(uuid "b31bd06b-a5b4-4dcc-babf-55eac9cbde7b")
-	)
-	(wire
-		(pts
-			(xy 341.63 219.075) (xy 341.63 231.14)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b31d128f-3b7f-4592-b9cc-e5a605d6aaf9")
 	)
 	(bus
 		(pts
@@ -23741,16 +23450,6 @@
 			(type default)
 		)
 		(uuid "b9f06cb9-45ab-4fe0-9722-dde94ef059b5")
-	)
-	(wire
-		(pts
-			(xy 313.69 249.555) (xy 328.93 249.555)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "bb026297-a76c-4ff0-ab5f-ccfd310f314b")
 	)
 	(wire
 		(pts
@@ -24644,16 +24343,6 @@
 	)
 	(wire
 		(pts
-			(xy 341.63 219.075) (xy 359.41 219.075)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d95df9cf-ff3f-42d1-830d-732c22acc40f")
-	)
-	(wire
-		(pts
 			(xy 71.12 242.57) (xy 82.55 242.57)
 		)
 		(stroke
@@ -25242,16 +24931,6 @@
 		)
 		(uuid "ebf83048-efd1-4a7e-bba6-4d5becaede98")
 	)
-	(wire
-		(pts
-			(xy 339.09 214.63) (xy 339.09 216.535)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ec03cc75-0420-4507-81c5-05fc7aa5ec47")
-	)
 	(bus
 		(pts
 			(xy 128.27 71.12) (xy 128.27 68.58)
@@ -25261,16 +24940,6 @@
 			(type default)
 		)
 		(uuid "ec4af54b-2e64-48e3-bf97-14f9d4a3f723")
-	)
-	(wire
-		(pts
-			(xy 313.69 236.22) (xy 326.39 236.22)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ed0d4445-7ac3-4746-81b5-60d1b3fd10b8")
 	)
 	(wire
 		(pts
@@ -25892,17 +25561,6 @@
 		)
 		(uuid "ffd35fe7-d4c1-4800-b15d-ce9c52a8b115")
 	)
-	(text "Pin 3/4 swapped!!!\n"
-		(exclude_from_sim no)
-		(at 137.922 57.404 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-				(color 255 27 58 1)
-			)
-		)
-		(uuid "3e5dbe50-39ec-4c46-afd8-8858d6273314")
-	)
 	(text "/1\n/2\n/4\n/8\n/16\n/32"
 		(exclude_from_sim no)
 		(at 236.22 54.864 0)
@@ -25924,17 +25582,6 @@
 			(justify left bottom)
 		)
 		(uuid "9662fcba-34d6-4ef5-8aeb-ef017ffcf5c0")
-	)
-	(text "Level shifter not working\nand not required after all.\n\nWired SI5351 outputs directly to\ncorresponding Ppins on RN3.\nRemoved Q1,Q2,Q3,RN3,R25,R25,R27"
-		(exclude_from_sim no)
-		(at 317.754 200.66 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-				(color 255 27 58 1)
-			)
-		)
-		(uuid "c8f7fd64-873f-463d-888c-06a4fd458db2")
 	)
 	(text "IF RD=0 AND CS=0 Q=1\n"
 		(exclude_from_sim no)
@@ -25981,7 +25628,7 @@
 		(uuid "022807f5-9950-4d47-84d4-b0ef59ac420a")
 	)
 	(label "A23{slash}SDA"
-		(at 132.08 53.34 0)
+		(at 132.08 50.8 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -26045,17 +25692,6 @@
 			(justify right bottom)
 		)
 		(uuid "093611bb-a411-4e48-a2bc-e3156a4f7fd4")
-	)
-	(label "#~{CLK_SN}"
-		(at 359.41 216.535 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "0bac013d-e5a9-47c5-8ab4-3f51709d1327")
 	)
 	(label "TRIG_OUT_C"
 		(at 306.07 260.35 180)
@@ -26255,6 +25891,17 @@
 		)
 		(uuid "2261f506-5907-4625-ae89-2400e302336f")
 	)
+	(label "#~{CLK_YM}"
+		(at 168.91 48.26 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "22be5423-1120-40c1-b6a3-17b95c90f868")
+	)
 	(label "#D5"
 		(at 257.81 43.18 0)
 		(fields_autoplaced yes)
@@ -26331,17 +25978,6 @@
 			(justify right bottom)
 		)
 		(uuid "29024ee5-99b3-499c-8361-ad4e685e815e")
-	)
-	(label "CLK_PSG"
-		(at 168.91 53.34 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "2a56039b-47dc-4fec-a473-55651a00d2ad")
 	)
 	(label "#A7"
 		(at 72.39 214.63 0)
@@ -27069,17 +26705,6 @@
 		)
 		(uuid "77a25dc0-3043-4894-b014-056ef9faee3c")
 	)
-	(label "CLK_SN"
-		(at 168.91 43.18 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "78ae9ac6-857d-4bde-95ca-363965b0abcf")
-	)
 	(label "#D5"
 		(at 176.53 249.555 0)
 		(fields_autoplaced yes)
@@ -27101,17 +26726,6 @@
 			(justify right bottom)
 		)
 		(uuid "7bc093da-6759-420d-83b4-8523395664a5")
-	)
-	(label "CLK_YM"
-		(at 168.91 48.26 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "7c04f8a1-a905-4db5-9c69-ec2bf50faa73")
 	)
 	(label "#D2"
 		(at 176.53 241.935 0)
@@ -27189,17 +26803,6 @@
 			(justify left bottom)
 		)
 		(uuid "833534d5-3a12-4515-80e6-5409a1058193")
-	)
-	(label "CLK_SN"
-		(at 313.69 222.885 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "8633b0eb-e7e6-4730-8e73-127214730f16")
 	)
 	(label "~{#RESET}"
 		(at 176.53 211.455 0)
@@ -27421,17 +27024,6 @@
 		)
 		(uuid "a19bbb6a-c8de-43fc-9ab7-6b5e16504d2f")
 	)
-	(label "CLK_YM"
-		(at 313.69 236.22 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "a21d9176-d1eb-4a60-b4c1-8c7f5aebac49")
-	)
 	(label "#D7"
 		(at 123.19 214.63 0)
 		(fields_autoplaced yes)
@@ -27499,7 +27091,7 @@
 		(uuid "a8fcc5d2-cfb5-4912-ac54-742999ea37a3")
 	)
 	(label "A22{slash}SCL"
-		(at 132.08 50.8 0)
+		(at 132.08 53.34 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -27938,6 +27530,17 @@
 		)
 		(uuid "ca6879fd-1229-4c29-9b77-9c37ea685aa5")
 	)
+	(label "#~{CLK_PSG}"
+		(at 168.91 53.34 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "cf9f02e7-8663-4fac-a393-f02d0a5251a1")
+	)
 	(label "A19"
 		(at 64.77 257.81 180)
 		(fields_autoplaced yes)
@@ -27970,17 +27573,6 @@
 			(justify right bottom)
 		)
 		(uuid "d4a89851-f343-4a84-b3cb-1339eebcb206")
-	)
-	(label "#~{CLK_YM}"
-		(at 359.41 219.075 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "d66e72d7-207b-4b0c-855b-2c0b715629b9")
 	)
 	(label "#D2"
 		(at 123.19 201.93 0)
@@ -28246,16 +27838,16 @@
 		)
 		(uuid "eb086003-5e2a-4337-917d-d3d8619ff107")
 	)
-	(label "CLK_PSG"
-		(at 313.69 249.555 0)
+	(label "#~{CLK_SN}"
+		(at 168.91 43.18 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left bottom)
+			(justify right bottom)
 		)
-		(uuid "ec7e4fa6-349b-4935-9878-cde991accabe")
+		(uuid "ecd975e3-75df-4727-86ef-b813c4b88a71")
 	)
 	(label "MIDIA_IN_DATA"
 		(at 359.41 125.73 0)
@@ -28267,17 +27859,6 @@
 			(justify left bottom)
 		)
 		(uuid "eebe9b70-f9c0-4262-9b72-1078f0a858c4")
-	)
-	(label "#~{CLK_PSG}"
-		(at 359.41 221.615 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "ef7eb39d-56aa-4335-bd56-70c416a8da0e")
 	)
 	(label "#A1"
 		(at 169.545 209.55 180)
@@ -29049,7 +28630,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "220uF"
+		(property "Value" "100uF"
 			(at 390.525 229.87 0)
 			(effects
 				(font
@@ -29661,81 +29242,6 @@
 			(project "z80-SOUND"
 				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55"
 					(reference "#PWR029")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Transistor_BJT:2N3904")
-		(at 336.55 222.885 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "089f0181-8a6f-4f7c-86e2-186bb7845e38")
-		(property "Reference" "Q1"
-			(at 335.915 218.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "2N3904"
-			(at 331.47 227.33 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Package_TO_SOT_THT:TO-92_Inline"
-			(at 341.63 224.79 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.onsemi.com/pub/Collateral/2N3903-D.PDF"
-			(at 336.55 222.885 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 336.55 222.885 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "4e88f799-385c-419e-9024-537b2953585e")
-		)
-		(pin "1"
-			(uuid "8fc29c10-7770-43c2-a11e-3c2eed9c2520")
-		)
-		(pin "3"
-			(uuid "f8b6f1bb-5024-483b-ad1d-5b59a07b4591")
-		)
-		(instances
-			(project "z80-SOUND"
-				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55"
-					(reference "Q1")
 					(unit 1)
 				)
 			)
@@ -30449,81 +29955,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Transistor_BJT:2N3904")
-		(at 339.09 236.22 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "198f0ca4-08d8-4044-98f0-87661623abf5")
-		(property "Reference" "Q2"
-			(at 334.645 233.045 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "2N3904"
-			(at 330.2 239.395 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Package_TO_SOT_THT:TO-92_Inline"
-			(at 344.17 238.125 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.onsemi.com/pub/Collateral/2N3903-D.PDF"
-			(at 339.09 236.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 339.09 236.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "f75c062d-1035-4ca5-a9a5-55c3795a1067")
-		)
-		(pin "1"
-			(uuid "7339a9c1-8df0-4677-bc47-19e2fdd30e88")
-		)
-		(pin "3"
-			(uuid "d7e8b761-5071-4491-9c2b-cf51efd54a5a")
-		)
-		(instances
-			(project "z80-SOUND"
-				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55"
-					(reference "Q2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:D_Zener")
 		(at 297.815 220.345 0)
 		(unit 1)
@@ -30550,7 +29981,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_THT:D_DO-34_SOD68_P7.62mm_Horizontal"
+		(property "Footprint" "Diode_THT:D_DO-35_SOD27_P7.62mm_Horizontal"
 			(at 297.815 220.345 0)
 			(effects
 				(font
@@ -31989,83 +31420,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R_Network04")
-		(at 344.17 209.55 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "2d089a36-7540-4150-abe3-c71b555db6f6")
-		(property "Reference" "RN3"
-			(at 353.06 209.804 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "R_Network04"
-			(at 350.52 209.804 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_THT:R_Array_SIP5"
-			(at 351.155 209.55 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "http://www.vishay.com/docs/31509/csc.pdf"
-			(at 344.17 209.55 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 344.17 209.55 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "4"
-			(uuid "3b578a7c-3413-44e0-a81c-dc04f01aa441")
-		)
-		(pin "3"
-			(uuid "3b5aaf7c-ba86-4b52-ab10-d3f5f079de86")
-		)
-		(pin "1"
-			(uuid "f2b34381-f1fe-4e84-b6c8-72ec5558286c")
-		)
-		(pin "2"
-			(uuid "7a7a8621-187b-4e20-9575-61ce9308e5a4")
-		)
-		(pin "5"
-			(uuid "2878359d-16ee-4598-909c-077c18a89c0d")
-		)
-		(instances
-			(project "z80-SOUND"
-				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55"
-					(reference "RN3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
 		(at 302.895 125.095 270)
 		(unit 1)
@@ -32999,73 +32353,6 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 332.74 249.555 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "3ac32d40-32b0-4869-9ddb-c9a3765ff785")
-		(property "Reference" "R27"
-			(at 332.74 247.65 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "1k"
-			(at 332.74 249.555 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal"
-			(at 332.74 251.333 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 332.74 249.555 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 332.74 249.555 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "5d45395c-6c53-45a9-b5d0-d6962c9638a7")
-		)
-		(pin "2"
-			(uuid "465b4c34-2caa-4d72-82bb-2fb37cde17a6")
-		)
-		(instances
-			(project "z80-SOUND"
-				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55"
-					(reference "R27")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
 		(at 187.325 147.32 180)
 		(unit 1)
 		(exclude_from_sim no)
@@ -33735,7 +33022,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:C_Rect_L7.0mm_W2.0mm_P5.00mm"
+		(property "Footprint" "Capacitor_THT:C_Rect_L7.0mm_W3.5mm_P5.00mm"
 			(at 165.735 156.21 0)
 			(effects
 				(font
@@ -33861,7 +33148,7 @@
 				)
 			)
 		)
-		(property "Value" "3-103J"
+		(property "Value" "3-102J"
 			(at 359.41 105.41 90)
 			(effects
 				(font
@@ -33947,7 +33234,7 @@
 				)
 			)
 		)
-		(property "Value" "3-103J"
+		(property "Value" "3-102J"
 			(at 359.41 74.295 90)
 			(effects
 				(font
@@ -34995,7 +34282,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_THT:D_DO-34_SOD68_P7.62mm_Horizontal"
+		(property "Footprint" "Diode_THT:D_DO-35_SOD27_P7.62mm_Horizontal"
 			(at 297.815 210.185 0)
 			(effects
 				(font
@@ -35055,7 +34342,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "2n2"
+		(property "Value" "10n"
 			(at 243.84 165.735 90)
 			(effects
 				(font
@@ -35356,71 +34643,6 @@
 			(project "z80-SOUND"
 				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55"
 					(reference "U16")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 344.17 254.635 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "5852fb42-9856-48b9-997c-4ff35dc33bd1")
-		(property "Reference" "#PWR0125"
-			(at 344.17 260.985 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 344.17 258.445 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 344.17 254.635 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 344.17 254.635 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 344.17 254.635 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "f673ce65-90b5-45f6-97cb-ab1fbc46c41b")
-		)
-		(instances
-			(project "z80-SOUND"
-				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55"
-					(reference "#PWR0125")
 					(unit 1)
 				)
 			)
@@ -36049,7 +35271,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "220uF"
+		(property "Value" "100uF"
 			(at 390.525 240.03 0)
 			(effects
 				(font
@@ -36413,73 +35635,6 @@
 			(project "z80-SOUND"
 				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55"
 					(reference "#PWR0109")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 327.66 222.885 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "60dd0d5b-ff41-44ed-8187-791d254300f2")
-		(property "Reference" "R25"
-			(at 327.66 220.98 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "1k"
-			(at 327.66 222.885 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal"
-			(at 327.66 224.663 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 327.66 222.885 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 327.66 222.885 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "200a21e3-cdfa-4eee-b684-8c3a984f9916")
-		)
-		(pin "2"
-			(uuid "0a8245f7-e700-4d74-815d-320cc85a7748")
-		)
-		(instances
-			(project "z80-SOUND"
-				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55"
-					(reference "R25")
 					(unit 1)
 				)
 			)
@@ -37152,7 +36307,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "2n2"
+		(property "Value" "10n"
 			(at 243.84 150.495 90)
 			(effects
 				(font
@@ -38760,71 +37915,6 @@
 			(project "z80-SOUND"
 				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55"
 					(reference "#PWR021")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 339.09 227.965 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "82a65803-9649-4347-b2b2-ab72c372af34")
-		(property "Reference" "#PWR0123"
-			(at 339.09 234.315 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 339.09 231.775 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 339.09 227.965 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 339.09 227.965 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 339.09 227.965 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "dbc75de4-55f6-46c3-8343-b874d1d6376d")
-		)
-		(instances
-			(project "z80-SOUND"
-				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55"
-					(reference "#PWR0123")
 					(unit 1)
 				)
 			)
@@ -41233,7 +40323,7 @@
 				)
 			)
 		)
-		(property "Value" "3-103J"
+		(property "Value" "3-102J"
 			(at 359.41 80.01 90)
 			(effects
 				(font
@@ -41672,81 +40762,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Transistor_BJT:2N3904")
-		(at 341.63 249.555 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "a9fe4454-e25f-41f7-81a4-4e8f84cae6f9")
-		(property "Reference" "Q3"
-			(at 337.185 246.38 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "2N3904"
-			(at 332.74 252.73 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Package_TO_SOT_THT:TO-92_Inline"
-			(at 346.71 251.46 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.onsemi.com/pub/Collateral/2N3903-D.PDF"
-			(at 341.63 249.555 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 341.63 249.555 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "2009c934-8e74-4308-ab2e-5b15d4fe5d49")
-		)
-		(pin "1"
-			(uuid "925850df-fe16-4b10-8809-a5e50d6d9c41")
-		)
-		(pin "3"
-			(uuid "3fc39cd6-44d0-476c-87df-e3dc6d592558")
-		)
-		(instances
-			(project "z80-SOUND"
-				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55"
-					(reference "Q3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
 		(at 165.735 276.86 0)
 		(unit 1)
@@ -42098,8 +41113,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "100nF"
-			(at 384.175 245.745 90)
+		(property "Value" "1uF"
+			(at 384.302 243.84 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -42144,73 +41159,6 @@
 			(project "z80-SOUND"
 				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55"
 					(reference "C16")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 330.2 236.22 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "af98f7e7-68c4-4adf-8d9f-631cc81801e3")
-		(property "Reference" "R26"
-			(at 330.2 234.315 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "1k"
-			(at 330.2 236.22 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal"
-			(at 330.2 237.998 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 330.2 236.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 330.2 236.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "ae5e8f69-35fe-4649-ada6-de787958a2e5")
-		)
-		(pin "2"
-			(uuid "c7ec6c38-ba5e-4502-a06b-f750b213f1f0")
-		)
-		(instances
-			(project "z80-SOUND"
-				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55"
-					(reference "R26")
 					(unit 1)
 				)
 			)
@@ -43190,73 +42138,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:+5V")
-		(at 339.09 204.47 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "c0179290-2c32-4069-9ef3-8bdb43ba0b71")
-		(property "Reference" "#PWR052"
-			(at 339.09 208.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+5V"
-			(at 339.09 201.295 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 339.09 204.47 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 339.09 204.47 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 339.09 204.47 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "6374991c-a317-4e25-ba0e-28eceb602c63")
-		)
-		(instances
-			(project "z80-SOUND"
-				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55"
-					(reference "#PWR052")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
 		(at 344.17 186.69 0)
 		(unit 1)
@@ -43609,8 +42490,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "100nF"
-			(at 384.175 235.585 90)
+		(property "Value" "1uF"
+			(at 384.302 233.68 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -44078,71 +42959,6 @@
 			(project "z80-SOUND"
 				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55"
 					(reference "#PWR085")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 341.63 241.3 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "c713a8d7-d0ae-491f-922c-345b7331d21c")
-		(property "Reference" "#PWR0124"
-			(at 341.63 247.65 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 341.63 245.11 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 341.63 241.3 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 341.63 241.3 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 341.63 241.3 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "c298b1dd-9fb2-46c0-969a-b4fd8b770a43")
-		)
-		(instances
-			(project "z80-SOUND"
-				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55"
-					(reference "#PWR0124")
 					(unit 1)
 				)
 			)
@@ -44988,7 +43804,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_THT:D_DO-34_SOD68_P7.62mm_Horizontal"
+		(property "Footprint" "Diode_THT:D_DO-35_SOD27_P7.62mm_Horizontal"
 			(at 297.815 225.425 0)
 			(effects
 				(font
@@ -46497,7 +45313,7 @@
 				)
 			)
 		)
-		(property "Value" "3-103J"
+		(property "Value" "3-102J"
 			(at 359.41 100.33 90)
 			(effects
 				(font
@@ -47345,7 +46161,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_THT:D_DO-34_SOD68_P7.62mm_Horizontal"
+		(property "Footprint" "Diode_THT:D_DO-35_SOD27_P7.62mm_Horizontal"
 			(at 297.815 215.265 0)
 			(effects
 				(font
