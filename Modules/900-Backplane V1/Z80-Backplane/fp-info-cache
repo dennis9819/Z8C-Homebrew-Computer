@@ -1,0 +1,1184 @@
+0
+Audio_Module
+Reverb_BTDR-1H
+Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
+audio belton reverb
+0
+7
+7
+Audio_Module
+Reverb_BTDR-1V
+Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
+audio belton reverb
+0
+7
+7
+Buzzer_Beeper
+Buzzer_12x9.5RM7.6
+Generic Buzzer, D12mm height 9.5mm with RM7.6mm
+buzzer
+0
+2
+2
+Buzzer_Beeper
+Buzzer_15x7.5RM7.6
+Generic Buzzer, D15mm height 7.5mm with RM7.6mm
+buzzer
+0
+2
+2
+Buzzer_Beeper
+Buzzer_CUI_CPT-9019S-SMT
+https://www.cui.com/product/resource/cpt-9019s-smt.pdf
+buzzer piezo
+0
+2
+2
+Buzzer_Beeper
+Buzzer_D14mm_H7mm_P10mm
+Generic Buzzer, D14mm height 7mm with pitch 10mm
+buzzer
+0
+2
+2
+Buzzer_Beeper
+Buzzer_Mallory_AST1109MLTRQ
+Mallory low-profile piezo buzzer, https://www.mspindy.com/specifications/AST1109MLTRQ.pdf
+buzzer piezo
+0
+2
+2
+Buzzer_Beeper
+Buzzer_Murata_PKLCS1212E
+Murata Buzzer https://www.murata.com/~/media/webrenewal/support/library/catalog/products/sound/p37e.ashx
+Murata Buzzer Beeper
+0
+2
+2
+Buzzer_Beeper
+Buzzer_Murata_PKMCS0909E
+Murata Buzzer http://www.murata.com/en-us/api/pdfdownloadapi?cate=&partno=PKMCS0909E4000-R1
+Murata Buzzer Beeper
+0
+2
+2
+Buzzer_Beeper
+Buzzer_TDK_PS1240P02BT_D12.2mm_H6.5mm
+Buzzer, D12.2mm height 6.5mm, https://product.tdk.com/info/en/catalog/datasheets/piezoelectronic_buzzer_ps_en.pdf
+buzzer
+0
+2
+2
+Buzzer_Beeper
+Indicator_PUI_AI-1440-TWT-24V-2-R
+14mm Indicator, https://www.puiaudio.com/media/SpecSheet/AI-1440-TWT-24V-2-R.pdf
+piezo buzzer self drive oscillator
+0
+2
+2
+Buzzer_Beeper
+MagneticBuzzer_CUI_CMT-8504-100-SMT
+magnetic transducer buzzer, 5V, SPL of 100 dB at 10 cm, https://www.cuidevices.com/product/resource/pdf/cmt-8504-100-smt-tr.pdf
+CMT 8504
+0
+4
+4
+Buzzer_Beeper
+MagneticBuzzer_CUI_CST-931RP-A
+CST-931RP-A, http://www.cui.com/product/resource/cst-931rp-a.pdf
+CST-931RP-A
+0
+2
+2
+Buzzer_Beeper
+MagneticBuzzer_Kingstate_KCG0601
+Buzzer, Elektromagnetic Beeper, Summer,
+Kingstate KCG0601 
+0
+2
+2
+Buzzer_Beeper
+MagneticBuzzer_Kobitone_254-EMB84Q-RO
+MagneticBuzzer Kobitone 254-EMB84Q-RO https://www.mouser.es/datasheet/2/209/KT-400385-1171904.pdf
+MagneticBuzzer Kobitone 254-EMB84Q-RO
+0
+3
+3
+Buzzer_Beeper
+MagneticBuzzer_PUI_AT-0927-TT-6-R
+Buzzer Magnetic 9mm AT-0927-TT-6-R, http://www.puiaudio.com/pdf/AT-0927-TT-6-R.pdf
+Buzzer Magnetic 9mm AT-0927-TT-6-R
+0
+2
+2
+Buzzer_Beeper
+MagneticBuzzer_ProSignal_ABI-009-RC
+Buzzer, Elektromagnetic Beeper, Summer, 6V-DC,
+Pro Signal ABI-009-RC 
+0
+2
+2
+Buzzer_Beeper
+MagneticBuzzer_ProSignal_ABI-010-RC
+Buzzer, Elektromagnetic Beeper, Summer, 12V-DC,
+Pro Signal ABI-010-RC 
+0
+2
+2
+Buzzer_Beeper
+MagneticBuzzer_ProSignal_ABT-410-RC
+Buzzer, Elektromagnetic Beeper, Summer, 1,5V-DC,
+Pro Signal ABT-410-RC 
+0
+2
+2
+Buzzer_Beeper
+MagneticBuzzer_ProjectsUnlimited_AI-4228-TWT-R
+Buzzer, Elektromagnetic Beeper, Summer, 3-28V-DC, https://www.kynix.com/uploadfiles/pdf/AI-4228-TWT-R.pdf
+Projects Unlimited AI-4228-TWT-R 
+0
+2
+2
+Buzzer_Beeper
+MagneticBuzzer_StarMicronics_HMB-06_HMB-12
+Buzzer, Elektromagnetic Beeper, Summer,
+Star Micronics HMB-06 HMB-12
+0
+2
+2
+Buzzer_Beeper
+PUIAudio_SMT_0825_S_4_R
+SMD 8540, http://www.puiaudio.com/product-detail.aspx?partnumber=SMT-0825-S-4-R
+SMD 8540
+0
+4
+4
+Buzzer_Beeper
+Speaker_CUI_CMR-1206S-67
+Speaker, 30mW, 300-7000Hz, IP67 face, 12x6x2,25mm, https://www.cuidevices.com/product/resource/cmr-12062s-67.pdf
+speaker CUI
+0
+2
+2
+Calibration_Scale
+Gauge_10mm_Type1_CopperTop
+Gauge, Massstab, 10mm, CopperTop, Type 1,
+Gauge Massstab 10mm CopperTop Type 1
+0
+0
+0
+Calibration_Scale
+Gauge_10mm_Type1_SilkScreenTop
+Gauge, Massstab, 10mm, SilkScreenTop, Type 1,
+Gauge Massstab 10mm SilkScreenTop Type 1
+0
+0
+0
+Calibration_Scale
+Gauge_10mm_Type2_CopperTop
+Gauge, Massstab, 10mm, CopperTop, Type 2,
+Gauge Massstab 10mm CopperTop Type 2
+0
+0
+0
+Calibration_Scale
+Gauge_10mm_Type2_SilkScreenTop
+Gauge, Massstab, 10mm, SilkScreenTop, Type 2,
+Gauge Massstab 10mm SilkScreenTop Type 2
+0
+0
+0
+Calibration_Scale
+Gauge_10mm_Type3_CopperTop
+Gauge, Massstab, 10mm, CopperTop, Type 3,
+Gauge Massstab 10mm CopperTop Type 3
+0
+0
+0
+Calibration_Scale
+Gauge_10mm_Type3_SilkScreenTop
+Gauge, Massstab, 10mm, SilkScreenTop, Type 3,
+Gauge Massstab 10mm SilkScreenTop Type 3
+0
+0
+0
+Calibration_Scale
+Gauge_10mm_Type4_CopperTop
+Gauge, Massstab, 10mm, CopperTop, Type 4,
+Gauge Massstab 10mm CopperTop Type 4
+0
+0
+0
+Calibration_Scale
+Gauge_10mm_Type4_SilkScreenTop
+Gauge, Massstab, 10mm, SilkScreenTop, Type 4,
+Gauge Massstab 10mm SilkScreenTop Type 4
+0
+0
+0
+Calibration_Scale
+Gauge_10mm_Type5_CopperTop
+Gauge, Massstab, 10mm, CopperTop, Type 5,
+Gauge Massstab 10mm CopperTop Type 5
+0
+0
+0
+Calibration_Scale
+Gauge_10mm_Type5_SilkScreenTop
+Gauge, Massstab, 10mm, SilkScreenTop, Type 5,
+Gauge Massstab 10mm SilkScreenTop Type 5
+0
+0
+0
+Calibration_Scale
+Gauge_50mm_Type1_CopperTop
+Gauge, Massstab, 50mm, CopperTop, Type 1,
+Gauge Massstab 50mm CopperTop Type 1
+0
+0
+0
+Calibration_Scale
+Gauge_50mm_Type1_SilkScreenTop
+Gauge, Massstab, 50mm, SilkScreenTop, Type 1,
+Gauge Massstab 50mm SilkScreenTop Type 1
+0
+0
+0
+Calibration_Scale
+Gauge_50mm_Type2_CopperTop
+Gauge, Massstab, 50mm, CopperTop, Type 2,
+Gauge Massstab 50mm CopperTop Type 2
+0
+0
+0
+Calibration_Scale
+Gauge_50mm_Type2_SilkScreenTop
+Gauge, Massstab, 50mm, SilkScreenTop, Type 2,
+Gauge Massstab 50mm SilkScreenTop Type 2
+0
+0
+0
+Calibration_Scale
+Gauge_100mm_Grid_Type1_CopperTop
+Gauge, Massstab, 100mm, Gitter, Grid, CopperTop, Type 1,
+Gauge Massstab 100mm Gitter Grid CopperTop Type 1
+0
+0
+0
+Calibration_Scale
+Gauge_100mm_Type1_CopperTop
+Gauge, Massstab, 100mm, CopperTop, Type 1,
+Gauge Massstab 100mm CopperTop Type 1
+0
+0
+0
+Calibration_Scale
+Gauge_100mm_Type1_SilkScreenTop
+Gauge, Massstab, 100mm, SilkScreenTop, Type 1,
+Gauge Massstab 100mm SilkScreenTop Type 1
+0
+0
+0
+Calibration_Scale
+Gauge_100mm_Type2_CopperTop
+Gauge, Massstab, 100mm, CopperTop, Type 2,
+Gauge Massstab 100mm  CopperTop Type 2
+0
+0
+0
+Calibration_Scale
+Gauge_100mm_Type2_SilkScreenTop
+Gauge, Massstab, 100mm, SilkScreenTop, Type 2,
+Gauge Massstab 100mm SilkScreenTop Type 2
+0
+0
+0
+Connector
+Banana_Jack_1Pin
+Single banana socket, footprint - 6mm drill
+banana socket
+0
+1
+1
+Connector
+Banana_Jack_2Pin
+Dual banana socket, footprint - 2 x 6mm drills
+banana socket
+0
+2
+2
+Connector
+Banana_Jack_3Pin
+Triple banana socket, footprint - 3 x 6mm drills
+banana socket
+0
+3
+3
+Connector
+CUI_PD-30
+3 pin connector, PD-30, http://www.cui.com/product/resource/pd-30.pdf
+connector 3-pin PD-30 power DIN
+0
+4
+4
+Connector
+CUI_PD-30S
+3-pin nonstandard DIN connector, shielded, PD-30S, http://www.cui.com/product/resource/pd-30s.pdf
+connector 3-pin PD-30S power DIN shielded
+0
+8
+5
+Connector
+CUI_PD-30S_CircularHoles
+3-pin nonstandard DIN connector, shielded, PD-30S, http://www.cui.com/product/resource/pd-30s.pdf
+connector 3-pin PD-30S power DIN shielded
+0
+8
+5
+Connector
+CalTest_CT3151
+Right-angle standard banana jack, http://www.caltestelectronics.com/images/attachments/P315100rH_drawing.pdf
+banana jack horizontal
+0
+4
+1
+Connector
+Connector_SFP_and_Cage
+https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=2227302&DocType=Customer+Drawing&DocLang=English
+SFP+ SFP
+0
+40
+21
+Connector
+DTF13-12Px
+http://www.te.com/usa-en/product-DTF13-12PA-G003.html
+DEUTSCH DT header 12 pin 
+0
+12
+12
+Connector
+FanPinHeader_1x03_P2.54mm_Vertical
+3-pin CPU fan Through hole pin header, see http://www.formfactors.org/developer%5Cspecs%5Crev1_2_public.pdf
+pin header 3-pin CPU fan
+0
+3
+3
+Connector
+FanPinHeader_1x04_P2.54mm_Vertical
+4-pin CPU fan Through hole pin header, e.g. for Wieson part number 2366C888-007 Molex 47053-1000, Foxconn HF27040-M1, Tyco 1470947-1 or equivalent, see http://www.formfactors.org/developer%5Cspecs%5Crev1_2_public.pdf
+pin header 4-pin CPU fan
+0
+4
+4
+Connector
+GB042-34S-H10
+http://www.lsmtron.com/pdf/Connector&Antenna_catalog.PDF
+34pin SMD connector 
+0
+34
+34
+Connector
+IHI_B6A-PCB-45_Vertical
+https://lugsdirect.com/PDF_Webprint/B6A-PCB-45-XX(-X).pdf
+connector IHI B6A-PCB-45
+0
+49
+1
+Connector
+JWT_A3963_1x02_P3.96mm_Vertical
+JWT A3963, 3.96mm pitch Pin head connector (http://www.jwt.com.tw/pro_pdf/A3963.pdf)
+connector JWT A3963 pinhead
+0
+2
+2
+Connector
+NS-Tech_Grove_1x04_P2mm_Vertical
+https://statics3.seeedstudio.com/images/opl/datasheet/3470130P1.pdf
+Grove-1x04
+0
+4
+4
+Connector
+SpringContact_Harwin_S1941-46R
+7.25mm SMT Multi-directional Spring Contact (T+R), https://cdn.harwin.com/pdfs/S1941R.pdf
+spring contact emi emc shield
+0
+1
+1
+Connector
+Tag-Connect_TC2030-IDC-FP_2x03_P1.27mm_Vertical
+Tag-Connect programming header; http://www.tag-connect.com/Materials/TC2030-IDC.pdf
+tag connect programming header pogo pins
+0
+6
+6
+Connector
+Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical
+Tag-Connect programming header; http://www.tag-connect.com/Materials/TC2030-IDC-NL.pdf
+tag connect programming header pogo pins
+0
+6
+6
+Connector
+Tag-Connect_TC2050-IDC-FP_2x05_P1.27mm_Vertical
+Tag-Connect programming header; http://www.tag-connect.com/Materials/TC2050-IDC-430%20Datasheet.pdf
+tag connect programming header pogo pins
+0
+10
+10
+Connector
+Tag-Connect_TC2050-IDC-NL_2x05_P1.27mm_Vertical
+Tag-Connect programming header; http://www.tag-connect.com/Materials/TC2050-IDC-NL%20Datasheet.pdf
+tag connect programming header pogo pins
+0
+10
+10
+Connector
+Tag-Connect_TC2050-IDC-NL_2x05_P1.27mm_Vertical_with_bottom_clip
+Tag-Connect programming header with bottom courtyard for TC2050-NL Clip board ; https://www.tag-connect.com/wp-content/uploads/bsk-pdf-manager/TC2050-IDC-NL_Datasheet_8.pdf https://www.tag-connect.com/wp-content/uploads/bsk-pdf-manager/TC2050-CLIP_Datasheet_25.pdf
+tag connect programming header pogo pins
+0
+10
+10
+Connector
+Tag-Connect_TC2070-IDC-FP_2x07_P1.27mm_Vertical
+Tag-Connect programming header; http://www.tag-connect.com/Materials/TC2070-IDC%20Datasheet.pdf
+tag connect programming header pogo pins
+0
+14
+14
+Connector_AMASS
+AMASS_MR30PW-FB_1x03_P3.50mm_Horizontal
+Connector XT30 Horizontal PCB Female, https://www.tme.eu/en/Document/5e47640ba39fa492dbd4c0f4c8ae7b93/MR30PW%20SPEC.pdf
+RC Connector XT30
+0
+5
+3
+Connector_AMASS
+AMASS_MR30PW-M_1x03_P3.50mm_Horizontal
+Connector XT30 Horizontal PCB Male, https://www.tme.eu/en/Document/5e47640ba39fa492dbd4c0f4c8ae7b93/MR30PW%20SPEC.pdf
+RC Connector XT30
+0
+5
+3
+Connector_AMASS
+AMASS_XT30PW-F_1x02_P2.50mm_Horizontal
+Connector XT30 Horizontal PCB Female, https://www.tme.eu/en/Document/ce4077e36b79046da520ca73227e15de/XT30PW%20SPEC.pdf
+RC Connector XT30
+0
+4
+2
+Connector_AMASS
+AMASS_XT30PW-M_1x02_P2.50mm_Horizontal
+Connector XT30 Horizontal PCB Male, https://www.tme.eu/en/Document/ce4077e36b79046da520ca73227e15de/XT30PW%20SPEC.pdf
+RC Connector XT30
+0
+4
+2
+Connector_AMASS
+AMASS_XT30U-F_1x02_P5.0mm_Vertical
+Connector XT30 Vertical Cable Female, https://www.tme.eu/en/Document/3cbfa5cfa544d79584972dd5234a409e/XT30U%20SPEC.pdf
+RC Connector XT30
+0
+2
+2
+Connector_AMASS
+AMASS_XT30U-M_1x02_P5.0mm_Vertical
+Connector XT30 Vertical Cable Male, https://www.tme.eu/en/Document/3cbfa5cfa544d79584972dd5234a409e/XT30U%20SPEC.pdf
+RC Connector XT30
+0
+2
+2
+Connector_AMASS
+AMASS_XT30UPB-F_1x02_P5.0mm_Vertical
+Connector XT30 Vertical PCB Female, https://www.tme.eu/en/Document/4acc913878197f8c2e30d4b8cdc47230/XT30UPB%20SPEC.pdf
+RC Connector XT30
+0
+2
+2
+Connector_AMASS
+AMASS_XT30UPB-M_1x02_P5.0mm_Vertical
+Connector XT30 Vertical PCB Male, https://www.tme.eu/en/Document/4acc913878197f8c2e30d4b8cdc47230/XT30UPB%20SPEC.pdf
+RC Connector XT30
+0
+2
+2
+Connector_AMASS
+AMASS_XT60-F_1x02_P7.20mm_Vertical
+AMASS female XT60, through hole, vertical, https://www.tme.eu/Document/2d152ced3b7a446066e6c419d84bb460/XT60%20SPEC.pdf
+XT60 female vertical
+0
+2
+2
+Connector_AMASS
+AMASS_XT60-M_1x02_P7.20mm_Vertical
+AMASS female XT60, through hole, vertical, https://www.tme.eu/Document/2d152ced3b7a446066e6c419d84bb460/XT60%20SPEC.pdf
+XT60 female vertical
+0
+2
+2
+Connector_Amphenol
+Amphenol_M8S-03PMMR-SF8001
+M8 Male connector for panel, 90° PCB mount (https://www.amphenolltw.com/2012download/2D%20PDF/03_M%20Series%20Sensor%20Connectors/M8S-XXPMMR-SF8001.pdf)
+three-pin M8
+0
+5
+4
+Connector_BarrelJack
+BarrelJack_CLIFF_FC681465S_SMT_Horizontal
+Surface-mount DC Barrel Jack, https://www.cliffuk.co.uk/products/dcconnectors/FC681465S.pdf
+Power Jack SMT
+0
+4
+3
+Connector_BarrelJack
+BarrelJack_CUI_PJ-036AH-SMT_Horizontal
+Surface-mount DC Barrel Jack, http://www.cui.com/product/resource/pj-036ah-smt.pdf
+Power Jack SMT
+0
+3
+3
+Connector_BarrelJack
+BarrelJack_CUI_PJ-063AH_Horizontal
+Barrel Jack, 2.0mm ID, 5.5mm OD, 24V, 8A, no switch, https://www.cui.com/product/resource/pj-063ah.pdf
+barrel jack cui dc power
+0
+4
+3
+Connector_BarrelJack
+BarrelJack_CUI_PJ-063AH_Horizontal_CircularHoles
+Barrel Jack, 2.0mm ID, 5.5mm OD, 24V, 8A, no switch, https://www.cui.com/product/resource/pj-063ah.pdf
+barrel jack cui dc power
+0
+4
+3
+Connector_BarrelJack
+BarrelJack_CUI_PJ-102AH_Horizontal
+Thin-pin DC Barrel Jack, https://cdn-shop.adafruit.com/datasheets/21mmdcjackDatasheet.pdf
+Power Jack
+0
+3
+3
+Connector_BarrelJack
+BarrelJack_GCT_DCJ200-10-A_Horizontal
+Barrel jack connector (5.5 mm outer diameter, 2.05 inner diameter ), https://gct.co/files/drawings/dcj200-10.pdf
+connector barrel jack
+0
+3
+3
+Connector_BarrelJack
+BarrelJack_Horizontal
+DC Barrel Jack
+Power Jack
+0
+3
+3
+Connector_BarrelJack
+BarrelJack_SwitchcraftConxall_RAPC10U_Horizontal
+DC Power Jack, 13A, 24V, Panel Mount,Through-hole, https://www.switchcraft.com/Drawings/RAPC10U_CD.pdf
+barreljack switchcraftconxall dc power
+0
+2
+2
+Connector_BarrelJack
+BarrelJack_Wuerth_6941xx301002
+Wuerth electronics barrel jack connector (5.5mm outher diameter, inner diameter 2.05mm or 2.55mm depending on exact order number), See: http://katalog.we-online.de/em/datasheet/6941xx301002.pdf
+connector barrel jack
+0
+3
+3
+Connector_Card
+CF-Card_3M_N7E50-A516xx-30
+Compact Flash Card connector, polarization inverse (https://multimedia.3m.com/mws/media/22424O/3mtm-cf-card-header-type-i-low-profile-surface-mount-ts0747.pdf)
+connector cf
+0
+54
+50
+Connector_Card
+CF-Card_3M_N7E50-E516xx-30
+Compact Flash Card connector, normal polarization (https://multimedia.3m.com/mws/media/22424O/3mtm-cf-card-header-type-i-low-profile-surface-mount-ts0747.pdf)
+connector cf
+0
+54
+50
+Connector_Card
+SD_Kyocera_145638009211859+
+SD Card Connector, Normal Type, Outer Tail, Without Ejector (https://global.kyocera.com/prdct/electro/product/pdf/5638.pdf)
+sd card smt
+0
+13
+13
+Connector_Card
+SD_Kyocera_145638009511859+
+SD Card Connector, Normal Type, Outer Tail, Spring Eject Type (https://global.kyocera.com/prdct/electro/product/pdf/5638.pdf)
+sd card smt
+0
+13
+13
+Connector_Card
+SD_Kyocera_145638109211859+
+SD Card Connector, Reverse Type, Outer Tail, Without Ejector (https://global.kyocera.com/prdct/electro/product/pdf/5638.pdf)
+sd card smt
+0
+13
+13
+Connector_Card
+SD_Kyocera_145638109511859+
+SD Card Connector, Reverse Type, Outer Tail, Spring Eject Type (https://global.kyocera.com/prdct/electro/product/pdf/5638.pdf)
+sd card smt
+0
+13
+13
+Connector_Card
+SD_TE_2041021
+SD card connector, top mount, SMT (http://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F2041021%7FB%7Fpdf%7FEnglish%7FENG_CD_2041021_B_C_2041021_B.pdf%7F2041021-4)
+sd card
+0
+15
+12
+Connector_Card
+microSD_HC_Hirose_DM3AT-SF-PEJM5
+Micro SD, SMD, right-angle, push-pull (https://www.hirose.com/product/en/download_file/key_name/DM3AT-SF-PEJM5/category/Drawing%20(2D)/doc_file_id/44099/?file_category_id=6&item_id=06090031000&is_series=)
+Micro SD
+0
+14
+11
+Connector_Card
+microSD_HC_Hirose_DM3BT-DSF-PEJS
+Micro SD, SMD, reverse on-board, right-angle, push-pull (https://www.hirose.com/product/en/download_file/key_name/DM3BT-DSF-PEJS/category/Drawing%20(2D)/doc_file_id/44097/?file_category_id=6&item_id=06090029900&is_series=)
+Micro SD
+0
+16
+11
+Connector_Card
+microSD_HC_Hirose_DM3D-SF
+Micro SD, SMD, right-angle, push-pull (https://media.digikey.com/PDF/Data%20Sheets/Hirose%20PDFs/DM3D-SF.pdf)
+Micro SD
+0
+14
+11
+Connector_Card
+microSD_HC_Molex_104031-0811
+1.10mm Pitch microSD Memory Card Connector, Surface Mount, Push-Pull Type, 1.42mm Height, with Detect Switch (https://www.molex.com/pdm_docs/sd/1040310811_sd.pdf)
+microSD SD molex
+0
+14
+11
+Connector_Card
+microSD_HC_Wuerth_693072010801
+http://katalog.we-online.de/em/datasheet/693072010801.pdf
+Micro SD Wuerth Wurth Würth
+0
+12
+9
+Connector_Card
+microSIM_JAE_SF53S006VCBR2000
+https://www.jae.com/z-en/pdf_download_exec.cfm?param=SJ115712.pdf
+microSIM GSM Card
+0
+14
+7
+Connector_DIN
+DIN41612_B2_2x8_Female_Vertical_THT
+DIN41612 connector, type B/2, Vertical, 2 rows 16 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 B/2
+0
+16
+16
+Connector_DIN
+DIN41612_B2_2x8_Male_Horizontal_THT
+DIN41612 connector, type B/2, Horizontal, 2 rows 16 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 B/2
+0
+16
+16
+Connector_DIN
+DIN41612_B2_2x16_Female_Vertical_THT
+DIN41612 connector, type B/2, Vertical, 2 rows 16 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 B/2
+0
+32
+32
+Connector_DIN
+DIN41612_B2_2x16_Male_Horizontal_THT
+DIN41612 connector, type B/2, Horizontal, 2 rows 16 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 B/2
+0
+32
+32
+Connector_DIN
+DIN41612_B3_2x5_Female_Vertical_THT
+DIN41612 connector, type B/3, Vertical, 2 rows 10 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 B/3
+0
+10
+10
+Connector_DIN
+DIN41612_B3_2x5_Male_Horizontal_THT
+DIN41612 connector, type B/3, Horizontal, 2 rows 10 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 B/3
+0
+10
+10
+Connector_DIN
+DIN41612_B3_2x10_Female_Vertical_THT
+DIN41612 connector, type B/3, Vertical, 2 rows 10 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 B/3
+0
+20
+20
+Connector_DIN
+DIN41612_B3_2x10_Male_Horizontal_THT
+DIN41612 connector, type B/3, Horizontal, 2 rows 10 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 B/3
+0
+20
+20
+Connector_DIN
+DIN41612_B_1x32_Female_Vertical_THT
+DIN41612 connector, type B, Vertical, 2 rows 32 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 B
+0
+32
+32
+Connector_DIN
+DIN41612_B_1x32_Male_Horizontal_THT
+DIN41612 connector, type B, Horizontal, 2 rows 32 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 B
+0
+32
+32
+Connector_DIN
+DIN41612_B_2x16_Female_Vertical_THT
+DIN41612 connector, type B, Vertical, 2 rows 32 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 B
+0
+32
+32
+Connector_DIN
+DIN41612_B_2x16_Male_Horizontal_THT
+DIN41612 connector, type B, Horizontal, 2 rows 32 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 B
+0
+32
+32
+Connector_DIN
+DIN41612_B_2x32_Female_Vertical_THT
+DIN41612 connector, type B, Vertical, 2 rows 32 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 B
+0
+64
+64
+Connector_DIN
+DIN41612_B_2x32_Male_Horizontal_THT
+DIN41612 connector, type B, Horizontal, 2 rows 32 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 B
+0
+64
+64
+Connector_DIN
+DIN41612_C2_2x16_Female_Vertical_THT
+DIN41612 connector, type C/2, Vertical, 3 rows 16 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 C/2
+0
+32
+32
+Connector_DIN
+DIN41612_C2_2x16_Male_Horizontal_THT
+DIN41612 connector, type C/2, Horizontal, 3 rows 16 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 C/2
+0
+32
+32
+Connector_DIN
+DIN41612_C2_3x16_Female_Vertical_THT
+DIN41612 connector, type C/2, Vertical, 3 rows 16 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 C/2
+0
+48
+48
+Connector_DIN
+DIN41612_C2_3x16_Male_Horizontal_THT
+DIN41612 connector, type C/2, Horizontal, 3 rows 16 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 C/2
+0
+48
+48
+Connector_DIN
+DIN41612_C3_2x10_Female_Vertical_THT
+DIN41612 connector, type C/3, Vertical, 3 rows 10 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 C/3
+0
+20
+20
+Connector_DIN
+DIN41612_C3_2x10_Male_Horizontal_THT
+DIN41612 connector, type C/3, Horizontal, 3 rows 10 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 C/3
+0
+20
+20
+Connector_DIN
+DIN41612_C3_3x10_Female_Vertical_THT
+DIN41612 connector, type C/3, Vertical, 3 rows 10 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 C/3
+0
+30
+30
+Connector_DIN
+DIN41612_C3_3x10_Male_Horizontal_THT
+DIN41612 connector, type C/3, Horizontal, 3 rows 10 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 C/3
+0
+30
+30
+Connector_DIN
+DIN41612_C_1x32_Female_Vertical_THT
+DIN41612 connector, type C, Vertical, 3 rows 32 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 C
+0
+32
+32
+Connector_DIN
+DIN41612_C_1x32_Male_Horizontal_THT
+DIN41612 connector, type C, Horizontal, 3 rows 32 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 C
+0
+32
+32
+Connector_DIN
+DIN41612_C_2x16_Female_Vertical_THT
+DIN41612 connector, type C, Vertical, 3 rows 32 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 C
+0
+32
+32
+Connector_DIN
+DIN41612_C_2x16_Male_Horizontal_THT
+DIN41612 connector, type C, Horizontal, 3 rows 32 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 C
+0
+32
+32
+Connector_DIN
+DIN41612_C_2x32_Female_Vertical_THT
+DIN41612 connector, type C, Vertical, 3 rows 32 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 C
+0
+64
+64
+Connector_DIN
+DIN41612_C_2x32_Male_Horizontal_THT
+DIN41612 connector, type C, Horizontal, 3 rows 32 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 C
+0
+64
+64
+Connector_DIN
+DIN41612_C_3x16_Female_Vertical_THT
+DIN41612 connector, type C, Vertical, 3 rows 32 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 C
+0
+48
+48
+Connector_DIN
+DIN41612_C_3x16_Male_Horizontal_THT
+DIN41612 connector, type C, Horizontal, 3 rows 32 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 C
+0
+48
+48
+Connector_DIN
+DIN41612_C_3x32_Female_Vertical_THT
+DIN41612 connector, type C, Vertical, 3 rows 32 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 C
+0
+96
+96
+Connector_DIN
+DIN41612_C_3x32_Male_Horizontal_THT
+DIN41612 connector, type C, Horizontal, 3 rows 32 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 C
+0
+96
+96
+Connector_DIN
+DIN41612_D_2x8_Female_Vertical_THT
+DIN41612 connector, type D, Vertical, 3 rows 32 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 D
+0
+16
+16
+Connector_DIN
+DIN41612_D_2x8_Male_Horizontal_THT
+DIN41612 connector, type D, Horizontal, 3 rows 32 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 D
+0
+16
+16
+Connector_DIN
+DIN41612_D_2x16_Female_Vertical_THT
+DIN41612 connector, type D, Vertical, 3 rows 32 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 D
+0
+32
+32
+Connector_DIN
+DIN41612_D_2x16_Male_Horizontal_THT
+DIN41612 connector, type D, Horizontal, 3 rows 32 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 D
+0
+32
+32
+Connector_DIN
+DIN41612_E_2x16_Female_Vertical_THT
+DIN41612 connector, type E, Vertical, 5 rows 32 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 E
+0
+32
+32
+Connector_DIN
+DIN41612_E_2x16_Male_Horizontal_THT
+DIN41612 connector, type E, Horizontal, 5 rows 32 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 E
+0
+32
+32
+Connector_DIN
+DIN41612_E_2x16_RowsAC_Female_Vertical_THT
+DIN41612 connector, type E, Vertical, 5 rows 32 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 E
+0
+32
+32
+Connector_DIN
+DIN41612_E_2x16_RowsAC_Male_Horizontal_THT
+DIN41612 connector, type E, Horizontal, 5 rows 32 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 E
+0
+32
+32
+Connector_DIN
+DIN41612_E_3x16_Female_Vertical_THT
+DIN41612 connector, type E, Vertical, 5 rows 32 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 E
+0
+48
+48
+Connector_DIN
+DIN41612_E_3x16_Male_Horizontal_THT
+DIN41612 connector, type E, Horizontal, 5 rows 32 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 E
+0
+48
+48
+Connector_DIN
+DIN41612_F_2x16_Female_Vertical_THT
+DIN41612 connector, type F, Vertical, 3 rows 32 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 F
+0
+32
+32
+Connector_DIN
+DIN41612_F_2x16_Male_Horizontal_THT
+DIN41612 connector, type F, Horizontal, 3 rows 32 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 F
+0
+32
+32
+Connector_DIN
+DIN41612_F_2x16_RowsZD_Female_Vertical_THT
+DIN41612 connector, type F, Vertical, 3 rows 32 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 F
+0
+32
+32
+Connector_DIN
+DIN41612_F_2x16_RowsZD_Male_Horizontal_THT
+DIN41612 connector, type F, Horizontal, 3 rows 32 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 F
+0
+32
+32
+Connector_DIN
+DIN41612_F_3x16_Female_Vertical_THT
+DIN41612 connector, type F, Vertical, 3 rows 32 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 F
+0
+48
+48
+Connector_DIN
+DIN41612_F_3x16_Male_Horizontal_THT
+DIN41612 connector, type F, Horizontal, 3 rows 32 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 F
+0
+48
+48
+Connector_DIN
+DIN41612_Q2_2x16_Male_Horizontal_THT
+DIN41612 connector, type Q/2, Horizontal, 2 rows 16 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 Q/2
+0
+32
+32
+Connector_DIN
+DIN41612_Q2_2x16_Male_Vertical_THT
+DIN41612 connector, type Q/2, Vertical, 2 rows 16 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 Q/2
+0
+32
+32
+Connector_DIN
+DIN41612_Q3_2x10_Male_Horizontal_THT
+DIN41612 connector, type Q/3, Horizontal, 2 rows 10 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 Q/3
+0
+20
+20
+Connector_DIN
+DIN41612_Q3_2x10_Male_Vertical_THT
+DIN41612 connector, type Q/3, Vertical, 2 rows 10 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 Q/3
+0
+20
+20
+Connector_DIN
+DIN41612_Q_2x32_Male_Horizontal_THT
+DIN41612 connector, type Q, Horizontal, 2 rows 32 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 Q
+0
+64
+64
+Connector_DIN
+DIN41612_Q_2x32_Male_Vertical_THT
+DIN41612 connector, type Q, Vertical, 2 rows 32 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 Q
+0
+64
+64
+Connector_DIN
+DIN41612_R2_2x16_Male_Horizontal_THT
+DIN41612 connector, type R/2, Horizontal, 3 rows 16 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 R/2
+0
+32
+32
+Connector_DIN
+DIN41612_R2_2x16_Male_Vertical_THT
+DIN41612 connector, type R/2, Vertical, 3 rows 16 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 R/2
+0
+32
+32
+Connector_DIN
+DIN41612_R2_3x16_Male_Horizontal_THT
+DIN41612 connector, type R/2, Horizontal, 3 rows 16 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 R/2
+0
+48
+48
+Connector_DIN
+DIN41612_R2_3x16_Male_Vertical_THT
+DIN41612 connector, type R/2, Vertical, 3 rows 16 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 R/2
+0
+48
+48
+Connector_DIN
+DIN41612_R3_2x10_Male_Horizontal_THT
+DIN41612 connector, type R/3, Horizontal, 3 rows 10 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 R/3
+0
+20
+20
+Connector_DIN
+DIN41612_R3_2x10_Male_Vertical_THT
+DIN41612 connector, type R/3, Vertical, 3 rows 10 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 R/3
+0
+20
+20
+Connector_DIN
+DIN41612_R3_3x10_Male_Horizontal_THT
+DIN41612 connector, type R/3, Horizontal, 3 rows 10 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 R/3
+0
+30
+30
+Connector_DIN
+DIN41612_R3_3x10_Male_Vertical_THT
+DIN41612 connector, type R/3, Vertical, 3 rows 10 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 R/3
+0
+30
+30
+Connector_DIN
+DIN41612_R_1x32_Male_Horizontal_THT
+DIN41612 connector, type R, Horizontal, 3 rows 32 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 R
+0
+32
+32
+Connector_DIN
+DIN41612_R_1x32_Male_Vertical_THT
+DIN41612 connector, type R, Vertical, 3 rows 32 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 R
+0
+32
+32
+Connector_DIN
+DIN41612_R_2x16_Male_Horizontal_THT
+DIN41612 connector, type R, Horizontal, 3 rows 32 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 R
+0
+32
+32
+Connector_DIN
+DIN41612_R_2x16_Male_Vertical_THT
+DIN41612 connector, type R, Vertical, 3 rows 32 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 R
+0
+32
+32
+Connector_DIN
+DIN41612_R_2x32_Male_Horizontal_THT
+DIN41612 connector, type R, Horizontal, 3 rows 32 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 R
+0
+64
+64
+Connector_DIN
+DIN41612_R_2x32_Male_Vertical_THT
+DIN41612 connector, type R, Vertical, 3 rows 32 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 R
+0
+64
+64
+Connector_DIN
+DIN41612_R_3x16_Male_Horizontal_THT
+DIN41612 connector, type R, Horizontal, 3 rows 32 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 R
+0
+48
+48
+Connector_DIN
+DIN41612_R_3x16_Male_Vertical_THT
+DIN41612 connector, type R, Vertical, 3 rows 32 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 R
+0
+48
+48
+Connector_DIN
+DIN41612_R_3x32_Male_Horizontal_THT
+DIN41612 connector, type R, Horizontal, 3 rows 32 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 R
+0
+96
+96
+Connector_DIN
+DIN41612_R_3x32_Male_Vertical_THT
+DIN41612 connector, type R, Vertical, 3 rows 32 pins wide, https://www.erni-x-press.com/de/downloads/kataloge/englische_kataloge/erni-din41612-iec60603-2-e.pdf
+DIN 41612 IEC 60603 R
+0
+96
+96
